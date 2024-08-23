@@ -4,7 +4,7 @@ import com.school.things.entities.abstracts.Things;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class Uniform extends Things {
+public abstract class Uniform extends Things {
 
     private int size;
 
