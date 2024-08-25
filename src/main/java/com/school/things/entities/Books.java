@@ -13,8 +13,10 @@ public class Books extends Things {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String unit;
-    private int grade;
+    private int unit;  // Единица (например, предмет)
+    private int grade;  // Грейд (класс, для которого предназначена книга)
+
+    // Геттеры и сеттеры
 
     public Long getId() {
         return id;
@@ -24,11 +26,11 @@ public class Books extends Things {
         this.id = id;
     }
 
-    public String getUnit() {
+    public int getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public void setUnit(int unit) {
         this.unit = unit;
     }
 
