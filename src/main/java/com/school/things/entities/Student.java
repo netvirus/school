@@ -19,13 +19,10 @@ public class Student extends Person {
     private String motherPhoneNumber;  // Телефон мамы
     private String fatherPhoneNumber;  // Телефон папы
 
-    // Геттеры и сеттеры
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }

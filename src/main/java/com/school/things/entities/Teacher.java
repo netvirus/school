@@ -16,13 +16,10 @@ public class Teacher extends Person {
     private String subject;  // Предмет, который ведет учитель
     private String grade;  // Грейд класса, который ведет учитель
 
-    // Геттеры и сеттеры
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }

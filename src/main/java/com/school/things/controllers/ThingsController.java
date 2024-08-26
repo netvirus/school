@@ -1,10 +1,10 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.Books;
-import com.school.things.entities.Shirt;
-import com.school.things.entities.Shorts;
-import com.school.things.entities.Pants;
-import com.school.things.entities.Skirt;
+import com.school.things.entities.items.Books;
+import com.school.things.entities.items.Shirt;
+import com.school.things.entities.items.Shorts;
+import com.school.things.entities.items.Pants;
+import com.school.things.entities.items.Skirt;
 import com.school.things.services.ThingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

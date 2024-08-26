@@ -1,7 +1,6 @@
 package com.school.things.entities.items;
 
 import com.school.things.entities.BookReceipt;
-import com.school.things.entities.Books;
 import jakarta.persistence.*;
 
 @Entity

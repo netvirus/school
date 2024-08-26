@@ -4,7 +4,7 @@ import com.school.things.entities.BookReceipt;
 import com.school.things.entities.items.BookReceiptItem;
 import com.school.things.requests.BookItemRequest;
 import com.school.things.requests.BookReceiptRequest;
-import com.school.things.entities.Books;
+import com.school.things.entities.items.Books;
 import com.school.things.repositories.BookReceiptRepository;
 import com.school.things.repositories.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;

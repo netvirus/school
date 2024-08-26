@@ -1,6 +1,6 @@
 package com.school.things.services;
 
-import com.school.things.entities.*;
+import com.school.things.entities.items.*;
 import com.school.things.repositories.BooksRepository;
 import com.school.things.repositories.ShirtRepository;
 import com.school.things.repositories.ShortsRepository;

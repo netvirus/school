@@ -1,10 +1,9 @@
 package com.school.things.controllers;
 
+import com.school.things.entities.items.*;
 import com.school.things.requests.UniformReceiptRequest;
 import com.school.things.requests.UniformItemRequest;
 import com.school.things.entities.UniformReceipt;
-import com.school.things.entities.items.UniformReceiptItem;
-import com.school.things.entities.*;
 import com.school.things.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

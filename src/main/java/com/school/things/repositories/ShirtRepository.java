@@ -1,6 +1,6 @@
 package com.school.things.repositories;
 
-import com.school.things.entities.Shirt;
+import com.school.things.entities.items.Shirt;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

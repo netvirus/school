@@ -7,8 +7,6 @@ import java.util.Date;
 
 @MappedSuperclass
 public abstract class Person {
-
-    private Long id;
     private String firstName;
     private String lastName;
     private int age;
@@ -20,15 +18,6 @@ public abstract class Person {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", updatable = false)
     private Date createdAt;
-
-    // Геттеры и сеттеры
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;

@@ -1,4 +1,4 @@
-package com.school.things.entities;
+package com.school.things.entities.items;
 
 import com.school.things.entities.abstracts.Uniform;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Shorts extends Uniform {
+public class Pants extends Uniform {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

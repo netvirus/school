@@ -1,4 +1,4 @@
-package com.school.things.entities;
+package com.school.things.entities.items;
 
 import com.school.things.entities.abstracts.Things;
 import jakarta.persistence.Entity;
@@ -16,7 +16,6 @@ public class Books extends Things {
     private int unit;  // Единица (например, предмет)
     private int grade;  // Грейд (класс, для которого предназначена книга)
 
-    // Геттеры и сеттеры
 
     public Long getId() {
         return id;
