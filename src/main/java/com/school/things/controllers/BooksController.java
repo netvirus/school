@@ -1,7 +1,7 @@
 package com.school.things.controllers;
 
 import com.school.things.entities.items.Books;
-import com.school.things.services.ThingService;
+import com.school.things.services.BooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,30 +13,30 @@ import java.util.Optional;
 public class BooksController {
 
     @Autowired
-    private ThingService thingService;
+    private BooksService booksService;
 
     @GetMapping
     public List<Books> getAllBooks() {
-        return thingService.getAllBooks();
+        return booksService.getAll();
     }
 
     @GetMapping("/{id}")
     public Optional<Books> getBookById(@PathVariable Long id) {
-        return thingService.getBookById(id);
+        return booksService.getById(id);
     }
 
     @PostMapping
     public Books createBook(@RequestBody Books book) {
-        return thingService.saveBook(book);
+        return booksService.save(book);
     }
 
     @PutMapping("/{id}")
     public Books updateBook(@PathVariable Long id, @RequestBody Books book) {
-        return thingService.updateBook(id, book);
+        return booksService.update(id, book);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id) {
-        thingService.deleteBook(id);
+        booksService.delete(id);
     }
 }

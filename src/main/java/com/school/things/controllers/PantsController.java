@@ -1,7 +1,7 @@
 package com.school.things.controllers;
 
 import com.school.things.entities.items.Pants;
-import com.school.things.services.ThingService;
+import com.school.things.services.PantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,30 +13,30 @@ import java.util.Optional;
 public class PantsController {
 
     @Autowired
-    private ThingService thingService;
+    private PantsService pantsService;
 
     @GetMapping
     public List<Pants> getAllPants() {
-        return thingService.getAllPants();
+        return pantsService.getAll();
     }
 
     @GetMapping("/{id}")
     public Optional<Pants> getPantsById(@PathVariable Long id) {
-        return thingService.getPantsById(id);
+        return pantsService.getById(id);
     }
 
     @PostMapping
     public Pants createPants(@RequestBody Pants pants) {
-        return thingService.savePants(pants);
+        return pantsService.save(pants);
     }
 
     @PutMapping("/{id}")
     public Pants updatePants(@PathVariable Long id, @RequestBody Pants pants) {
-        return thingService.updatePants(id, pants);
+        return pantsService.update(id, pants);
     }
 
     @DeleteMapping("/{id}")
     public void deletePants(@PathVariable Long id) {
-        thingService.deletePants(id);
+        pantsService.delete(id);
     }
 }
