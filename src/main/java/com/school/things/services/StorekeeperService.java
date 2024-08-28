@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StorekeeperService extends GenericService<Storekeeper, Long> {
+public class StorekeeperService extends GenericThingsService<Storekeeper, Long> {
 
     @Autowired
     public StorekeeperService(StorekeeperRepository storekeeperRepository) {

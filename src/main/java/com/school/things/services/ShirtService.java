@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ShirtService extends GenericService<Shirt, Long> {
+public class ShirtService extends GenericThingsService<Shirt, Long> {
 
     private final ShirtRepository shirtRepository;
 

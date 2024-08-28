@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class GenericService<T, ID> {
+public abstract class GenericThingsService<T, ID> {
 
     private final JpaRepository<T, ID> repository;
 
-    protected GenericService(JpaRepository<T, ID> repository) {
+    protected GenericThingsService(JpaRepository<T, ID> repository) {
         this.repository = repository;
     }
 

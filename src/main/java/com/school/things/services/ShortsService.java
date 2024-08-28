@@ -5,7 +5,7 @@ import com.school.things.repositories.ShortsRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ShortsService extends GenericService<Shorts, Long> {
+public class ShortsService extends GenericThingsService<Shorts, Long> {
 
     private final ShortsRepository shortsRepository;
 
