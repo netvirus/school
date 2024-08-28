@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PersonDataCopier {
 
-    public void copyCommonPersonData(Person existingPerson, Person newPerson) {
+    public static void copyCommonPersonData(Person existingPerson, Person newPerson) {
         existingPerson.setFirstName(newPerson.getFirstName());
         existingPerson.setLastName(newPerson.getLastName());
         existingPerson.setAge(newPerson.getAge());
