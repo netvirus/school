@@ -1,5 +1,6 @@
 package com.school.things.services;
 
+import com.school.things.entities.Book;
 import com.school.things.entities.ExpenseReceipt;
 import com.school.things.entities.Storekeeper;
 import com.school.things.entities.items.*;
@@ -22,18 +23,6 @@ public class ExpenseReceiptService {
 
     @Autowired
     private BooksRepository booksRepository;
-
-    @Autowired
-    private PantsRepository pantsRepository;
-
-    @Autowired
-    private ShirtRepository shirtRepository;
-
-    @Autowired
-    private SkirtRepository skirtRepository;
-
-    @Autowired
-    private ShortsRepository shortsRepository;
 
     public List<ExpenseReceipt> getAllReceipts() {
         return expenseReceiptRepository.findAll();
@@ -71,25 +60,9 @@ public class ExpenseReceiptService {
 
         for (ExpenseReceiptItem item : items) {
             if (item.getBook() != null) {
-                Books book = booksRepository.findById(item.getBook().getId())
+                Book book = booksRepository.findById(item.getBook().getId())
                         .orElseThrow(() -> new EntityNotFoundException("Book not found"));
                 item.setBook(book);
-            } else if (item.getPants() != null) {
-                Pants pants = pantsRepository.findById(item.getPants().getId())
-                        .orElseThrow(() -> new EntityNotFoundException("Pants not found"));
-                item.setPants(pants);
-            } else if (item.getShirt() != null) {
-                Shirt shirt = shirtRepository.findById(item.getShirt().getId())
-                        .orElseThrow(() -> new EntityNotFoundException("Shirt not found"));
-                item.setShirt(shirt);
-            } else if (item.getSkirt() != null) {
-                Skirt skirt = skirtRepository.findById(item.getSkirt().getId())
-                        .orElseThrow(() -> new EntityNotFoundException("Skirt not found"));
-                item.setSkirt(skirt);
-            } else if (item.getShorts() != null) {
-                Shorts shorts = shortsRepository.findById(item.getShorts().getId())
-                        .orElseThrow(() -> new EntityNotFoundException("Shorts not found"));
-                item.setShorts(shorts);
             }
             item.setExpenseReceipt(receipt);
         }

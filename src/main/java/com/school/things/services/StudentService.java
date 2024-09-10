@@ -2,7 +2,6 @@ package com.school.things.services;
 
 import com.school.things.entities.Student;
 import com.school.things.repositories.StudentRepository;
-import com.school.things.utils.PersonDataCopier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +13,6 @@ public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
-
-    @Autowired
-    private PersonDataCopier personDataCopier;
 
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
@@ -33,7 +29,6 @@ public class StudentService {
     public Student updateStudent(Student student, Long id) {
         return studentRepository.findById(id)
                 .map(existingStudent -> {
-                    personDataCopier.copyCommonPersonData(existingStudent, student);
                     existingStudent.setGrade(student.getGrade());
                     existingStudent.setMotherName(student.getMotherName());
                     existingStudent.setFatherName(student.getFatherName());

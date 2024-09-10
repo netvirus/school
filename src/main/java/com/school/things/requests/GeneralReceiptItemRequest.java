@@ -2,8 +2,8 @@ package com.school.things.requests;
 
 public class GeneralReceiptItemRequest {
 
-    private Long itemId;     // ID предмета (Books, Pants, Skirt, Shirt, Shorts)
-    private String itemType; // Тип предмета ("books", "pants", "skirt", "shirt", "shorts")
+    private Long itemId;
+    private String itemType;
     private int quantity;
 
     public Long getItemId() {

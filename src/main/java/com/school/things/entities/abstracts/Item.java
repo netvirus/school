@@ -3,12 +3,9 @@ package com.school.things.entities.abstracts;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Things {
-
+public abstract class Item {
     private String name;
     private String color;
-
-    // Геттеры и сеттеры
 
     public String getName() {
         return name;

@@ -1,21 +1,19 @@
-package com.school.things.entities.items;
+package com.school.things.entities;
 
-import com.school.things.entities.abstracts.Things;
+import com.school.things.entities.abstracts.Item;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Books extends Things {
+public class Book extends Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private int unit;  // Единица (например, предмет)
-    private int grade;  // Грейд (класс, для которого предназначена книга)
-
+    private int unit;
+    private int grade;
 
     public Long getId() {
         return id;

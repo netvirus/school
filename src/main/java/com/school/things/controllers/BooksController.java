@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.items.Books;
+import com.school.things.entities.Book;
 import com.school.things.services.BooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,27 +16,27 @@ public class BooksController {
     private BooksService booksService;
 
     @GetMapping
-    public List<Books> getAllBooks() {
-        return booksService.getAll();
+    public List<Book> getAllBooks() {
+        return booksService.getAllBooks();
     }
 
     @GetMapping("/{id}")
-    public Optional<Books> getBookById(@PathVariable Long id) {
-        return booksService.getById(id);
+    public Optional<Book> getBookById(@PathVariable Long id) {
+        return booksService.getBookById(id);
     }
 
     @PostMapping
-    public Books createBook(@RequestBody Books book) {
-        return booksService.save(book);
+    public Book createBook(@RequestBody Book book) {
+        return booksService.saveBook(book);
     }
 
     @PutMapping("/{id}")
-    public Books updateBook(@PathVariable Long id, @RequestBody Books book) {
-        return booksService.update(id, book);
+    public Book updateBook(@PathVariable Long id, @RequestBody Book book) {
+        return booksService.updateBook(id, book);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id) {
-        booksService.delete(id);
+        booksService.deleteBook(id);
     }
 }

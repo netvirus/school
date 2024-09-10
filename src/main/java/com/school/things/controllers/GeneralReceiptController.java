@@ -1,5 +1,6 @@
 package com.school.things.controllers;
 
+import com.school.things.entities.Book;
 import com.school.things.entities.GeneralReceipt;
 import com.school.things.entities.items.*;
 import com.school.things.requests.GeneralReceiptRequest;
@@ -34,36 +35,10 @@ public class GeneralReceiptController {
         List<GeneralReceiptItem> items = request.getItems().stream().map(itemRequest -> {
             GeneralReceiptItem item = new GeneralReceiptItem();
             item.setQuantity(itemRequest.getQuantity());
+            Book book = new Book();
+            book.setId(itemRequest.getItemId());
+            item.setBook(book);
 
-            switch (itemRequest.getItemType().toLowerCase()) {
-                case "books":
-                    Books book = new Books();
-                    book.setId(itemRequest.getItemId());
-                    item.setBook(book);
-                    break;
-                case "pants":
-                    Pants pants = new Pants();
-                    pants.setId(itemRequest.getItemId());
-                    item.setPants(pants);
-                    break;
-                case "shirt":
-                    Shirt shirt = new Shirt();
-                    shirt.setId(itemRequest.getItemId());
-                    item.setShirt(shirt);
-                    break;
-                case "skirt":
-                    Skirt skirt = new Skirt();
-                    skirt.setId(itemRequest.getItemId());
-                    item.setSkirt(skirt);
-                    break;
-                case "shorts":
-                    Shorts shorts = new Shorts();
-                    shorts.setId(itemRequest.getItemId());
-                    item.setShorts(shorts);
-                    break;
-                default:
-                    throw new RuntimeException("Unsupported item type: " + itemRequest.getItemType());
-            }
             return item;
         }).toList();
 
