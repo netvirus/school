@@ -35,6 +35,7 @@ public class PaymentService {
                     existingPayment.setNumberOfMonth(updatedPayment.getNumberOfMonth());
                     existingPayment.setDiscount(updatedPayment.getDiscount());
                     existingPayment.setPaymentDate(updatedPayment.getPaymentDate());
+                    existingPayment.setReceiptId(updatedPayment.getReceiptId());  // Обновление Receipt ID
                     return paymentRepository.save(existingPayment);
                 })
                 .orElseThrow(() -> new RuntimeException("Payment not found"));
@@ -42,6 +43,11 @@ public class PaymentService {
 
     public void deletePayment(Long id) {
         paymentRepository.deleteById(id);
+    }
+
+    // Поиск платежей по receiptId
+    public List<Payment> findPaymentsByReceiptId(String receiptId) {
+        return paymentRepository.findByReceiptId(receiptId);
     }
 
     // Поиск платежей по payerId (student.id)

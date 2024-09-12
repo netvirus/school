@@ -71,4 +71,11 @@ public class PaymentController {
         List<Payment> payments = paymentService.findPaymentsByPayerId(payerId);
         return ResponseEntity.ok(payments);
     }
+
+    // Поиск по receiptId
+    @GetMapping("/receipt/{receiptId}")
+    public ResponseEntity<List<Payment>> findPaymentsByReceiptId(@PathVariable String receiptId) {
+        List<Payment> payments = paymentService.findPaymentsByReceiptId(receiptId);
+        return ResponseEntity.ok(payments);
+    }
 }

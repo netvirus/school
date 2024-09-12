@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +20,7 @@ public class Payment {
     private double amount;
     @NotNull(message = "Payer ID cannot be null")
     private Long payerId;
-
+    private String receiptId;
     @Min(value = 1, message = "Month should be between 1 and 12")
     @Max(value = 12, message = "Month should be between 1 and 12")
     private int numberOfMonth;
@@ -30,11 +29,13 @@ public class Payment {
     @JsonFormat(pattern = "HH:mm dd-MM-yyyy")
     private LocalDateTime paymentDate;
 
-    public Payment() {}
+    public Payment() {
+    }
 
-    public Payment(double amount, Long payerId, int numberOfMonth, double discount, LocalDateTime paymentDate) {
+    public Payment(double amount, Long payerId, String receiptId, int numberOfMonth, double discount, LocalDateTime paymentDate) {
         this.amount = amount;
         this.payerId = payerId;
+        this.receiptId = receiptId;
         this.numberOfMonth = numberOfMonth;
         this.discount = discount;
         this.paymentDate = paymentDate;
@@ -62,6 +63,14 @@ public class Payment {
 
     public void setPayerId(Long payerId) {
         this.payerId = payerId;
+    }
+
+    public String getReceiptId() {
+        return receiptId;
+    }
+
+    public void setReceiptId(String receiptId) {
+        this.receiptId = receiptId;
     }
 
     public int getNumberOfMonth() {
