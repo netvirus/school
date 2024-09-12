@@ -6,30 +6,55 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class OneChildPersonalDiscount extends Discounts {
+public class PersonalDiscount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long studentId;
+    private double discountAnnualModulesFee = 0;
+    private double discountLegacyTlp = 0;
+    private double discountUniform = 0;
+    private double discountFood = 0;
+    private double discountAnnualMiscellaneousFee = 0;
+    private double discountFieldTripCampRecognition = 0;
+    private double discountLsaFeeOneTime = 0;
+    private double discountRegistrationFeeOneTime = 0;
+
+    public PersonalDiscount(Long studentId, double discountAnnualModulesFee, double discountLegacyTlp, double discountUniform, double discountFood, double discountAnnualMiscellaneousFee, double discountFieldTripCampRecognition, double discountLsaFeeOneTime, double discountRegistrationFeeOneTime) {
+        this.studentId = studentId;
+        this.discountAnnualModulesFee = discountAnnualModulesFee;
+        this.discountLegacyTlp = discountLegacyTlp;
+        this.discountUniform = discountUniform;
+        this.discountFood = discountFood;
+        this.discountAnnualMiscellaneousFee = discountAnnualMiscellaneousFee;
+        this.discountFieldTripCampRecognition = discountFieldTripCampRecognition;
+        this.discountLsaFeeOneTime = discountLsaFeeOneTime;
+        this.discountRegistrationFeeOneTime = discountRegistrationFeeOneTime;
+    }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public Long getStudentId() {
         return studentId;
     }
+
     public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
+
     public double getDiscountAnnualModulesFee() {
         return discountAnnualModulesFee;
     }
 
     public void setDiscountAnnualModulesFee(double discountAnnualModulesFee) {
-        super._discountAnnualModulesFee = discountAnnualModulesFee;
+        this.discountAnnualModulesFee = discountAnnualModulesFee;
     }
 
     public double getDiscountLegacyTlp() {

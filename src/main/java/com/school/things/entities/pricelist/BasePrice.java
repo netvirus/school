@@ -1,7 +1,5 @@
 package com.school.things.entities.pricelist;
 
-import jakarta.persistence.MappedSuperclass;
-
 public class BasePrice {
     private int gradeLevelId;
     private double annualModulesFee;           // ANNUAL MODULES FEE
