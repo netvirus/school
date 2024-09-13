@@ -33,6 +33,10 @@ public class PersonalDiscount {
         this.discountRegistrationFeeOneTime = discountRegistrationFeeOneTime;
     }
 
+    public PersonalDiscount() {
+
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,6 +1,15 @@
 package com.school.things.entities.pricelist;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class BasePrice {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int gradeLevelId;
     private double annualModulesFee;           // ANNUAL MODULES FEE
     private double legacyTlp;                  // LEGACY / TLP
@@ -11,17 +20,9 @@ public class BasePrice {
     private double lsaFeeOneTime;              // LSA FEE (ONE TIME)
     private double registrationFeeOneTime;     // REGISTRATION FEE (ONE TIME)
 
-    public BasePrice(int gradeLevelId, double annualModulesFee, double legacyTlp, double uniform, double food, double annualMiscellaneousFee, double fieldTripCampRecognition, double lsaFeeOneTime, double registrationFeeOneTime) {
-        this.gradeLevelId = gradeLevelId;
-        this.annualModulesFee = annualModulesFee;
-        this.legacyTlp = legacyTlp;
-        this.uniform = uniform;
-        this.food = food;
-        this.annualMiscellaneousFee = annualMiscellaneousFee;
-        this.fieldTripCampRecognition = fieldTripCampRecognition;
-        this.lsaFeeOneTime = lsaFeeOneTime;
-        this.registrationFeeOneTime = registrationFeeOneTime;
-    }
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 
     public int getGradeLevelId() {
         return gradeLevelId;
