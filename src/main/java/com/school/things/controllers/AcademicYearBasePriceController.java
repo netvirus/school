@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/academic-year-base-prices")
@@ -16,36 +15,47 @@ public class AcademicYearBasePriceController {
     @Autowired
     private AcademicYearBasePriceService academicYearBasePriceService;
 
+    // Получить все записи с учётом paymentItemName
     @GetMapping
-    public List<AcademicYearBasePrice> getAllAcademicYearBasePrices() {
-        return academicYearBasePriceService.getAllAcademicYearBasePrices();
+    public ResponseEntity<List<AcademicYearBasePrice>> getAllAcademicYearBasePrices() {
+        List<AcademicYearBasePrice> prices = academicYearBasePriceService.getAllPrices();
+        return ResponseEntity.ok(prices);
     }
 
+    // Получить конкретную запись по id с учётом paymentItemName
     @GetMapping("/{id}")
     public ResponseEntity<AcademicYearBasePrice> getAcademicYearBasePriceById(@PathVariable Long id) {
-        Optional<AcademicYearBasePrice> academicYearBasePrice = academicYearBasePriceService.getAcademicYearBasePriceById(id);
-        return academicYearBasePrice.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        AcademicYearBasePrice price = academicYearBasePriceService.getPriceById(id);
+        if (price == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(price);
     }
 
-    @GetMapping("/year/{year}")
-    public List<AcademicYearBasePrice> getAcademicYearBasePricesByYear(@PathVariable int year) {
-        return academicYearBasePriceService.getAcademicYearBasePricesByYear(year);
-    }
-
+    // Создание новой записи
     @PostMapping
-    public AcademicYearBasePrice createAcademicYearBasePrice(@RequestBody AcademicYearBasePrice academicYearBasePrice) {
-        return academicYearBasePriceService.createAcademicYearBasePrice(academicYearBasePrice);
+    public ResponseEntity<AcademicYearBasePrice> createAcademicYearBasePrice(@RequestBody AcademicYearBasePrice price) {
+        AcademicYearBasePrice createdPrice = academicYearBasePriceService.createAcademicYearBasePrice(price);
+        return ResponseEntity.ok(createdPrice);
     }
 
+    // Обновление записи
     @PutMapping("/{id}")
-    public ResponseEntity<AcademicYearBasePrice> updateAcademicYearBasePrice(@PathVariable Long id, @RequestBody AcademicYearBasePrice academicYearBasePrice) {
-        return ResponseEntity.ok(academicYearBasePriceService.updateAcademicYearBasePrice(id, academicYearBasePrice));
+    public ResponseEntity<AcademicYearBasePrice> updateAcademicYearBasePrice(@PathVariable Long id, @RequestBody AcademicYearBasePrice price) {
+        AcademicYearBasePrice updatedPrice = academicYearBasePriceService.updateAcademicYearBasePrice(id, price);
+        if (updatedPrice == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedPrice);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAcademicYearBasePrice(@PathVariable Long id) {
-        academicYearBasePriceService.deleteAcademicYearBasePrice(id);
-        return ResponseEntity.noContent().build();
+        boolean isDeleted = academicYearBasePriceService.deleteAcademicYearBasePrice(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

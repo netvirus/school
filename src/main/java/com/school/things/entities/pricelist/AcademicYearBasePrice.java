@@ -1,11 +1,9 @@
 package com.school.things.entities.pricelist;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "academic_year_base_price")
 public class AcademicYearBasePrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +11,8 @@ public class AcademicYearBasePrice {
     private int priceYear;
     private Long paymentItemId;
     private double paymentItemPrice;
+    @Transient // Это поле не будет сохранено в базу данных
+    private String paymentItemName;
 
     public Long getId() {
         return id;
@@ -44,6 +44,14 @@ public class AcademicYearBasePrice {
 
     public void setPaymentItemPrice(double paymentItemPrice) {
         this.paymentItemPrice = paymentItemPrice;
+    }
+
+    public String getPaymentItemName() {
+        return paymentItemName;
+    }
+
+    public void setPaymentItemName(String paymentItemName) {
+        this.paymentItemName = paymentItemName;
     }
 }
 
