@@ -1,0 +1,55 @@
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G1"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G2"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G3"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G4"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G5"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G6"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G7"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G8"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G9"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G10"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G11"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "G12"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "K1"}'
+
+curl -X POST https://bot.swingerhub.net/api/grades \
+-H "Content-Type: application/json" \
+-d '{"name": "K2"}'
