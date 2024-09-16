@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/academic-year-personal-prices")
+@RequestMapping("/api/personal-prices")
 public class PersonalPriceController {
 
     @Autowired
@@ -26,16 +26,6 @@ public class PersonalPriceController {
         Optional<PersonalPrice> academicYearPersonalPrice = academicYearPersonalPriceService.getAcademicYearPersonalPriceById(id);
         return academicYearPersonalPrice.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/student/{studentId}")
-    public List<PersonalPrice> getAcademicYearPersonalPricesByStudentId(@PathVariable Long studentId) {
-        return academicYearPersonalPriceService.getAcademicYearPersonalPricesByStudentId(studentId);
-    }
-
-    @GetMapping("/year/{year}/grade/{gradeId}")
-    public List<PersonalPrice> getAcademicYearPersonalPricesByYearAndGrade(@PathVariable int year, @PathVariable int gradeId) {
-        return academicYearPersonalPriceService.getAcademicYearPersonalPricesByYearAndGrade(year, gradeId);
     }
 
     @PostMapping
