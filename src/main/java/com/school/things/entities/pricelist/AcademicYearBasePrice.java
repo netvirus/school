@@ -8,6 +8,7 @@ public class AcademicYearBasePrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long gradeId;
     private int priceYear;
     private Long paymentItemId;
     private double paymentItemPrice;
@@ -20,6 +21,14 @@ public class AcademicYearBasePrice {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(Long gradeId) {
+        this.gradeId = gradeId;
     }
 
     public int getPriceYear() {

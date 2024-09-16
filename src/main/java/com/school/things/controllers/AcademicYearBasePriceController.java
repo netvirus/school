@@ -15,44 +15,45 @@ public class AcademicYearBasePriceController {
     @Autowired
     private AcademicYearBasePriceService academicYearBasePriceService;
 
-    // Получить все записи с учётом paymentItemName
+    // Получить все записи
     @GetMapping
-    public ResponseEntity<List<AcademicYearBasePrice>> getAllAcademicYearBasePrices() {
-        List<AcademicYearBasePrice> prices = academicYearBasePriceService.getAllPrices();
-        return ResponseEntity.ok(prices);
+    public List<AcademicYearBasePrice> getAllPrices() {
+        return academicYearBasePriceService.getAllPrices();
     }
 
-    // Получить конкретную запись по id с учётом paymentItemName
+    // Получить запись по ID
     @GetMapping("/{id}")
-    public ResponseEntity<AcademicYearBasePrice> getAcademicYearBasePriceById(@PathVariable Long id) {
+    public ResponseEntity<AcademicYearBasePrice> getPriceById(@PathVariable Long id) {
         AcademicYearBasePrice price = academicYearBasePriceService.getPriceById(id);
-        if (price == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(price);
     }
 
-    // Создание новой записи
+    // Получить записи по gradeId
+    @GetMapping("/grade/{gradeId}")
+    public ResponseEntity<List<AcademicYearBasePrice>> getPricesByGradeId(@PathVariable Long gradeId) {
+        List<AcademicYearBasePrice> prices = academicYearBasePriceService.getPricesByGradeId(gradeId);
+        return ResponseEntity.ok(prices);
+    }
+
+    // Создать новую запись
     @PostMapping
-    public ResponseEntity<AcademicYearBasePrice> createAcademicYearBasePrice(@RequestBody AcademicYearBasePrice price) {
-        AcademicYearBasePrice createdPrice = academicYearBasePriceService.createAcademicYearBasePrice(price);
+    public ResponseEntity<AcademicYearBasePrice> createPrice(@RequestBody AcademicYearBasePrice academicYearBasePrice) {
+        AcademicYearBasePrice createdPrice = academicYearBasePriceService.createAcademicYearBasePrice(academicYearBasePrice);
         return ResponseEntity.ok(createdPrice);
     }
 
-    // Обновление записи
+    // Обновить запись
     @PutMapping("/{id}")
-    public ResponseEntity<AcademicYearBasePrice> updateAcademicYearBasePrice(@PathVariable Long id, @RequestBody AcademicYearBasePrice price) {
-        AcademicYearBasePrice updatedPrice = academicYearBasePriceService.updateAcademicYearBasePrice(id, price);
-        if (updatedPrice == null) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<AcademicYearBasePrice> updatePrice(@PathVariable Long id, @RequestBody AcademicYearBasePrice academicYearBasePrice) {
+        AcademicYearBasePrice updatedPrice = academicYearBasePriceService.updateAcademicYearBasePrice(id, academicYearBasePrice);
         return ResponseEntity.ok(updatedPrice);
     }
 
+    // Удалить запись
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAcademicYearBasePrice(@PathVariable Long id) {
-        boolean isDeleted = academicYearBasePriceService.deleteAcademicYearBasePrice(id);
-        if (isDeleted) {
+    public ResponseEntity<Void> deletePrice(@PathVariable Long id) {
+        boolean deleted = academicYearBasePriceService.deleteAcademicYearBasePrice(id);
+        if (deleted) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
