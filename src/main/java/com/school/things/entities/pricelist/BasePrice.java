@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "academic_year_base_price")
-public class AcademicYearBasePrice {
+public class BasePrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,6 +14,9 @@ public class AcademicYearBasePrice {
     private double paymentItemPrice;
     @Transient // Это поле не будет сохранено в базу данных
     private String paymentItemName;
+
+    @Transient // Это поле не будет сохранено в базу данных
+    private String gradeName;
 
     public Long getId() {
         return id;
@@ -61,6 +64,14 @@ public class AcademicYearBasePrice {
 
     public void setPaymentItemName(String paymentItemName) {
         this.paymentItemName = paymentItemName;
+    }
+
+    public String getGradeName() {
+        return gradeName;
+    }
+
+    public void setGradeName(String gradeName) {
+        this.gradeName = gradeName;
     }
 }
 

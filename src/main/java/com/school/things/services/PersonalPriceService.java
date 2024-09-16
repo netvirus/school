@@ -1,7 +1,7 @@
 package com.school.things.services;
 
-import com.school.things.entities.pricelist.AcademicYearPersonalPrice;
-import com.school.things.repositories.AcademicYearPersonalPriceRepository;
+import com.school.things.entities.pricelist.PersonalPrice;
+import com.school.things.repositories.PersonalPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,32 +9,32 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AcademicYearPersonalPriceService {
+public class PersonalPriceService {
 
     @Autowired
-    private AcademicYearPersonalPriceRepository academicYearPersonalPriceRepository;
+    private PersonalPriceRepository academicYearPersonalPriceRepository;
 
-    public List<AcademicYearPersonalPrice> getAllAcademicYearPersonalPrices() {
+    public List<PersonalPrice> getAllAcademicYearPersonalPrices() {
         return academicYearPersonalPriceRepository.findAll();
     }
 
-    public Optional<AcademicYearPersonalPrice> getAcademicYearPersonalPriceById(Long id) {
+    public Optional<PersonalPrice> getAcademicYearPersonalPriceById(Long id) {
         return academicYearPersonalPriceRepository.findById(id);
     }
 
-    public List<AcademicYearPersonalPrice> getAcademicYearPersonalPricesByStudentId(Long studentId) {
+    public List<PersonalPrice> getAcademicYearPersonalPricesByStudentId(Long studentId) {
         return academicYearPersonalPriceRepository.findByStudentId(studentId);
     }
 
-    public List<AcademicYearPersonalPrice> getAcademicYearPersonalPricesByYearAndGrade(int year, int gradeId) {
+    public List<PersonalPrice> getAcademicYearPersonalPricesByYearAndGrade(int year, int gradeId) {
         return academicYearPersonalPriceRepository.findByAcademicYearAndGradeId(year, gradeId);
     }
 
-    public AcademicYearPersonalPrice createAcademicYearPersonalPrice(AcademicYearPersonalPrice academicYearPersonalPrice) {
+    public PersonalPrice createAcademicYearPersonalPrice(PersonalPrice academicYearPersonalPrice) {
         return academicYearPersonalPriceRepository.save(academicYearPersonalPrice);
     }
 
-    public AcademicYearPersonalPrice updateAcademicYearPersonalPrice(Long id, AcademicYearPersonalPrice academicYearPersonalPrice) {
+    public PersonalPrice updateAcademicYearPersonalPrice(Long id, PersonalPrice academicYearPersonalPrice) {
         return academicYearPersonalPriceRepository.findById(id)
                 .map(existingPrice -> {
                     existingPrice.setAcademicYear(academicYearPersonalPrice.getAcademicYear());

@@ -7,7 +7,7 @@ import org.hibernate.annotations.Type;
 import java.util.Arrays;
 
 @Entity
-public class AcademicYearPersonalPrice {
+public class PersonalPrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +22,7 @@ public class AcademicYearPersonalPrice {
     private int[] discountInMonths = new int[12];
     private Long academicBasePriceId;
 
-    public AcademicYearPersonalPrice() {
+    public PersonalPrice() {
         Arrays.fill(this.paymentMonths, 0);
         Arrays.fill(this.discountInMonths, 0);
     }
