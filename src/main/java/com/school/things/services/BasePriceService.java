@@ -70,13 +70,13 @@ public class BasePriceService {
         return basePriceRepository.save(academicYearBasePrice);
     }
 
-    public BasePrice updateAcademicYearBasePrice(Long id, BasePrice academicYearBasePrice) {
+    public BasePrice updateAcademicYearBasePrice(Long id, BasePrice BasePrice) {
         return basePriceRepository.findById(id)
                 .map(existingBasePrice -> {
-                    existingBasePrice.setPriceYear(academicYearBasePrice.getPriceYear());
-                    existingBasePrice.setPaymentItemId(academicYearBasePrice.getPaymentItemId());
-                    existingBasePrice.setPaymentItemPrice(academicYearBasePrice.getPaymentItemPrice());
-                    existingBasePrice.setGradeId(academicYearBasePrice.getGradeId());
+                    existingBasePrice.setPriceYear(BasePrice.getPriceYear());
+                    existingBasePrice.setPaymentItemId(BasePrice.getPaymentItemId());
+                    existingBasePrice.setPaymentItemPrice(BasePrice.getPaymentItemPrice());
+                    existingBasePrice.setGradeId(BasePrice.getGradeId());
                     return basePriceRepository.save(existingBasePrice);
                 })
                 .orElseThrow(() -> new RuntimeException("Academic Year Base Price not found"));
