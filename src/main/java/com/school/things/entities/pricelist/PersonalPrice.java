@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 
 import java.util.Arrays;
 
+@Table(name = "personal_price")
 @Entity
 public class PersonalPrice {
     @Id

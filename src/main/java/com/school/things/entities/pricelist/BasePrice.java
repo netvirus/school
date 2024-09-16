@@ -3,7 +3,7 @@ package com.school.things.entities.pricelist;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "academic_year_base_price")
+@Table(name = "base_price")
 public class BasePrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,12 +66,8 @@ public class BasePrice {
         this.paymentItemName = paymentItemName;
     }
 
-    public String getGradeName() {
-        return gradeName;
-    }
+    public String getGradeName() { return gradeName; }
 
-    public void setGradeName(String gradeName) {
-        this.gradeName = gradeName;
-    }
+    public void setGradeName(String gradeName) { this.gradeName = gradeName; }
 }
 
