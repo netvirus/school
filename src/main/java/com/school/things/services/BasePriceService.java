@@ -8,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BasePriceService {
@@ -18,20 +20,28 @@ public class BasePriceService {
     @Autowired
     private BasePriceRepository basePriceRepository;
 
+    // Метод для проверки на наличие null в любом элементе массива
+    private boolean isAnyElementNull(Object[] array) {
+        return Objects.isNull(array) || Objects.nonNull(array) && Arrays.stream(array).anyMatch(Objects::isNull);
+    }
+
     public List<BasePrice> getAllPrices() {
         List<Object[]> results = basePriceRepository.findAllWithPaymentItemNameAndGrade();
         List<BasePrice> prices = new ArrayList<>();
 
         for (Object[] result : results) {
-            BasePrice price = new BasePrice();
+            if (isAnyElementNull(result)) {
+                log.warn("Skipping record due to null values");
+                continue; // Пропуск записи, если есть null элементы
+            }
 
-            // Безопасное приведение через Number для числовых значений
-            if (result[0] != null) price.setId(((Number) result[0]).longValue());
-            if (result[1] != null) price.setPaymentItemId(((Number) result[1]).longValue());
-            if (result[2] != null) price.setPaymentItemPrice((Double) result[2]);
-            if (result[3] != null) price.setPriceYear((Integer) result[3]);
-            if (result[4] != null) price.setPaymentItemName((String) result[4]);
-            if (result[5] != null) price.setGradeName((String) result[5]);
+            BasePrice price = new BasePrice();
+            price.setId(((Number) result[0]).longValue());
+            price.setPaymentItemId(((Number) result[1]).longValue());
+            price.setPaymentItemPrice((Double) result[2]);
+            price.setPriceYear((Integer) result[3]);
+            price.setPaymentItemName((String) result[4]);
+            price.setGradeName((String) result[5]);
 
             prices.add(price);
         }
@@ -42,19 +52,18 @@ public class BasePriceService {
     public BasePrice getPriceById(Long id) {
         Object[] result = basePriceRepository.findByIdWithPaymentItemNameAndGrade(id);
 
-        if (result == null) {
-            log.warn("BasePrice not found for id {}", id);
-            throw new RuntimeException("BasePrice not found for id " + id);
+        if (isAnyElementNull(result)) {
+            log.warn("BasePrice not found or contains null values for id {}", id);
+            throw new RuntimeException("BasePrice not found or invalid data for id " + id);
         }
 
         BasePrice price = new BasePrice();
-
-        if (result[0] != null) price.setId(((Number) result[0]).longValue());
-        if (result[1] != null) price.setPaymentItemId(((Number) result[1]).longValue());
-        if (result[2] != null) price.setPaymentItemPrice((Double) result[2]);
-        if (result[3] != null) price.setPriceYear((Integer) result[3]);
-        if (result[4] != null) price.setPaymentItemName((String) result[4]);
-        if (result[5] != null) price.setGradeName((String) result[5]);
+        price.setId(((Number) result[0]).longValue());
+        price.setPaymentItemId(((Number) result[1]).longValue());
+        price.setPaymentItemPrice((Double) result[2]);
+        price.setPriceYear((Integer) result[3]);
+        price.setPaymentItemName((String) result[4]);
+        price.setGradeName((String) result[5]);
 
         log.info("Fetched BasePrice with id {}", id);
         return price;
