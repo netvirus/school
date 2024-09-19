@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class BasePriceService {
@@ -20,31 +17,12 @@ public class BasePriceService {
     @Autowired
     private BasePriceRepository basePriceRepository;
 
-    // Метод для проверки на наличие null в любом элементе массива
-    private boolean isAnyElementNull(Object[] array) {
-        return Objects.isNull(array) || Objects.nonNull(array) && Arrays.stream(array).anyMatch(Objects::isNull);
-    }
-
     public List<BasePrice> getAllPrices() {
         List<Object[]> results = basePriceRepository.findAllWithPaymentItemNameAndGrade();
-        List<BasePrice> prices = new ArrayList<>();
+        List<BasePrice> prices = results.stream()
+                .map(this::mapToBasePrice)
+                .toList(); // Используем Stream API
 
-        for (Object[] result : results) {
-            if (isAnyElementNull(result)) {
-                log.warn("Skipping record due to null values");
-                continue; // Пропуск записи, если есть null элементы
-            }
-
-            BasePrice price = new BasePrice();
-            price.setId(((Number) result[0]).longValue());
-            price.setPaymentItemId(((Number) result[1]).longValue());
-            price.setPaymentItemPrice((Double) result[2]);
-            price.setPriceYear((Integer) result[3]);
-            price.setPaymentItemName((String) result[4]);
-            price.setGradeName((String) result[5]);
-
-            prices.add(price);
-        }
         log.info("Fetched {} BasePrice records", prices.size());
         return prices;
     }
@@ -52,46 +30,65 @@ public class BasePriceService {
     public BasePrice getPriceById(Long id) {
         Object[] result = basePriceRepository.findByIdWithPaymentItemNameAndGrade(id);
 
-        if (isAnyElementNull(result)) {
-            log.warn("BasePrice not found or contains null values for id {}", id);
-            throw new RuntimeException("BasePrice not found or invalid data for id " + id);
+        if (result == null) {
+            log.warn("BasePrice not found for id {}", id);
+            throw new RuntimeException("BasePrice not found for id " + id);
         }
 
-        BasePrice price = new BasePrice();
-        price.setId(((Number) result[0]).longValue());
-        price.setPaymentItemId(((Number) result[1]).longValue());
-        price.setPaymentItemPrice((Double) result[2]);
-        price.setPriceYear((Integer) result[3]);
-        price.setPaymentItemName((String) result[4]);
-        price.setGradeName((String) result[5]);
-
+        BasePrice price = mapToBasePrice(result);
         log.info("Fetched BasePrice with id {}", id);
         return price;
     }
 
-    public BasePrice createBasePrice(BasePrice academicYearBasePrice) {
+    private BasePrice mapToBasePrice(Object[] result) {
+        if (result == null || result.length < 6) {
+            log.error("Invalid result array: {}", (Object) result);
+            throw new IllegalArgumentException("Result array is invalid");
+        }
+
+        return new BasePrice(
+                safeCast(result[0], Number.class).map(Number::longValue).orElse(null),
+                safeCast(result[1], Number.class).map(Number::longValue).orElse(null),
+                safeCast(result[2], Double.class).orElse(null),
+                safeCast(result[3], Integer.class).orElse(null),
+                safeCast(result[4], String.class).orElse(null),
+                safeCast(result[5], String.class).orElse(null)
+        );
+    }
+
+    // Используем безопасное приведение типов
+    private <T> Optional<T> safeCast(Object obj, Class<T> clazz) {
+        if (clazz.isInstance(obj)) {
+            return Optional.of(clazz.cast(obj));
+        }
+        return Optional.empty();
+    }
+
+    public BasePrice createBasePrice(BasePrice basePrice) {
         log.info("Creating BasePrice for year: {}, paymentItemId: {}, gradeId: {}",
-                academicYearBasePrice.getPriceYear(), academicYearBasePrice.getPaymentItemId(), academicYearBasePrice.getGradeId());
-        return basePriceRepository.save(academicYearBasePrice);
+                basePrice.getPriceYear(), basePrice.getPaymentItemId(), basePrice.getGradeId());
+        return basePriceRepository.save(basePrice);
     }
 
     public BasePrice updateBasePrice(Long id, BasePrice basePrice) {
         return basePriceRepository.findById(id)
                 .map(existingBasePrice -> {
-                    existingBasePrice.setPriceYear(basePrice.getPriceYear());
-                    existingBasePrice.setPaymentItemId(basePrice.getPaymentItemId());
-                    existingBasePrice.setPaymentItemPrice(basePrice.getPaymentItemPrice());
-                    existingBasePrice.setGradeId(basePrice.getGradeId());
-
+                    updateExistingPrice(existingBasePrice, basePrice);
                     log.info("Updating BasePrice with id {}, new year: {}, paymentItemId: {}, gradeId: {}",
                             id, basePrice.getPriceYear(), basePrice.getPaymentItemId(), basePrice.getGradeId());
-
                     return basePriceRepository.save(existingBasePrice);
                 })
                 .orElseThrow(() -> {
                     log.error("BasePrice not found for id {}", id);
                     return new RuntimeException("BasePrice not found for id " + id);
                 });
+    }
+
+    private void updateExistingPrice(BasePrice existing, BasePrice updated) {
+        existing.setPriceYear(updated.getPriceYear());
+        existing.setPaymentItemId(updated.getPaymentItemId());
+        existing.setPaymentItemPrice(updated.getPaymentItemPrice());
+        existing.setGradeId(updated.getGradeId());
     }
 
     public boolean deleteBasePrice(Long id) {
@@ -105,3 +102,4 @@ public class BasePriceService {
         }
     }
 }
+
