@@ -15,34 +15,29 @@ public class BasePriceController {
     @Autowired
     private BasePriceService basePriceService;
 
-    // Получить все записи
     @GetMapping
     public List<BasePrice> getAllPrices() {
         return basePriceService.getAllPrices();
     }
 
-    // Получить запись по ID
     @GetMapping("/{id}")
     public ResponseEntity<BasePrice> getPriceById(@PathVariable Long id) {
         BasePrice price = basePriceService.getPriceById(id);
         return ResponseEntity.ok(price);
     }
 
-    // Создать новую запись
     @PostMapping
     public ResponseEntity<BasePrice> createPrice(@RequestBody BasePrice basePrice) {
         BasePrice createdPrice = basePriceService.createBasePrice(basePrice);
         return ResponseEntity.ok(createdPrice);
     }
 
-    // Обновить запись
     @PutMapping("/{id}")
     public ResponseEntity<BasePrice> updatePrice(@PathVariable Long id, @RequestBody BasePrice BasePrice) {
         BasePrice updatedPrice = basePriceService.updateBasePrice(id, BasePrice);
         return ResponseEntity.ok(updatedPrice);
     }
 
-    // Удалить запись
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePrice(@PathVariable Long id) {
         boolean deleted = basePriceService.deleteBasePrice(id);

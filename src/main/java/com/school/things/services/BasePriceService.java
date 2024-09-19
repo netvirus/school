@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 public class BasePriceService {
@@ -18,55 +18,26 @@ public class BasePriceService {
     private BasePriceRepository basePriceRepository;
 
     public List<BasePrice> getAllPrices() {
-        List<Object[]> results = basePriceRepository.findAllWithPaymentItemNameAndGrade();
-        List<BasePrice> prices = results.stream()
-                .map(this::mapToBasePrice)
-                .toList(); // Используем Stream API
-
+        List<BasePrice> prices = basePriceRepository.findAllWithPaymentItemAndGrade();
         log.info("Fetched {} BasePrice records", prices.size());
         return prices;
     }
 
     public BasePrice getPriceById(Long id) {
-        Object[] result = basePriceRepository.findByIdWithPaymentItemNameAndGrade(id);
+        BasePrice price = basePriceRepository.findByIdWithPaymentItemAndGrade(id);
 
-        if (result == null) {
+        if (price == null) {
             log.warn("BasePrice not found for id {}", id);
             throw new RuntimeException("BasePrice not found for id " + id);
         }
 
-        BasePrice price = mapToBasePrice(result);
         log.info("Fetched BasePrice with id {}", id);
         return price;
     }
 
-    private BasePrice mapToBasePrice(Object[] result) {
-        if (result == null || result.length < 6) {
-            log.error("Invalid result array: {}", (Object) result);
-            throw new IllegalArgumentException("Result array is invalid");
-        }
-
-        return new BasePrice(
-                safeCast(result[0], Number.class).map(Number::longValue).orElse(null),
-                safeCast(result[1], Number.class).map(Number::longValue).orElse(null),
-                safeCast(result[2], Double.class).orElse(null),
-                safeCast(result[3], Integer.class).orElse(null),
-                safeCast(result[4], String.class).orElse(null),
-                safeCast(result[5], String.class).orElse(null)
-        );
-    }
-
-    // Используем безопасное приведение типов
-    private <T> Optional<T> safeCast(Object obj, Class<T> clazz) {
-        if (clazz.isInstance(obj)) {
-            return Optional.of(clazz.cast(obj));
-        }
-        return Optional.empty();
-    }
-
     public BasePrice createBasePrice(BasePrice basePrice) {
         log.info("Creating BasePrice for year: {}, paymentItemId: {}, gradeId: {}",
-                basePrice.getPriceYear(), basePrice.getPaymentItemId(), basePrice.getGradeId());
+                basePrice.getPriceYear(), basePrice.getPaymentItem().getId(), basePrice.getGrade().getId());
         return basePriceRepository.save(basePrice);
     }
 
@@ -75,7 +46,7 @@ public class BasePriceService {
                 .map(existingBasePrice -> {
                     updateExistingPrice(existingBasePrice, basePrice);
                     log.info("Updating BasePrice with id {}, new year: {}, paymentItemId: {}, gradeId: {}",
-                            id, basePrice.getPriceYear(), basePrice.getPaymentItemId(), basePrice.getGradeId());
+                            id, basePrice.getPriceYear(), basePrice.getPaymentItem().getId(), basePrice.getGrade().getId());
                     return basePriceRepository.save(existingBasePrice);
                 })
                 .orElseThrow(() -> {
@@ -86,9 +57,9 @@ public class BasePriceService {
 
     private void updateExistingPrice(BasePrice existing, BasePrice updated) {
         existing.setPriceYear(updated.getPriceYear());
-        existing.setPaymentItemId(updated.getPaymentItemId());
         existing.setPaymentItemPrice(updated.getPaymentItemPrice());
-        existing.setGradeId(updated.getGradeId());
+        existing.setGrade(updated.getGrade());
+        existing.setPaymentItem(updated.getPaymentItem());
     }
 
     public boolean deleteBasePrice(Long id) {
@@ -102,4 +73,3 @@ public class BasePriceService {
         }
     }
 }
-
