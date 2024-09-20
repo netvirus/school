@@ -48,4 +48,10 @@ public class PricesController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/create-and-clone")
+    public ResponseEntity<Prices> createAndClonePrices(@RequestParam Long previousPriceId, @RequestParam int newPriceYear) {
+        Prices newPrices = pricesService.createAndClonePrices(previousPriceId, newPriceYear);
+        return ResponseEntity.ok(newPrices);
+    }
 }
