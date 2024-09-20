@@ -27,15 +27,18 @@ public class GradeService {
     }
 
     public Grade updateGrade(Long id, Grade updatedGrade) {
-        return gradeRepository.findById(id)
-                .map(existingGrade -> {
-                    existingGrade.setName(updatedGrade.getName());
-                    return gradeRepository.save(existingGrade);
-                })
-                .orElseThrow(() -> new RuntimeException("Grade not found"));
+        return gradeRepository.findById(id).map(existingGrade -> {
+            existingGrade.setName(updatedGrade.getName());
+            existingGrade.setBasePrices(updatedGrade.getBasePrices());
+            return gradeRepository.save(existingGrade);
+        }).orElseThrow(() -> new RuntimeException("Grade not found for id " + id));
     }
 
-    public void deleteGrade(Long id) {
-        gradeRepository.deleteById(id);
+    public boolean deleteGrade(Long id) {
+        if (gradeRepository.existsById(id)) {
+            gradeRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

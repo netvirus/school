@@ -26,16 +26,19 @@ public class PaymentItemService {
         return paymentItemRepository.save(paymentItem);
     }
 
-    public PaymentItem updatePaymentItem(Long id, PaymentItem paymentItem) {
-        return paymentItemRepository.findById(id)
-                .map(existingItem -> {
-                    existingItem.setName(paymentItem.getName());
-                    return paymentItemRepository.save(existingItem);
-                })
-                .orElseThrow(() -> new RuntimeException("Payment Item not found"));
+    public PaymentItem updatePaymentItem(Long id, PaymentItem updatedPaymentItem) {
+        return paymentItemRepository.findById(id).map(existingPaymentItem -> {
+            existingPaymentItem.setName(updatedPaymentItem.getName());
+            existingPaymentItem.setBasePrices(updatedPaymentItem.getBasePrices());
+            return paymentItemRepository.save(existingPaymentItem);
+        }).orElseThrow(() -> new RuntimeException("PaymentItem not found for id " + id));
     }
 
-    public void deletePaymentItem(Long id) {
-        paymentItemRepository.deleteById(id);
+    public boolean deletePaymentItem(Long id) {
+        if (paymentItemRepository.existsById(id)) {
+            paymentItemRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

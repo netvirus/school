@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/base-prices")
@@ -16,30 +17,30 @@ public class BasePriceController {
     private BasePriceService basePriceService;
 
     @GetMapping
-    public List<BasePrice> getAllPrices() {
-        return basePriceService.getAllPrices();
+    public List<BasePrice> getAllBasePrices() {
+        return basePriceService.getAllBasePrices();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BasePrice> getPriceById(@PathVariable Long id) {
-        BasePrice price = basePriceService.getPriceById(id);
-        return ResponseEntity.ok(price);
+    public ResponseEntity<BasePrice> getBasePriceById(@PathVariable Long id) {
+        Optional<BasePrice> basePrice = basePriceService.getBasePriceById(id);
+        return basePrice.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<BasePrice> createPrice(@RequestBody BasePrice basePrice) {
-        BasePrice createdPrice = basePriceService.createBasePrice(basePrice);
-        return ResponseEntity.ok(createdPrice);
+    public ResponseEntity<BasePrice> createBasePrice(@RequestBody BasePrice basePrice) {
+        BasePrice createdBasePrice = basePriceService.createBasePrice(basePrice);
+        return ResponseEntity.ok(createdBasePrice);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BasePrice> updatePrice(@PathVariable Long id, @RequestBody BasePrice BasePrice) {
-        BasePrice updatedPrice = basePriceService.updateBasePrice(id, BasePrice);
-        return ResponseEntity.ok(updatedPrice);
+    public ResponseEntity<BasePrice> updateBasePrice(@PathVariable Long id, @RequestBody BasePrice basePrice) {
+        BasePrice updatedBasePrice = basePriceService.updateBasePrice(id, basePrice);
+        return ResponseEntity.ok(updatedBasePrice);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePrice(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBasePrice(@PathVariable Long id) {
         boolean deleted = basePriceService.deleteBasePrice(id);
         if (deleted) {
             return ResponseEntity.noContent().build();

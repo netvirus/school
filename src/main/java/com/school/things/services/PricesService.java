@@ -29,7 +29,8 @@ public class PricesService {
     public Prices updatePrice(Long id, Prices updatedPrices) {
         return pricesRepository.findById(id).map(existingPrices -> {
             existingPrices.setPriceYear(updatedPrices.getPriceYear());
-            existingPrices.setPriceDescription(updatedPrices.getPriceDescription());
+            existingPrices.setDescription(updatedPrices.getDescription());
+            existingPrices.setBasePrice(updatedPrices.getBasePrice());
             return pricesRepository.save(existingPrices);
         }).orElseThrow(() -> new RuntimeException("Price not found for id " + id));
     }

@@ -2,8 +2,6 @@ package com.school.things.entities.pricelist;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "prices")
 public class Prices {

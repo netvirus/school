@@ -17,15 +17,14 @@ public class GradeController {
     private GradeService gradeService;
 
     @GetMapping
-    public ResponseEntity<List<Grade>> getAllGrades() {
-        return ResponseEntity.ok(gradeService.getAllGrades());
+    public List<Grade> getAllGrades() {
+        return gradeService.getAllGrades();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Grade> getGradeById(@PathVariable Long id) {
         Optional<Grade> grade = gradeService.getGradeById(id);
-        return grade.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return grade.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -35,14 +34,18 @@ public class GradeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Grade> updateGrade(@PathVariable Long id, @RequestBody Grade updatedGrade) {
-        Grade updated = gradeService.updateGrade(id, updatedGrade);
-        return ResponseEntity.ok(updated);
+    public ResponseEntity<Grade> updateGrade(@PathVariable Long id, @RequestBody Grade grade) {
+        Grade updatedGrade = gradeService.updateGrade(id, grade);
+        return ResponseEntity.ok(updatedGrade);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGrade(@PathVariable Long id) {
-        gradeService.deleteGrade(id);
-        return ResponseEntity.noContent().build();
+        boolean deleted = gradeService.deleteGrade(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

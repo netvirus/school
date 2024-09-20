@@ -24,23 +24,28 @@ public class PaymentItemController {
     @GetMapping("/{id}")
     public ResponseEntity<PaymentItem> getPaymentItemById(@PathVariable Long id) {
         Optional<PaymentItem> paymentItem = paymentItemService.getPaymentItemById(id);
-        return paymentItem.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return paymentItem.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public PaymentItem createPaymentItem(@RequestBody PaymentItem paymentItem) {
-        return paymentItemService.createPaymentItem(paymentItem);
+    public ResponseEntity<PaymentItem> createPaymentItem(@RequestBody PaymentItem paymentItem) {
+        PaymentItem createdPaymentItem = paymentItemService.createPaymentItem(paymentItem);
+        return ResponseEntity.ok(createdPaymentItem);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PaymentItem> updatePaymentItem(@PathVariable Long id, @RequestBody PaymentItem paymentItem) {
-        return ResponseEntity.ok(paymentItemService.updatePaymentItem(id, paymentItem));
+        PaymentItem updatedPaymentItem = paymentItemService.updatePaymentItem(id, paymentItem);
+        return ResponseEntity.ok(updatedPaymentItem);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePaymentItem(@PathVariable Long id) {
-        paymentItemService.deletePaymentItem(id);
-        return ResponseEntity.noContent().build();
+        boolean deleted = paymentItemService.deletePaymentItem(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
