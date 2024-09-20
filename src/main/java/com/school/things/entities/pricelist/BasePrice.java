@@ -11,31 +11,46 @@ public class BasePrice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Оставить если необходима ленивость
-    @JoinColumn(name = "grade_id")
-    private Grade grade;
+    // Связь One-to-One с Prices
+    @OneToOne
+    @JoinColumn(name = "price_id", nullable = false)
+    private Prices prices;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Оставить если необходима ленивость
-    @JoinColumn(name = "payment_item_id")
+    @ManyToOne
+    @JoinColumn(name = "payment_item_id", nullable = false)
     private PaymentItem paymentItem;
 
-    private int priceYear;
+    @ManyToOne
+    @JoinColumn(name = "grade_id", nullable = false)
+    private Grade grade;
+
+    @Column(name = "payment_item_price", nullable = false)
     private double paymentItemPrice;
 
-    // Конструктор по умолчанию для JPA
-    public BasePrice() {
+    // Конструкторы, геттеры и сеттеры
+    public BasePrice() {}
+
+    public BasePrice(Prices prices, PaymentItem paymentItem, Grade grade, double paymentItemPrice) {
+        this.prices = prices;
+        this.paymentItem = paymentItem;
+        this.grade = grade;
+        this.paymentItemPrice = paymentItemPrice;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Grade getGrade() {
-        return grade;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setGrade(Grade grade) {
-        this.grade = grade;
+    public Prices getPrices() {
+        return prices;
+    }
+
+    public void setPrices(Prices prices) {
+        this.prices = prices;
     }
 
     public PaymentItem getPaymentItem() {
@@ -46,12 +61,12 @@ public class BasePrice {
         this.paymentItem = paymentItem;
     }
 
-    public int getPriceYear() {
-        return priceYear;
+    public Grade getGrade() {
+        return grade;
     }
 
-    public void setPriceYear(int priceYear) {
-        this.priceYear = priceYear;
+    public void setGrade(Grade grade) {
+        this.grade = grade;
     }
 
     public double getPaymentItemPrice() {
