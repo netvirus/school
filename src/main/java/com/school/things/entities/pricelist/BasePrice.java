@@ -1,5 +1,6 @@
 package com.school.things.entities.pricelist;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.school.things.entities.Grade;
 import jakarta.persistence.*;
 
@@ -12,7 +13,8 @@ public class BasePrice {
     private Long id;
 
     // Связь One-to-One с Prices
-    @OneToOne(mappedBy = "basePrice")
+    @OneToOne(mappedBy = "basePrice", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
     private Prices prices;
 
     @ManyToOne

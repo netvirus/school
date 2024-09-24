@@ -1,5 +1,6 @@
 package com.school.things.entities.pricelist;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,7 +17,8 @@ public class PaymentItem {
     private String name;
 
     // Связь One-to-Many с BasePrice
-    @OneToMany(mappedBy = "paymentItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paymentItem", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<BasePrice> basePrices;
 
     // Конструкторы
