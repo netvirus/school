@@ -1,6 +1,5 @@
 package com.school.things.entities.pricelist;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.school.things.entities.Grade;
 import jakarta.persistence.*;
 
@@ -12,27 +11,22 @@ public class BasePrice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Связь One-to-One с Prices
-    @OneToOne(mappedBy = "basePrice", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonIgnore
-    private Prices prices;
+    private int priceYear;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_item_id", nullable = false)
     private PaymentItem paymentItem;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "grade_id", nullable = false)
     private Grade grade;
 
     @Column(name = "payment_item_price", nullable = false)
     private double paymentItemPrice;
 
-    // Конструкторы, геттеры и сеттеры
     public BasePrice() {}
 
-    public BasePrice(Prices prices, PaymentItem paymentItem, Grade grade, double paymentItemPrice) {
-        this.prices = prices;
+    public BasePrice(PaymentItem paymentItem, Grade grade, double paymentItemPrice) {
         this.paymentItem = paymentItem;
         this.grade = grade;
         this.paymentItemPrice = paymentItemPrice;
@@ -46,12 +40,12 @@ public class BasePrice {
         this.id = id;
     }
 
-    public Prices getPrices() {
-        return prices;
+    public int getPriceYear() {
+        return priceYear;
     }
 
-    public void setPrices(Prices prices) {
-        this.prices = prices;
+    public void setPriceYear(int priceYear) {
+        this.priceYear = priceYear;
     }
 
     public PaymentItem getPaymentItem() {

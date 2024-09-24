@@ -36,7 +36,6 @@ public class PricesService {
         return pricesRepository.findById(id).map(existingPrices -> {
             existingPrices.setPriceYear(updatedPrices.getPriceYear());
             existingPrices.setDescription(updatedPrices.getDescription());
-            existingPrices.setBasePrice(updatedPrices.getBasePrice());
             return pricesRepository.save(existingPrices);
         }).orElseThrow(() -> new RuntimeException("Price not found for id " + id));
     }
@@ -62,15 +61,15 @@ public class PricesService {
 
         List<BasePrice> previousBasePrices = basePriceRepository.findByPrices(previousPrices);
 
-        for (BasePrice previousBasePrice : previousBasePrices) {
-            BasePrice newBasePrice = new BasePrice(
-                    newPrices,
-                    previousBasePrice.getPaymentItem(),
-                    previousBasePrice.getGrade(),
-                    previousBasePrice.getPaymentItemPrice()
-            );
-            basePriceRepository.save(newBasePrice);
-        }
+//        for (BasePrice previousBasePrice : previousBasePrices) {
+//            BasePrice newBasePrice = new BasePrice(
+//                    newPrices,
+//                    previousBasePrice.getPaymentItem(),
+//                    previousBasePrice.getGrade(),
+//                    previousBasePrice.getPaymentItemPrice()
+//            );
+//            basePriceRepository.save(newBasePrice);
+//        }
         return newPrices;
     }
 }

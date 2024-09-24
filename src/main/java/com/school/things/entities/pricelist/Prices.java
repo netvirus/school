@@ -16,11 +16,6 @@ public class Prices {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "base_price_id", referencedColumnName = "id")
-    private BasePrice basePrice;
-
-    // Конструкторы, геттеры и сеттеры
     public Prices() {}
 
     public Prices(int priceYear, String description) {
@@ -50,13 +45,5 @@ public class Prices {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public BasePrice getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(BasePrice basePrice) {
-        this.basePrice = basePrice;
     }
 }
