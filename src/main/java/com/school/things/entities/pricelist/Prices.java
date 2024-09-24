@@ -3,7 +3,7 @@ package com.school.things.entities.pricelist;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "prices")
+@Table(name = "prices", uniqueConstraints = @UniqueConstraint(columnNames = "price_year"))
 public class Prices {
 
     @Id
@@ -16,11 +16,11 @@ public class Prices {
     @Column(name = "description")
     private String description;
 
-    // Связь One-to-One с BasePrice
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "base_price_id", referencedColumnName = "id")
     private BasePrice basePrice;
 
+    // Конструкторы, геттеры и сеттеры
     public Prices() {}
 
     public Prices(int priceYear, String description) {

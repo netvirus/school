@@ -12,8 +12,7 @@ public class BasePrice {
     private Long id;
 
     // Связь One-to-One с Prices
-    @OneToOne
-    @JoinColumn(name = "price_id", nullable = false)
+    @OneToOne(mappedBy = "basePrice")
     private Prices prices;
 
     @ManyToOne
