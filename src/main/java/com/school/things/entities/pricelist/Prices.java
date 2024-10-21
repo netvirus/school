@@ -16,6 +16,10 @@ public class Prices {
     @Column(name = "description")
     private String description;
 
+    @OneToOne
+    @JoinColumn(name = "base_price_id")  // Связь с BasePrice
+    private BasePrice basePrice;
+
     public Prices() {}
 
     public Prices(int priceYear, String description) {
@@ -45,5 +49,13 @@ public class Prices {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BasePrice getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(BasePrice basePrice) {
+        this.basePrice = basePrice;
     }
 }

@@ -14,6 +14,10 @@ public class BasePrice {
     private int priceYear;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prices_id")
+    private Prices prices;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_item_id", nullable = false)
     private PaymentItem paymentItem;
 
@@ -26,10 +30,11 @@ public class BasePrice {
 
     public BasePrice() {}
 
-    public BasePrice(PaymentItem paymentItem, Grade grade, double paymentItemPrice) {
+    public BasePrice(PaymentItem paymentItem, Grade grade, double paymentItemPrice, Prices prices) {
         this.paymentItem = paymentItem;
         this.grade = grade;
         this.paymentItemPrice = paymentItemPrice;
+        this.prices = prices;
     }
 
     public Long getId() {
@@ -70,5 +75,13 @@ public class BasePrice {
 
     public void setPaymentItemPrice(double paymentItemPrice) {
         this.paymentItemPrice = paymentItemPrice;
+    }
+
+    public Prices getPrices() {
+        return prices;
+    }
+
+    public void setPrices(Prices prices) {
+        this.prices = prices;
     }
 }
