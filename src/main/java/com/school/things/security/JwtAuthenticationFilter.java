@@ -16,7 +16,7 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtService jwtService; // Сервис для работы с JWT токенами
+    private final JwtService jwtService;
 
     public JwtAuthenticationFilter(JwtService jwtService) {
         this.jwtService = jwtService;
@@ -40,7 +40,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         );
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // Устанавливаем объект аутентификации в SecurityContext
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
