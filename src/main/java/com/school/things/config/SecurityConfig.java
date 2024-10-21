@@ -44,6 +44,8 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // TODO Убрать токен или разобраться как его правильно заставить работать
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
