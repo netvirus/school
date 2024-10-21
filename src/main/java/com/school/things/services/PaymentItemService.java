@@ -29,7 +29,6 @@ public class PaymentItemService {
     public PaymentItem updatePaymentItem(Long id, PaymentItem updatedPaymentItem) {
         return paymentItemRepository.findById(id).map(existingPaymentItem -> {
             existingPaymentItem.setName(updatedPaymentItem.getName());
-            existingPaymentItem.setBasePrices(updatedPaymentItem.getBasePrices());
             return paymentItemRepository.save(existingPaymentItem);
         }).orElseThrow(() -> new RuntimeException("PaymentItem not found for id " + id));
     }

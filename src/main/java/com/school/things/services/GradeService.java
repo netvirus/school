@@ -29,7 +29,6 @@ public class GradeService {
     public Grade updateGrade(Long id, Grade updatedGrade) {
         return gradeRepository.findById(id).map(existingGrade -> {
             existingGrade.setName(updatedGrade.getName());
-            existingGrade.setBasePrices(updatedGrade.getBasePrices());
             return gradeRepository.save(existingGrade);
         }).orElseThrow(() -> new RuntimeException("Grade not found for id " + id));
     }

@@ -28,7 +28,7 @@ public class BasePriceService {
 
     public BasePrice updateBasePrice(Long id, BasePrice updatedBasePrice) {
         return basePriceRepository.findById(id).map(existingBasePrice -> {
-            existingBasePrice.setPrices(updatedBasePrice.getPrices());
+            existingBasePrice.setPriceYear(updatedBasePrice.getPriceYear());
             existingBasePrice.setPaymentItem(updatedBasePrice.getPaymentItem());
             existingBasePrice.setGrade(updatedBasePrice.getGrade());
             existingBasePrice.setPaymentItemPrice(updatedBasePrice.getPaymentItemPrice());
