@@ -1,9 +1,11 @@
 package com.school.things.entities.pricelist;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "payment_item")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PaymentItem {
 
     @Id
