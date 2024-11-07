@@ -21,7 +21,7 @@ public class Student extends Person {
     private String fatherName;
     @Column(name = "mother_phone_number", length = 90, nullable = false)
     private String motherPhoneNumber;
-    @Column(name = "father_name", length = 90, nullable = false)
+    @Column(name = "father_phone_number", length = 90, nullable = false)
     private String fatherPhoneNumber;
     @OneToMany()
     private List<StudentPersonalPrice> studentPersonalPriceList;

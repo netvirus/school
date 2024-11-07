@@ -53,3 +53,44 @@ curl -X POST https://bot.swingerhub.net/api/grades \
 curl -X POST https://bot.swingerhub.net/api/grades \
 -H "Content-Type: application/json" \
 -d '{"name": "K2"}'
+
+=== Curl demo data for Students ===
+curl -X POST https://bot.swingerhub.net/api/students -H "Content-Type: application/json" -d '{
+  "address": "123 Main St, Springfield",
+  "age": 16,
+  "created_at": "2024-09-09 05:33:10.477",
+  "first_name": "John",
+  "gender": "Male",
+  "last_name": "Doe",
+  "nationality": "American",
+  "phone_number": "+1234567890",
+  "father_name": "Jack Doe",
+  "father_phone_number": "+1122334455",
+  "grade": "10",
+  "mother_name": "Jane Doe",
+  "mother_phone_number": "+0987654321"
+}'
+
+curl -X POST https://bot.swingerhub.net/api/students -H "Content-Type: application/json" -d '{
+  "address": "sdsdf@dsfsdfds",
+  "age": 2,
+  "created_at": "2024-09-09 10:33:03.566",
+  "first_name": "ывацуаыв",
+  "gender": "Male",
+  "last_name": "фывфвыфыв",
+  "nationality": "Russian",
+  "phone_number": "23424234",
+  "father_name": "Yaroslav Tsuprak",
+  "father_phone_number": "234242334534",
+  "grade": "2",
+  "mother_name": "Svetlana Tsuprak",
+  "mother_phone_number": "2324234"
+}'
+
+=== SQL demo data for Student ===
+INSERT INTO student (address, age, created_at, first_name, gender, last_name, nationality, phone_number, father_name, father_phone_number, grade, mother_name, mother_phone_number)
+VALUES ('123 Main St, Springfield', 16, '2024-09-09 05:33:10.477', 'John', 'Male', 'Doe', 'American', '+1234567890', 'Jack Doe', '+1122334455', '10', 'Jane Doe', '+0987654321');
+
+INSERT INTO student (address, age, created_at, first_name, gender, last_name, nationality, phone_number, father_name, father_phone_number, grade, mother_name, mother_phone_number)
+VALUES ('sdsdf@dsfsdfds', 2, '2024-09-09 10:33:03.566', 'ывацуаыв', 'Male', 'фывфвыфыв', 'Russian', '23424234', 'Yaroslav Tsuprak', '234242334534', '2', 'Svetlana Tsuprak', '2324234');
+
