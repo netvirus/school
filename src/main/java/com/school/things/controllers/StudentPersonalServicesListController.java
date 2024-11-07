@@ -1,6 +1,5 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.prices.StudentPersonalPrice;
 import com.school.things.entities.prices.StudentPersonalServicesList;
 import com.school.things.services.StudentPersonalServicesListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/personal-prices")
+@RequestMapping("/api/personal-services")
 public class StudentPersonalServicesListController {
 
     @Autowired
