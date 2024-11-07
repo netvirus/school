@@ -1,23 +1,30 @@
 package com.school.things.entities;
 
 import com.school.things.entities.abstracts.Person;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.school.things.entities.prices.StudentPersonalPrice;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Student extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
-    private String grade;  // Класс ученика
-    private String motherName;  // Имя и фамилия мамы
-    private String fatherName;  // Имя и фамилия папы
-    private String motherPhoneNumber;  // Телефон мамы
-    private String fatherPhoneNumber;  // Телефон папы
+    @Column(name = "grade", nullable = false)
+    private String grade;
+    @Column(name = "mother_name", length = 90, nullable = false)
+    private String motherName;
+    @Column(name = "father_name", length = 90, nullable = false)
+    private String fatherName;
+    @Column(name = "mother_phone_number", length = 90, nullable = false)
+    private String motherPhoneNumber;
+    @Column(name = "father_name", length = 90, nullable = false)
+    private String fatherPhoneNumber;
+    @OneToMany()
+    private List<StudentPersonalPrice> studentPersonalPriceList;
 
     public Long getId() {
         return id;
