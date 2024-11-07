@@ -13,7 +13,7 @@ public class StudentPersonalPrice {
     private int ownerId;
     @Column(name = "name", nullable = false)
     private String priceName;
-    @JoinColumn(name = "is_active", nullable = false)
+    @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
     public StudentPersonalPrice() {}
