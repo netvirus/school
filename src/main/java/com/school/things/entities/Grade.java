@@ -1,9 +1,6 @@
 package com.school.things.entities;
 
-import com.school.things.entities.pricelist.BasePrice;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "grade")
