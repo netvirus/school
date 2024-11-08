@@ -1,16 +1,11 @@
 package com.school.things.entities;
 
 import com.school.things.entities.abstracts.Item;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Uniform extends Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "size", length = 10, nullable = false)
     private int size;
     public int getSize() {
         return size;

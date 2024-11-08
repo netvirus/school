@@ -8,12 +8,7 @@ import java.util.List;
 
 @Entity
 public class Student extends Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-    @Column(name = "grade", nullable = false)
+    @Column(name = "grade", length = 10, nullable = false)
     private String grade;
     @Column(name = "mother_name", length = 90, nullable = false)
     private String motherName;
@@ -23,16 +18,9 @@ public class Student extends Person {
     private String motherPhoneNumber;
     @Column(name = "father_phone_number", length = 90, nullable = false)
     private String fatherPhoneNumber;
-    @OneToMany()
+    @OneToMany
+    @JoinColumn(name = "owner_id")
     private List<StudentPersonalPrice> studentPersonalPriceList;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getGrade() {
         return grade;
@@ -72,5 +60,13 @@ public class Student extends Person {
 
     public void setFatherPhoneNumber(String fatherPhoneNumber) {
         this.fatherPhoneNumber = fatherPhoneNumber;
+    }
+
+    public List<StudentPersonalPrice> getStudentPersonalPriceList() {
+        return studentPersonalPriceList;
+    }
+
+    public void setStudentPersonalPriceList(List<StudentPersonalPrice> studentPersonalPriceList) {
+        this.studentPersonalPriceList = studentPersonalPriceList;
     }
 }

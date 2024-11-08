@@ -1,28 +1,14 @@
 package com.school.things.entities;
 
 import com.school.things.entities.abstracts.Person;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Teacher extends Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String subject;  // Предмет, который ведет учитель
-    private String grade;  // Грейд класса, который ведет учитель
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "subject", length = 100, nullable = false)
+    private String subject;
+    @Column(name = "grade", length = 10, nullable = false)
+    private String grade;
 
     public String getSubject() {
         return subject;

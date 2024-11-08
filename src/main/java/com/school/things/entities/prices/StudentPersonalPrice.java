@@ -14,7 +14,7 @@ public class StudentPersonalPrice {
     @Column(name = "name", nullable = false)
     private String priceName;
     @Column(name = "is_active", nullable = false)
-    private Boolean isActive = true;
+    private Boolean isActive = false;
 
     public StudentPersonalPrice() {}
 
