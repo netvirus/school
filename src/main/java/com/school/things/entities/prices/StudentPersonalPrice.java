@@ -17,6 +17,7 @@ public class StudentPersonalPrice {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
     @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Student student;
 
     public StudentPersonalPrice() {}
