@@ -1,5 +1,6 @@
 package com.school.things.entities.prices;
 
+import com.school.things.entities.Student;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,11 +11,13 @@ public class StudentPersonalPrice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "owner_id", nullable = false)
-    private int ownerId;
+    private Long ownerId;
     @Column(name = "name", nullable = false)
     private String priceName;
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
+    @ManyToOne
+    private Student student;
 
     public StudentPersonalPrice() {}
 
@@ -26,11 +29,11 @@ public class StudentPersonalPrice {
         this.id = id;
     }
 
-    public int getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
