@@ -16,8 +16,8 @@ public class StudentPersonalPrice {
     private String priceName;
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
     private Student student;
 
     public StudentPersonalPrice() {}
