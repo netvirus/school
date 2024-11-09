@@ -16,8 +16,6 @@ public class StudentPersonalPrice {
     private String priceName;
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
-    @ManyToOne
-    private Student student;
 
     public StudentPersonalPrice() {}
 
