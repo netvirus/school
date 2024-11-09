@@ -50,12 +50,4 @@ public class StudentPersonalPrice {
     public void setActive(Boolean active) {
         isActive = active;
     }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
 }
