@@ -1,6 +1,5 @@
 package com.school.things.entities.prices;
 
-import com.school.things.entities.Student;
 import jakarta.persistence.*;
 
 @Entity
