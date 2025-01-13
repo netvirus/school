@@ -1,12 +1,12 @@
-package com.school.things.entities;
+package com.school.things.entities.student;
 
 import com.school.things.entities.abstracts.Person;
-import com.school.things.entities.prices.StudentPersonalPrice;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Table(name = "student")
 public class Student extends Person {
     @Column(name = "grade", length = 10, nullable = false)
     private String grade;
@@ -20,7 +20,7 @@ public class Student extends Person {
     private String fatherPhoneNumber;
     @OneToMany
     @JoinColumn(name = "owner_id")
-    private List<StudentPersonalPrice> studentPersonalPriceList;
+    private List<StudentPrice> studentPriceList;
 
     public String getGrade() {
         return grade;
@@ -62,11 +62,11 @@ public class Student extends Person {
         this.fatherPhoneNumber = fatherPhoneNumber;
     }
 
-    public List<StudentPersonalPrice> getStudentPersonalPriceList() {
-        return studentPersonalPriceList;
+    public List<StudentPrice> getStudentPersonalPriceList() {
+        return studentPriceList;
     }
 
-    public void setStudentPersonalPriceList(List<StudentPersonalPrice> studentPersonalPriceList) {
-        this.studentPersonalPriceList = studentPersonalPriceList;
+    public void setStudentPersonalPriceList(List<StudentPrice> studentPriceList) {
+        this.studentPriceList = studentPriceList;
     }
 }

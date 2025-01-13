@@ -1,7 +1,7 @@
 package com.school.things.services;
 
 import com.school.things.repositories.SchoolServicesListRepository;
-import com.school.things.entities.prices.SchoolServicesList;
+import com.school.things.entities.school.SchoolServicesList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

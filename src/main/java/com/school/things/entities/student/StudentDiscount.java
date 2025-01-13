@@ -1,10 +1,10 @@
-package com.school.things.entities.prices;
+package com.school.things.entities.student;
 
 import jakarta.persistence.*;
 
-@Table(name = "personal_services_list")
 @Entity
-public class StudentPersonalServicesList {
+@Table(name = "student_discount")
+public class StudentDiscount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +17,7 @@ public class StudentPersonalServicesList {
     @Column(name = "discount", nullable = false)
     private int discount = 0;
 
-    public StudentPersonalServicesList() {}
+    public StudentDiscount() {}
 
     public Long getId() {
         return id;

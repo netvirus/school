@@ -1,9 +1,9 @@
 package com.school.things.repositories;
 
-import com.school.things.entities.prices.StudentPersonalServicesList;
+import com.school.things.entities.student.StudentDiscount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StudentPersonalServicesListRepository extends JpaRepository<StudentPersonalServicesList, Long> {
+public interface StudentPersonalServicesListRepository extends JpaRepository<StudentDiscount, Long> {
 }

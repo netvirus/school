@@ -1,6 +1,6 @@
 package com.school.things.services;
 
-import com.school.things.entities.prices.StudentPersonalServicesList;
+import com.school.things.entities.student.StudentDiscount;
 import com.school.things.repositories.StudentPersonalServicesListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,23 +14,23 @@ public class StudentPersonalServicesListService {
     @Autowired
     private StudentPersonalServicesListRepository studentPersonalServicesListRepository;
 
-    public List<StudentPersonalServicesList> getAllStudentPersonalServicesList() {
+    public List<StudentDiscount> getAllStudentPersonalServicesList() {
         return studentPersonalServicesListRepository.findAll();
     }
 
-    public Optional<StudentPersonalServicesList> getStudentPersonalServicesListById(Long id) {
+    public Optional<StudentDiscount> getStudentPersonalServicesListById(Long id) {
         return studentPersonalServicesListRepository.findById(id);
     }
 
-    public StudentPersonalServicesList createStudentPersonalServicesList(StudentPersonalServicesList studentPersonalPrice) {
+    public StudentDiscount createStudentPersonalServicesList(StudentDiscount studentPersonalPrice) {
         return studentPersonalServicesListRepository.save(studentPersonalPrice);
     }
 
-    public StudentPersonalServicesList updateStudentPersonalServicesList(Long id, StudentPersonalServicesList updatedStudentPersonalServicesList) {
+    public StudentDiscount updateStudentPersonalServicesList(Long id, StudentDiscount updatedStudentDiscount) {
         return studentPersonalServicesListRepository.findById(id).map(existingPrices -> {
-            existingPrices.setPersonalPriceId(updatedStudentPersonalServicesList.getPersonalPriceId());
-            existingPrices.setSchoolServiceId(updatedStudentPersonalServicesList.getSchoolServiceId());
-            existingPrices.setSchoolServiceCost(updatedStudentPersonalServicesList.getSchoolServiceCost());
+            existingPrices.setPersonalPriceId(updatedStudentDiscount.getPersonalPriceId());
+            existingPrices.setSchoolServiceId(updatedStudentDiscount.getSchoolServiceId());
+            existingPrices.setSchoolServiceCost(updatedStudentDiscount.getSchoolServiceCost());
             return studentPersonalServicesListRepository.save(existingPrices);
         }).orElseThrow(() -> new RuntimeException("Student Personal Services List isn't found by id " + id));
     }

@@ -1,8 +1,7 @@
 package com.school.things.entities;
 
 import com.school.things.entities.items.ExpenseReceiptItem;
-import com.school.things.entities.Storekeeper;
-import com.school.things.entities.Student;
+import com.school.things.entities.student.Student;
 import jakarta.persistence.*;
 
 import java.util.Date;

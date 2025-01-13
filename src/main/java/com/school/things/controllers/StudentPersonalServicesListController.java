@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.prices.StudentPersonalServicesList;
+import com.school.things.entities.student.StudentDiscount;
 import com.school.things.services.StudentPersonalServicesListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,25 +17,25 @@ public class StudentPersonalServicesListController {
     private StudentPersonalServicesListService studentPersonalServicesListService;
 
     @GetMapping
-    public List<StudentPersonalServicesList> getAllStudentPersonalServicesList() {
+    public List<StudentDiscount> getAllStudentPersonalServicesList() {
         return studentPersonalServicesListService.getAllStudentPersonalServicesList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentPersonalServicesList> getStudentPersonalServicesListById(@PathVariable Long id) {
-        Optional<StudentPersonalServicesList> price = studentPersonalServicesListService.getStudentPersonalServicesListById(id);
+    public ResponseEntity<StudentDiscount> getStudentPersonalServicesListById(@PathVariable Long id) {
+        Optional<StudentDiscount> price = studentPersonalServicesListService.getStudentPersonalServicesListById(id);
         return price.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<StudentPersonalServicesList> createStudentPersonalServicesList(@RequestBody StudentPersonalServicesList studentPersonalPrice) {
-        StudentPersonalServicesList createdPrice = studentPersonalServicesListService.createStudentPersonalServicesList(studentPersonalPrice);
+    public ResponseEntity<StudentDiscount> createStudentPersonalServicesList(@RequestBody StudentDiscount studentPersonalPrice) {
+        StudentDiscount createdPrice = studentPersonalServicesListService.createStudentPersonalServicesList(studentPersonalPrice);
         return ResponseEntity.ok(createdPrice);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentPersonalServicesList> updateStudentPersonalServicesList(@PathVariable Long id, @RequestBody StudentPersonalServicesList studentPersonalPrice) {
-        StudentPersonalServicesList updatedPrice = studentPersonalServicesListService.updateStudentPersonalServicesList(id, studentPersonalPrice);
+    public ResponseEntity<StudentDiscount> updateStudentPersonalServicesList(@PathVariable Long id, @RequestBody StudentDiscount studentPersonalPrice) {
+        StudentDiscount updatedPrice = studentPersonalServicesListService.updateStudentPersonalServicesList(id, studentPersonalPrice);
         return ResponseEntity.ok(updatedPrice);
     }
 

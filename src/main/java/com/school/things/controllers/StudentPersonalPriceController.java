@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.prices.StudentPersonalPrice;
+import com.school.things.entities.student.StudentPrice;
 import com.school.things.services.StudentPersonalPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,25 +17,25 @@ public class StudentPersonalPriceController {
     private StudentPersonalPriceService studentPersonalPriceService;
 
     @GetMapping
-    public List<StudentPersonalPrice> getAllStudentPersonalPrices() {
+    public List<StudentPrice> getAllStudentPersonalPrices() {
         return studentPersonalPriceService.getAllStudentPersonalPrices();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentPersonalPrice> getStudentPersonalPriceById(@PathVariable Long id) {
-        Optional<StudentPersonalPrice> studentPersonalPrice = studentPersonalPriceService.getStudentPersonalPriceById(id);
+    public ResponseEntity<StudentPrice> getStudentPersonalPriceById(@PathVariable Long id) {
+        Optional<StudentPrice> studentPersonalPrice = studentPersonalPriceService.getStudentPersonalPriceById(id);
         return studentPersonalPrice.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public StudentPersonalPrice createStudentPersonalPrice(@RequestBody StudentPersonalPrice studentPersonalPrice) {
-        return studentPersonalPriceService.createStudentPersonalPrice(studentPersonalPrice);
+    public StudentPrice createStudentPersonalPrice(@RequestBody StudentPrice studentPrice) {
+        return studentPersonalPriceService.createStudentPersonalPrice(studentPrice);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentPersonalPrice> updateStudentPersonalPrice(@PathVariable Long id, @RequestBody StudentPersonalPrice studentPersonalPrice) {
-        return ResponseEntity.ok(studentPersonalPriceService.updateStudentPersonalPrice(id, studentPersonalPrice));
+    public ResponseEntity<StudentPrice> updateStudentPersonalPrice(@PathVariable Long id, @RequestBody StudentPrice studentPrice) {
+        return ResponseEntity.ok(studentPersonalPriceService.updateStudentPersonalPrice(id, studentPrice));
     }
 
     @DeleteMapping("/{id}")

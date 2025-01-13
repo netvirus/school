@@ -1,22 +1,22 @@
-package com.school.things.entities.prices;
+package com.school.things.entities.student;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "personal_price")
-public class StudentPersonalPrice {
+@Table(name = "student_price")
+public class StudentPrice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "owner_id", nullable = false)
     private Long ownerId;
-    @Column(name = "name", nullable = false)
-    private String priceName;
+    @Column(name = "price_id", nullable = false)
+    private String priceId;
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
 
-    public StudentPersonalPrice() {}
+    public StudentPrice() {}
 
     public Long getId() {
         return id;
@@ -33,15 +33,12 @@ public class StudentPersonalPrice {
     public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
-
-    public String getPriceName() {
-        return priceName;
+    public String getPriceId() {
+        return priceId;
     }
-
-    public void setPriceName(String priceName) {
-        this.priceName = priceName;
+    public void setPriceId(String priceId) {
+        this.priceId = priceId;
     }
-
     public Boolean getActive() {
         return isActive;
     }

@@ -1,6 +1,6 @@
 package com.school.things.services;
 
-import com.school.things.entities.prices.StudentPersonalPrice;
+import com.school.things.entities.student.StudentPrice;
 import com.school.things.repositories.StudentPersonalPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,20 +14,20 @@ public class StudentPersonalPriceService {
     @Autowired
     private StudentPersonalPriceRepository studentPersonalPriceRepository;
 
-    public List<StudentPersonalPrice> getAllStudentPersonalPrices() {
+    public List<StudentPrice> getAllStudentPersonalPrices() {
         return studentPersonalPriceRepository.findAll();
     }
-    public Optional<StudentPersonalPrice> getStudentPersonalPriceById(Long priceId) {
+    public Optional<StudentPrice> getStudentPersonalPriceById(Long priceId) {
         return studentPersonalPriceRepository.findById(priceId);
     }
-    public StudentPersonalPrice createStudentPersonalPrice(StudentPersonalPrice studentPersonalPrice) {
-        return studentPersonalPriceRepository.save(studentPersonalPrice);
+    public StudentPrice createStudentPersonalPrice(StudentPrice studentPrice) {
+        return studentPersonalPriceRepository.save(studentPrice);
     }
-    public StudentPersonalPrice updateStudentPersonalPrice(Long priceId, StudentPersonalPrice updatedStudentPersonalPrice) {
+    public StudentPrice updateStudentPersonalPrice(Long priceId, StudentPrice updatedStudentPrice) {
         return studentPersonalPriceRepository.findById(priceId).map(existingPrice -> {
-            existingPrice.setPriceName(updatedStudentPersonalPrice.getPriceName());
-            existingPrice.setOwnerId(updatedStudentPersonalPrice.getOwnerId());
-            existingPrice.setActive(updatedStudentPersonalPrice.getActive());
+            existingPrice.setPriceName(updatedStudentPrice.getPriceName());
+            existingPrice.setOwnerId(updatedStudentPrice.getOwnerId());
+            existingPrice.setActive(updatedStudentPrice.getActive());
             return studentPersonalPriceRepository.save(existingPrice);
         }).orElseThrow(() -> new RuntimeException("Student Personal Price isn't found by id " + priceId));
     }
