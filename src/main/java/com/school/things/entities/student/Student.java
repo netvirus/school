@@ -20,7 +20,7 @@ public class Student extends Person {
     private String fatherPhoneNumber;
     @OneToMany
     @JoinColumn(name = "owner_id")
-    private List<StudentPrice> studentPriceList;
+    private List<StudentPrice> studentPrice;
 
     public String getGrade() {
         return grade;
@@ -62,11 +62,11 @@ public class Student extends Person {
         this.fatherPhoneNumber = fatherPhoneNumber;
     }
 
-    public List<StudentPrice> getStudentPersonalPriceList() {
-        return studentPriceList;
+    public List<StudentPrice> getStudentPrice() {
+        return studentPrice;
     }
 
-    public void setStudentPersonalPriceList(List<StudentPrice> studentPriceList) {
-        this.studentPriceList = studentPriceList;
+    public void setStudentPrice(List<StudentPrice> studentPrice) {
+        this.studentPrice = studentPrice;
     }
 }

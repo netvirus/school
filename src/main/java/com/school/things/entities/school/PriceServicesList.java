@@ -19,32 +19,35 @@ public class PriceServicesList {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public Long getPriceId() {
         return priceId;
     }
-
     public void setPriceId(Long priceId) {
         this.priceId = priceId;
     }
-
     public Long getSchoolServiceId() {
         return schoolServiceId;
     }
-
     public void setSchoolServiceId(Long schoolServiceId) {
         this.schoolServiceId = schoolServiceId;
     }
-
     public Long getServiceCost() {
         return serviceCost;
     }
-
     public void setServiceCost(Long serviceCost) {
         this.serviceCost = serviceCost;
+    }
+
+    @Override
+    public String toString() {
+        return "PriceServicesList{" +
+                "id=" + id +
+                ", priceId=" + priceId +
+                ", schoolServiceId=" + schoolServiceId +
+                ", serviceCost=" + serviceCost +
+                '}';
     }
 }

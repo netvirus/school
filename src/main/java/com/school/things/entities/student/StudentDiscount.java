@@ -8,54 +8,54 @@ public class StudentDiscount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "personal_price_id", nullable = false)
-    private Long personalPriceId;
-    @Column(name = "school_service_id", nullable = false)
-    private Long schoolServiceId;
-    @Column(name = "cost", nullable = true)
-    private Long schoolServiceCost;
+    @Column(name = "student_id", nullable = false)
+    private Long studentId;
+    @Column(name = "price_id", nullable = false)
+    private Long priceId;
+    @Column(name = "service_id", nullable = false)
+    private Long serviceId;
     @Column(name = "discount", nullable = false)
     private int discount = 0;
 
-    public StudentDiscount() {}
-
-    public Long getId() {
-        return id;
+    public StudentDiscount() {
     }
 
+    public Long getId() { return id; }
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Long getPersonalPriceId() {
-        return personalPriceId;
+    public Long getStudentId() {
+        return studentId;
     }
-
-    public void setPersonalPriceId(Long personalPriceId) {
-        this.personalPriceId = personalPriceId;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
-
-    public Long getSchoolServiceId() {
-        return schoolServiceId;
+    public Long getPriceId() {
+        return priceId;
     }
-
-    public void setSchoolServiceId(Long schoolServiceId) {
-        this.schoolServiceId = schoolServiceId;
+    public void setPriceId(Long priceId) {
+        this.priceId = priceId;
     }
-
-    public Long getSchoolServiceCost() {
-        return schoolServiceCost;
+    public Long getServiceId() {
+        return serviceId;
     }
-
-    public void setSchoolServiceCost(Long schoolServiceCost) {
-        this.schoolServiceCost = schoolServiceCost;
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
     }
-
     public int getDiscount() {
         return discount;
     }
-
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+    @Override
+    public String toString() {
+        return "StudentDiscount{" +
+                "id=" + id +
+                ", studentId=" + studentId +
+                ", priceId=" + priceId +
+                ", serviceId=" + serviceId +
+                ", discount=" + discount +
+                '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.school.things.services;
 
 import com.school.things.entities.student.StudentDiscount;
-import com.school.things.repositories.StudentPersonalServicesListRepository;
+import com.school.things.repositories.StudentDiscountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,35 +9,36 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentPersonalServicesListService {
+public class StudentDiscountService {
 
     @Autowired
-    private StudentPersonalServicesListRepository studentPersonalServicesListRepository;
+    private StudentDiscountRepository studentDiscountRepository;
 
-    public List<StudentDiscount> getAllStudentPersonalServicesList() {
-        return studentPersonalServicesListRepository.findAll();
+    public List<StudentDiscount> getAllStudentDiscounts() {
+        return studentDiscountRepository.findAll();
     }
 
-    public Optional<StudentDiscount> getStudentPersonalServicesListById(Long id) {
-        return studentPersonalServicesListRepository.findById(id);
+    public Optional<StudentDiscount> getStudentDiscountById(Long id) {
+        return studentDiscountRepository.findById(id);
     }
 
-    public StudentDiscount createStudentPersonalServicesList(StudentDiscount studentPersonalPrice) {
-        return studentPersonalServicesListRepository.save(studentPersonalPrice);
+    public StudentDiscount createStudentDiscount(StudentDiscount studentDiscount) {
+        return studentDiscountRepository.save(studentDiscount);
     }
 
-    public StudentDiscount updateStudentPersonalServicesList(Long id, StudentDiscount updatedStudentDiscount) {
-        return studentPersonalServicesListRepository.findById(id).map(existingPrices -> {
-            existingPrices.setPersonalPriceId(updatedStudentDiscount.getPersonalPriceId());
-            existingPrices.setSchoolServiceId(updatedStudentDiscount.getSchoolServiceId());
-            existingPrices.setSchoolServiceCost(updatedStudentDiscount.getSchoolServiceCost());
-            return studentPersonalServicesListRepository.save(existingPrices);
-        }).orElseThrow(() -> new RuntimeException("Student Personal Services List isn't found by id " + id));
+    public StudentDiscount updateStudentDiscount(Long id, StudentDiscount updatedStudentDiscount) {
+        return studentDiscountRepository.findById(id).map(existingPrices -> {
+            existingPrices.setStudentId(updatedStudentDiscount.getStudentId());
+            existingPrices.setPriceId(updatedStudentDiscount.getPriceId());
+            existingPrices.setServiceId(updatedStudentDiscount.getServiceId());
+            existingPrices.setDiscount(updatedStudentDiscount.getDiscount());
+            return studentDiscountRepository.save(existingPrices);
+        }).orElseThrow(() -> new RuntimeException("Student Discount isn't found by id " + id));
     }
 
-    public boolean deleteStudentPersonalServicesList(Long id) {
-        if (studentPersonalServicesListRepository.existsById(id)) {
-            studentPersonalServicesListRepository.deleteById(id);
+    public boolean deleteStudentDiscount(Long id) {
+        if (studentDiscountRepository.existsById(id)) {
+            studentDiscountRepository.deleteById(id);
             return true;
         }
         return false;

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "school_services_list")
 public class SchoolServicesList {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,5 +24,13 @@ public class SchoolServicesList {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "SchoolServicesList{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
