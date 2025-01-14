@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/student-discount")
+@RequestMapping("/api/v1/student/discount")
 public class StudentDiscountController {
 
     @Autowired

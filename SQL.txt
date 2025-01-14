@@ -94,3 +94,12 @@ VALUES ('123 Main St, Springfield', 16, '2024-09-09 05:33:10.477', 'John', 'Male
 INSERT INTO student (address, age, created_at, first_name, gender, last_name, nationality, phone_number, father_name, father_phone_number, grade, mother_name, mother_phone_number)
 VALUES ('sdsdf@dsfsdfds', 2, '2024-09-09 10:33:03.566', 'ывацуаыв', 'Male', 'фывфвыфыв', 'Russian', '23424234', 'Yaroslav Tsuprak', '234242334534', '2', 'Svetlana Tsuprak', '2324234');
 
+=== School Service List
+INSERT INTO school_services_list (id, name) VALUES (1, 'Annual modules fee');
+INSERT INTO school_services_list (id, name) VALUES (2, 'Legacy / tlp');
+INSERT INTO school_services_list (id, name) VALUES (3, 'Uniform');
+INSERT INTO school_services_list (id, name) VALUES (4, 'Food');
+INSERT INTO school_services_list (id, name) VALUES (5, 'Annual miscellaneous fee');
+INSERT INTO school_services_list (id, name) VALUES (6, 'Field trip / camp & recognition');
+INSERT INTO school_services_list (id, name) VALUES (7, 'Lsa fee (one time)');
+INSERT INTO school_services_list (id, name) VALUES (8, 'Registration fee (one time)');

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/expense-receipts")
+@RequestMapping("/api/v1/expense/receipts")
 public class ExpenseReceiptController {
 
     @Autowired
