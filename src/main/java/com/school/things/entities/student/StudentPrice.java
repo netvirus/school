@@ -16,9 +16,9 @@ public class StudentPrice {
     private String priceId;
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
-//    @OneToMany
-//    @JoinColumn(name = "student_id")
-//    private List<StudentDiscount> studentDiscounts;
+    @OneToMany
+    @JoinColumn(name = "student_id")
+    private List<StudentDiscount> studentDiscounts;
 
     public StudentPrice() {}
 
@@ -47,13 +47,13 @@ public class StudentPrice {
         isActive = active;
     }
 
-//    public List<StudentDiscount> getStudentDiscounts() {
-//        return studentDiscounts;
-//    }
-//
-//    public void setStudentDiscounts(List<StudentDiscount> studentDiscounts) {
-//        this.studentDiscounts = studentDiscounts;
-//    }
+    public List<StudentDiscount> getStudentDiscounts() {
+        return studentDiscounts;
+    }
+
+    public void setStudentDiscounts(List<StudentDiscount> studentDiscounts) {
+        this.studentDiscounts = studentDiscounts;
+    }
 
     @Override
     public String toString() {
