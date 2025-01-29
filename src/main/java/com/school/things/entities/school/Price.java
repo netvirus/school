@@ -10,16 +10,16 @@ import java.util.List;
 public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "main_price_id")
+    private Long main_price_id;
     @Column(name = "name", length = 200, nullable = false)
     private String name;
 
     public Long getId() {
-        return id;
+        return main_price_id;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long main_price_id) {
+        this.main_price_id = main_price_id;
     }
     public String getName() {
         return name;
@@ -34,7 +34,7 @@ public class Price {
     @Override
     public String toString() {
         return "Price{" +
-                "id=" + id +
+                "main_price_id=" + main_price_id +
                 ", name='" + name + '\'' +
                 '}';
     }

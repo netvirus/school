@@ -7,10 +7,6 @@ import java.util.Date;
 
 @MappedSuperclass
 public abstract class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
     @Column(name = "first_name", length = 45, nullable = false)
     private String firstName;
     @Column(name = "last_name", length = 45, nullable = false)
@@ -29,19 +25,11 @@ public abstract class Person {
     @Column(name = "created_at", updatable = false)
     private Date createdAt;
 
-    public Person(Long id, String firstName, String lastName, String email, int age, String gender, String nationality, String phoneNumber, String address, Date createdAt) {
+    public Person(String firstName, String lastName, String email, int age, String gender, String nationality, String phoneNumber, String address, Date createdAt) {
     }
 
     public Person() {
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
