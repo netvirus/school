@@ -1,6 +1,9 @@
 package com.school.things.entities.school;
 
+import com.school.things.entities.student.Student;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -24,6 +27,9 @@ public class Price {
     public void setName(String name) {
         this.name = name;
     }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     @Override
     public String toString() {

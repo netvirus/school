@@ -3,6 +3,7 @@ package com.school.things.entities.student;
 import com.school.things.entities.abstracts.Person;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,9 +19,17 @@ public class Student extends Person {
     private String motherPhoneNumber;
     @Column(name = "father_phone_number", length = 90, nullable = false)
     private String fatherPhoneNumber;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private List<StudentPrice> studentPrice;
+
+    public Student(Long id, String firstName, String lastName, int age, String gender, String nationality, String phoneNumber, String address, Date createdAt, String grade, String motherName, String fatherName, String motherPhoneNumber, String fatherPhoneNumber) {
+        super();
+    }
+
+    public Student() {
+
+    }
 
     public String getGrade() {
         return grade;

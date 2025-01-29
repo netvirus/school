@@ -1,5 +1,7 @@
 package com.school.things.controllers;
 
+import com.school.things.dto.StudentDTO;
+import com.school.things.dto.StudentMapper;
 import com.school.things.entities.student.Student;
 import com.school.things.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,9 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping
-    public ResponseEntity<List<Student>> getAllStudents() {
+    public ResponseEntity<List<StudentDTO>> getAllStudents() {
         List<Student> students = studentService.getAllStudents();
-        return ResponseEntity.ok(students);
+        return ResponseEntity.ok(StudentMapper.fromStudents(students));
     }
 
     @GetMapping("/{id}")
