@@ -1,5 +1,6 @@
 package com.school.things.services;
 
+import com.school.things.dto.StudentDTO;
 import com.school.things.entities.student.Student;
 import com.school.things.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -14,12 +16,16 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public List<StudentDTO> getAllStudents() {
+        return studentRepository.findAll()
+                .stream()
+                .map(this::convertStudentToStudentDTO)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Student> getStudentById(Long id) {
-        return studentRepository.findById(id);
+    public StudentDTO getStudentById(Long id) {
+        Student student = studentRepository.findById(id).get();
+        return convertStudentToStudentDTO(student);
     }
 
     public Student saveStudent(Student student) {
@@ -41,5 +47,25 @@ public class StudentService {
 
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
+    }
+
+    private StudentDTO convertStudentToStudentDTO(Student student) {
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(student.getId());
+        studentDTO.setFirstName(student.getFirstName());
+        studentDTO.setLastName(student.getLastName());
+        studentDTO.setAge(student.getAge());
+        studentDTO.setGender(student.getGender());
+        studentDTO.setNationality(student.getNationality());
+        studentDTO.setPhoneNumber(student.getPhoneNumber());
+        studentDTO.setAddress(student.getAddress());
+        studentDTO.setCreatedAt(student.getCreatedAt());
+        studentDTO.setGrade(student.getGrade());
+        studentDTO.setMotherName(student.getMotherName());
+        studentDTO.setFatherName(student.getFatherName());
+        studentDTO.setMotherPhoneNumber(student.getMotherPhoneNumber());
+        studentDTO.setFatherPhoneNumber(student.getFatherPhoneNumber());
+        studentDTO.setStudentDiscount(student.getStudentDiscounts());
+        return studentDTO;
     }
 }

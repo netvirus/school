@@ -1,7 +1,6 @@
 package com.school.things.dto;
 
 import com.school.things.entities.student.StudentDiscount;
-import com.school.things.entities.student.StudentPrice;
 
 import java.util.Date;
 import java.util.List;
@@ -23,23 +22,7 @@ public class StudentDTO {
     private String fatherPhoneNumber;
     private List<StudentDiscount> studentDiscounts;
 
-    public StudentDTO(Long id, String firstName, String lastName, int age, String gender, String nationality, String phoneNumber, String address, Date createdAt, String grade, String motherName, String fatherName, String motherPhoneNumber, String fatherPhoneNumber, List<StudentDiscount> studentDiscounts) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.gender = gender;
-        this.nationality = nationality;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.createdAt = createdAt;
-        this.grade = grade;
-        this.motherName = motherName;
-        this.fatherName = fatherName;
-        this.motherPhoneNumber = motherPhoneNumber;
-        this.fatherPhoneNumber = fatherPhoneNumber;
-        this.studentDiscounts = studentDiscounts;
-    }
+    public StudentDTO() { }
 
     public Long getId() {
         return id;
