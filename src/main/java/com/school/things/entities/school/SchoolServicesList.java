@@ -8,8 +8,8 @@ public class SchoolServicesList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "service_name", nullable = false)
+    private String serviceName;
 
     public SchoolServicesList() {}
 
@@ -19,18 +19,16 @@ public class SchoolServicesList {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+    public String getServiceName() {
+        return serviceName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
-    @Override
-    public String toString() {
-        return "SchoolServicesList{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+//    @OneToMany(mappedBy = "price_services_list_id")
+//    private List<PriceServicesList> priceServicesList = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "student_extra_services_id")
+//    private List<StudentExtraServicesList> studentExtraServicesLists = new ArrayList<>();
 }

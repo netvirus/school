@@ -8,31 +8,23 @@ public class PriceServicesList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "price_id", nullable = false)
-    private Long priceId;
-    @Column(name = "school_service_id", nullable = false)
-    private Long schoolServiceId;
     @Column(name = "cost", nullable = true)
     private Long serviceCost;
     public PriceServicesList() {}
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "price_id")
+    private Price price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_services_list_id")
+    private SchoolServicesList schoolServicesList =  new SchoolServicesList();
 
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
-    }
-    public Long getPriceId() {
-        return priceId;
-    }
-    public void setPriceId(Long priceId) {
-        this.priceId = priceId;
-    }
-    public Long getSchoolServiceId() {
-        return schoolServiceId;
-    }
-    public void setSchoolServiceId(Long schoolServiceId) {
-        this.schoolServiceId = schoolServiceId;
     }
     public Long getServiceCost() {
         return serviceCost;
@@ -41,13 +33,19 @@ public class PriceServicesList {
         this.serviceCost = serviceCost;
     }
 
-    @Override
-    public String toString() {
-        return "PriceServicesList{" +
-                "id=" + id +
-                ", priceId=" + priceId +
-                ", schoolServiceId=" + schoolServiceId +
-                ", serviceCost=" + serviceCost +
-                '}';
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
+
+    public SchoolServicesList getSchoolServicesList() {
+        return schoolServicesList;
+    }
+
+    public void setSchoolServicesList(SchoolServicesList schoolServicesList) {
+        this.schoolServicesList = schoolServicesList;
     }
 }

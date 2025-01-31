@@ -1,5 +1,7 @@
 package com.school.things.entities.student;
 
+import com.school.things.entities.school.Price;
+import com.school.things.entities.school.SchoolServicesList;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,44 +9,29 @@ import jakarta.persistence.*;
 public class StudentDiscount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_discount_id")
-    private Long student_discount_id;
-    @Column(name = "student_owner_id", nullable = false)
-    private Long studentId;
-    @Column(name = "price_id", nullable = false)
-    private Long priceId;
-    @Column(name = "service_id", nullable = false)
-    private Long serviceId;
+    @Column(name = "id")
+    private Long id;
     @Column(name = "discount", nullable = false)
     private int discount = 0;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
+    private Student student;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_price_id")
     private StudentPrice studentPrice;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_services_id")
+    private SchoolServicesList schoolServicesList;
+
     public StudentDiscount() {
     }
 
-    public Long getId() { return student_discount_id; }
-    public void setId(Long student_discount_id) {
-        this.student_discount_id = student_discount_id;
-    }
-    public Long getStudentId() {
-        return studentId;
-    }
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
-    public Long getPriceId() {
-        return priceId;
-    }
-    public void setPriceId(Long priceId) {
-        this.priceId = priceId;
-    }
-    public Long getServiceId() {
-        return serviceId;
-    }
-    public void setServiceId(Long serviceId) {
-        this.serviceId = serviceId;
+    public Long getId() { return id; }
+    public void setId(Long id) {
+        this.id = id;
     }
     public int getDiscount() {
         return discount;
@@ -53,23 +40,25 @@ public class StudentDiscount {
         this.discount = discount;
     }
 
-    public StudentPrice getStudentPrice() {
-        return studentPrice;
+    public Student getStudent() {
+        return student;
     }
+
+    public void setStudent(Student student) { this.student = student; }
 
     public void setStudentPrice(StudentPrice studentPrice) {
         this.studentPrice = studentPrice;
     }
 
-    @Override
-    public String toString() {
-        return "StudentDiscount{" +
-                "student_discount_id=" + student_discount_id +
-                ", studentId=" + studentId +
-                ", priceId=" + priceId +
-                ", serviceId=" + serviceId +
-                ", discount=" + discount +
-                ", studentPrice=" + studentPrice +
-                '}';
+    public StudentPrice getStudentPrice() {
+        return studentPrice;
+    }
+
+    public SchoolServicesList getSchoolServicesList() {
+        return schoolServicesList;
+    }
+
+    public void setSchoolServicesList(SchoolServicesList schoolServicesList) {
+        this.schoolServicesList = schoolServicesList;
     }
 }

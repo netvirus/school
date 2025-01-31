@@ -8,48 +8,31 @@ import jakarta.persistence.*;
 public class StudentPrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_price_id")
-    private Long student_price_id;
-    @Column(name = "owner_id", nullable = false)
-    private Long ownerId;
-    @Column(name = "price_id", nullable = false)
-    private String priceId;
+    private Long id;
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
+
+    // STUDENT
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private Student student;
+    // PRICE
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "main_price_id")
+    @JoinColumn(name = "price_id")
     private Price price;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_owner_id")
+    @JoinColumn(name = "student_discount_id")
     private StudentDiscount studentDiscount;
 
     public StudentPrice() {}
 
     public Long getId() {
-        return student_price_id;
+        return id;
     }
 
-    public void setId(Long student_price_id) {
-        this.student_price_id = student_price_id;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getPriceId() {
-        return priceId;
-    }
-
-    public void setPriceId(String priceId) {
-        this.priceId = priceId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Boolean getActive() {
@@ -87,9 +70,7 @@ public class StudentPrice {
     @Override
     public String toString() {
         return "StudentPrice{" +
-                "student_price_id=" + student_price_id +
-                ", ownerId=" + ownerId +
-                ", priceId='" + priceId + '\'' +
+                "id=" + id +
                 ", isActive=" + isActive +
                 ", student=" + student +
                 ", price=" + price +

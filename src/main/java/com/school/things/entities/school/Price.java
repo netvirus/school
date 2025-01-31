@@ -1,6 +1,6 @@
 package com.school.things.entities.school;
 
-import com.school.things.entities.student.Student;
+import com.school.things.entities.student.StudentPrice;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -10,16 +10,15 @@ import java.util.List;
 public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "main_price_id")
-    private Long main_price_id;
+    private Long id;
     @Column(name = "name", length = 200, nullable = false)
     private String name;
 
     public Long getId() {
-        return main_price_id;
+        return id;
     }
-    public void setId(Long main_price_id) {
-        this.main_price_id = main_price_id;
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getName() {
         return name;
@@ -27,15 +26,20 @@ public class Price {
     public void setName(String name) {
         this.name = name;
     }
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
-    private Student student;
 
-    @Override
-    public String toString() {
-        return "Price{" +
-                "main_price_id=" + main_price_id +
-                ", name='" + name + '\'' +
-                '}';
+    @OneToMany
+    @JoinColumn(name = "price_id")
+    private List<PriceServicesList> priceServicesList;
+
+    @OneToMany
+    @JoinColumn(name = "student_price_id")
+    private List<StudentPrice> studentPrice;
+
+    public List<StudentPrice> getStudentPrices() {
+        return studentPrice;
+    }
+
+    public void setStudentPrices(List<StudentPrice> studentPrice) {
+        this.studentPrice = studentPrice;
     }
 }

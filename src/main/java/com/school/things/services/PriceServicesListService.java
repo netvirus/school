@@ -28,8 +28,8 @@ public class PriceServicesListService {
 
     public PriceServicesList updatePriceServiceList(Long id, PriceServicesList updatedPriceServicesList) {
         return priceServicesListRepository.findById(id).map(existingPriceServicesList -> {
-            existingPriceServicesList.setPriceId(updatedPriceServicesList.getPriceId());
-            existingPriceServicesList.setSchoolServiceId(updatedPriceServicesList.getSchoolServiceId());
+            existingPriceServicesList.setPrice(updatedPriceServicesList.getPrice());
+            existingPriceServicesList.setSchoolServicesList(updatedPriceServicesList.getSchoolServicesList());
             existingPriceServicesList.setServiceCost(updatedPriceServicesList.getServiceCost());
             return priceServicesListRepository.save(existingPriceServicesList);
         }).orElseThrow(() -> new RuntimeException("Price Services List isn't found by id " + id));

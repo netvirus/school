@@ -28,7 +28,7 @@ public class SchoolServicesListService {
 
     public SchoolServicesList updateServiceListItem(Long id, SchoolServicesList updatedSchoolServicesList) {
         return schoolServicesListRepository.findById(id).map(existingSchoolServicesList -> {
-            existingSchoolServicesList.setName(updatedSchoolServicesList.getName());
+            existingSchoolServicesList.setServiceName(updatedSchoolServicesList.getServiceName());
             return schoolServicesListRepository.save(existingSchoolServicesList);
         }).orElseThrow(() -> new RuntimeException("Services List Item isn't found by id " + id));
     }

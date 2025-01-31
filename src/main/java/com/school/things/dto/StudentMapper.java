@@ -4,6 +4,7 @@ import com.school.things.entities.student.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class StudentMapper {
     public static Student toStudent(StudentDTO studentDTO) {
@@ -64,7 +65,28 @@ public class StudentMapper {
                 student.getMotherName(),
                 student.getFatherName(),
                 student.getMotherPhoneNumber(),
-                student.getFatherPhoneNumber()
+                student.getFatherPhoneNumber(),
+                student.getStudentDiscounts()
+        );
+    }
+
+    public static StudentDTO fromStudent(Optional<Student> student) {
+        return new StudentDTO(
+                student.get().getId(),
+                student.get().getFirstName(),
+                student.get().getLastName(),
+                student.get().getAge(),
+                student.get().getGender(),
+                student.get().getNationality(),
+                student.get().getPhoneNumber(),
+                student.get().getAddress(),
+                student.get().getCreatedAt(),
+                student.get().getGrade(),
+                student.get().getMotherName(),
+                student.get().getFatherName(),
+                student.get().getMotherPhoneNumber(),
+                student.get().getFatherPhoneNumber(),
+                student.get().getStudentDiscounts()
         );
     }
 
@@ -86,7 +108,8 @@ public class StudentMapper {
                     student.getMotherName(),
                     student.getFatherName(),
                     student.getMotherPhoneNumber(),
-                    student.getFatherPhoneNumber()
+                    student.getFatherPhoneNumber(),
+                    student.getStudentDiscounts()
             );
             studentDTOs.add(studentDTO);
         }
