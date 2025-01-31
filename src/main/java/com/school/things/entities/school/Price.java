@@ -27,19 +27,19 @@ public class Price {
         this.name = name;
     }
 
-    @OneToMany
-    @JoinColumn(name = "price_id")
-    private List<PriceServicesList> priceServicesList;
-
-    @OneToMany
-    @JoinColumn(name = "student_price_id")
-    private List<StudentPrice> studentPrice;
-
-    public List<StudentPrice> getStudentPrices() {
-        return studentPrice;
-    }
-
-    public void setStudentPrices(List<StudentPrice> studentPrice) {
-        this.studentPrice = studentPrice;
-    }
+//    @OneToMany
+//    @JoinColumn(name = "price_id")
+//    private List<PriceServicesList> priceServicesList;
+//
+//    @OneToMany
+//    @JoinColumn(name = "student_price_id")
+//    private List<StudentPrice> studentPrice;
+//
+//    public List<StudentPrice> getStudentPrices() {
+//        return studentPrice;
+//    }
+//
+//    public void setStudentPrices(List<StudentPrice> studentPrice) {
+//        this.studentPrice = studentPrice;
+//    }
 }

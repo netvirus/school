@@ -1,6 +1,6 @@
 package com.school.things.dto;
 
-import com.school.things.entities.student.StudentDiscount;
+import com.school.things.entities.student.StudentPrice;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +20,7 @@ public class StudentDTO {
     private String fatherName;
     private String motherPhoneNumber;
     private String fatherPhoneNumber;
-    private List<StudentDiscount> studentDiscounts;
+    private List<StudentPrice> studentPrices;
 
     public StudentDTO() { }
 
@@ -136,12 +136,12 @@ public class StudentDTO {
         this.fatherPhoneNumber = fatherPhoneNumber;
     }
 
-    public List<StudentDiscount> getStudentDiscount() {
-        return studentDiscounts;
+    public List<StudentPrice> getStudentPrices() {
+        return studentPrices;
     }
 
-    public void setStudentDiscount(List<StudentDiscount> studentDiscounts) {
-        this.studentDiscounts = studentDiscounts;
+    public void setStudentPrices(List<StudentPrice> studentPrices) {
+        this.studentPrices = studentPrices;
     }
 
     @Override
@@ -161,7 +161,7 @@ public class StudentDTO {
                 ", fatherName='" + fatherName + '\'' +
                 ", motherPhoneNumber='" + motherPhoneNumber + '\'' +
                 ", fatherPhoneNumber='" + fatherPhoneNumber + '\'' +
-                ", studentPrice=" + studentDiscounts +
+                ", studentPrices=" + studentPrices +
                 '}';
     }
 }

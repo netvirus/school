@@ -1,5 +1,6 @@
 package com.school.things.entities.student;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.entities.abstracts.Person;
 import jakarta.persistence.*;
 
@@ -24,20 +25,12 @@ public class Student extends Person {
     private String motherPhoneNumber;
     @Column(name = "father_phone_number", length = 90, nullable = false)
     private String fatherPhoneNumber;
-    // STUDENT PRICE
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
-    private List<StudentPrice> studentPrice = new ArrayList<>();
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
-    private List<StudentDiscount> studentDiscounts = new ArrayList<>();
+    @JsonManagedReference
+    private List<StudentPrice> studentPrices = new ArrayList<>();
 
-    public Student(Long id, String firstName, String lastName, int age, String gender, String nationality, String phoneNumber, String address, Date createdAt, String grade, String motherName, String fatherName, String motherPhoneNumber, String fatherPhoneNumber) {
-        super();
-    }
-
-    public Student() {
-
-    }
+    public Student() { }
 
     public Long getId() {
         return id;
@@ -87,19 +80,11 @@ public class Student extends Person {
         this.fatherPhoneNumber = fatherPhoneNumber;
     }
 
-    public List<StudentPrice> getStudentPrice() {
-        return studentPrice;
+    public List<StudentPrice> getStudentPrices() {
+        return studentPrices;
     }
 
-    public void setStudentPrice(List<StudentPrice> studentPrice) {
-        this.studentPrice = studentPrice;
-    }
-
-    public List<StudentDiscount> getStudentDiscounts() {
-        return studentDiscounts;
-    }
-
-    public void setStudentDiscounts(List<StudentDiscount> studentDiscounts) {
-        this.studentDiscounts = studentDiscounts;
+    public void setStudentPrices(List<StudentPrice> studentPrices) {
+        this.studentPrices = studentPrices;
     }
 }

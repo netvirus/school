@@ -65,7 +65,7 @@ public class StudentService {
         studentDTO.setFatherName(student.getFatherName());
         studentDTO.setMotherPhoneNumber(student.getMotherPhoneNumber());
         studentDTO.setFatherPhoneNumber(student.getFatherPhoneNumber());
-        studentDTO.setStudentDiscount(student.getStudentDiscounts());
+        studentDTO.setStudentPrices(student.getStudentPrices());
         return studentDTO;
     }
 }

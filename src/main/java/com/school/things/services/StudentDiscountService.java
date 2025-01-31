@@ -28,7 +28,6 @@ public class StudentDiscountService {
 
     public StudentDiscount updateStudentDiscount(Long id, StudentDiscount updatedStudentDiscount) {
         return studentDiscountRepository.findById(id).map(existingPrices -> {
-            existingPrices.setStudent(updatedStudentDiscount.getStudent());
             existingPrices.setStudentPrice(updatedStudentDiscount.getStudentPrice());
             existingPrices.setDiscount(updatedStudentDiscount.getDiscount());
             return studentDiscountRepository.save(existingPrices);

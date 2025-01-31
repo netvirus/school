@@ -1,7 +1,11 @@
 package com.school.things.entities.student;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.entities.school.Price;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "student_price")
@@ -12,18 +16,20 @@ public class StudentPrice {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
 
-    // STUDENT
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
+    @JsonBackReference
     private Student student;
-    // PRICE
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "price_id")
-    private Price price;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "price_id")
+    @JsonManagedReference
+    private Price price;
+
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_discount_id")
-    private StudentDiscount studentDiscount;
+    @JsonManagedReference
+    private List<StudentDiscount> studentDiscounts;
 
     public StudentPrice() {}
 
@@ -59,12 +65,12 @@ public class StudentPrice {
         this.price = price;
     }
 
-    public StudentDiscount getStudentDiscount() {
-        return studentDiscount;
+    public List<StudentDiscount> getStudentDiscounts() {
+        return studentDiscounts;
     }
 
-    public void setStudentDiscount(StudentDiscount studentDiscount) {
-        this.studentDiscount = studentDiscount;
+    public void setStudentDiscounts(List<StudentDiscount> studentDiscounts) {
+        this.studentDiscounts = studentDiscounts;
     }
 
     @Override
@@ -74,7 +80,7 @@ public class StudentPrice {
                 ", isActive=" + isActive +
                 ", student=" + student +
                 ", price=" + price +
-                ", studentDiscount=" + studentDiscount +
+                ", studentDiscounts=" + studentDiscounts +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.school.things.entities.student;
 
-import com.school.things.entities.school.Price;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.school.things.entities.school.SchoolServicesList;
 import jakarta.persistence.*;
 
@@ -15,15 +15,13 @@ public class StudentDiscount {
     private int discount = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
-    private Student student;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_price_id")
+    @JsonBackReference
     private StudentPrice studentPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_services_id")
+    @JsonBackReference
     private SchoolServicesList schoolServicesList;
 
     public StudentDiscount() {
@@ -39,12 +37,6 @@ public class StudentDiscount {
     public void setDiscount(int discount) {
         this.discount = discount;
     }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) { this.student = student; }
 
     public void setStudentPrice(StudentPrice studentPrice) {
         this.studentPrice = studentPrice;
