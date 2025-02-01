@@ -21,7 +21,7 @@ public class StudentPrice {
     @JsonBackReference
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_id")
     @JsonManagedReference
     private Price price;

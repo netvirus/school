@@ -1,6 +1,7 @@
 package com.school.things.entities.school;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.school.things.entities.student.StudentPrice;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -27,6 +28,10 @@ public class Price {
         this.name = name;
     }
 
+    @OneToMany(mappedBy = "student_price_id", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<StudentPrice> studentPrices;
+
     @OneToMany
     @JoinColumn(name = "price_id")
     @JsonManagedReference
@@ -38,5 +43,13 @@ public class Price {
 
     public void setPriceServicesList(List<PriceServicesList> priceServicesList) {
         this.priceServicesList = priceServicesList;
+    }
+
+    public List<StudentPrice> getStudentPrices() {
+        return studentPrices;
+    }
+
+    public void setStudentPrices(List<StudentPrice> studentPrices) {
+        this.studentPrices = studentPrices;
     }
 }

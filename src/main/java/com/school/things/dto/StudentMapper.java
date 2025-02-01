@@ -29,14 +29,7 @@ public class StudentMapper {
 
     public static List<StudentPriceDTO> convertStudentPriceToStudentPriceDTO(List<StudentPrice> studentPrices) {
         return studentPrices.stream()
-                .map(studentPrice -> {
-                    StudentPriceDTO studentPriceDTO = new StudentPriceDTO();
-                    studentPriceDTO.setId(studentPrice.getId());
-                    studentPriceDTO.setPrice(studentPrice.getPrice());
-                    studentPriceDTO.setStudentDiscounts(studentPrice.getStudentDiscounts());
-                    studentPriceDTO.setActive(studentPrice.getActive());
-                    return studentPriceDTO;
-                })
+                .map(StudentMapper::convertStudentPriceToStudentPriceDTO)
                 .collect(Collectors.toList());
     }
 
