@@ -1,5 +1,6 @@
 package com.school.things.entities.school;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,13 +9,16 @@ public class PriceServicesList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "cost", nullable = true)
     private Long serviceCost;
-    public PriceServicesList() {}
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_id")
+    @JsonBackReference
     private Price price;
+
+    public PriceServicesList() {}
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_services_list_id")

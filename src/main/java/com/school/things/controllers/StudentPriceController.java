@@ -1,5 +1,6 @@
 package com.school.things.controllers;
 
+import com.school.things.dto.StudentPriceDTO;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.services.StudentPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,9 @@ public class StudentPriceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentPrice> getStudentPriceById(@PathVariable Long id) {
-        Optional<StudentPrice> studentPrice = studentPriceService.getStudentPriceById(id);
-        return studentPrice.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<StudentPriceDTO> getStudentPriceById(@PathVariable Long id) {
+        StudentPriceDTO studentPriceDTO = studentPriceService.getStudentPriceById(id);
+        return ResponseEntity.ok(studentPriceDTO);
     }
 
     @PostMapping

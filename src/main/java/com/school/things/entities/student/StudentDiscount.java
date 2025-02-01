@@ -21,7 +21,6 @@ public class StudentDiscount {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_services_id")
-    @JsonBackReference
     private SchoolServicesList schoolServicesList;
 
     public StudentDiscount() {

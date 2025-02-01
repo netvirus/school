@@ -20,7 +20,7 @@ public class StudentDTO {
     private String fatherName;
     private String motherPhoneNumber;
     private String fatherPhoneNumber;
-    private List<StudentPrice> studentPrices;
+    private List<StudentPriceDTO> studentPrices;
 
     public StudentDTO() { }
 
@@ -136,11 +136,11 @@ public class StudentDTO {
         this.fatherPhoneNumber = fatherPhoneNumber;
     }
 
-    public List<StudentPrice> getStudentPrices() {
+    public List<StudentPriceDTO> getStudentPricesDto() {
         return studentPrices;
     }
 
-    public void setStudentPrices(List<StudentPrice> studentPrices) {
+    public void setStudentPricesDTO(List<StudentPriceDTO> studentPrices) {
         this.studentPrices = studentPrices;
     }
 

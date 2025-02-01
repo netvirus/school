@@ -1,5 +1,7 @@
 package com.school.things.services;
 
+import com.school.things.dto.StudentMapper;
+import com.school.things.dto.StudentPriceDTO;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.repositories.StudentPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,15 @@ public class StudentPriceService {
     public List<StudentPrice> getAllStudentPrices() {
         return studentPriceRepository.findAll();
     }
-    public Optional<StudentPrice> getStudentPriceById(Long priceId) {
-        return studentPriceRepository.findById(priceId);
+
+    public StudentPriceDTO getStudentPriceById(Long priceId) {
+        StudentPrice studentPrice = studentPriceRepository.findById(priceId).orElse(null);
+        if (studentPrice != null) {
+            return StudentMapper.convertStudentPriceToStudentPriceDTO(studentPrice);
+        }
+        return null;
     }
+
     public StudentPrice createStudentPrice(StudentPrice studentPrice) {
         return studentPriceRepository.save(studentPrice);
     }

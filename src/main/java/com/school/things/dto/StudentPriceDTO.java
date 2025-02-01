@@ -3,15 +3,13 @@ package com.school.things.dto;
 import com.school.things.entities.school.Price;
 import com.school.things.entities.student.StudentDiscount;
 
+import java.util.List;
+
 public class StudentPriceDTO {
     private Long id;
-    private Long studentId;
-    private Long priceId;
-    private Long discountId;
+    private Price price;
+    private List<StudentDiscount> studentDiscounts;
     private Boolean isActive = false;
-
-    public StudentPriceDTO(Long id, Price price, StudentDiscount studentDiscount) {
-    }
 
     public Long getId() {
         return id;
@@ -21,28 +19,20 @@ public class StudentPriceDTO {
         this.id = id;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Price getPrice() {
+        return price;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
-    public Long getPriceId() {
-        return priceId;
+    public List<StudentDiscount> getStudentDiscounts() {
+        return studentDiscounts;
     }
 
-    public void setPriceId(Long priceId) {
-        this.priceId = priceId;
-    }
-
-    public Long getDiscountId() {
-        return discountId;
-    }
-
-    public void setDiscountId(Long discountId) {
-        this.discountId = discountId;
+    public void setStudentDiscounts(List<StudentDiscount> studentDiscounts) {
+        this.studentDiscounts = studentDiscounts;
     }
 
     public Boolean getActive() {
