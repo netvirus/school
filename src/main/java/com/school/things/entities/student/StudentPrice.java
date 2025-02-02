@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.entities.school.Price;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "student_price")
 public class StudentPrice {
@@ -21,15 +19,10 @@ public class StudentPrice {
     @JsonBackReference
     private Student student;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_id")
     @JsonManagedReference
     private Price price;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_discount_id")
-    @JsonManagedReference
-    private List<StudentDiscount> studentDiscounts;
 
     public StudentPrice() {}
 
@@ -65,14 +58,6 @@ public class StudentPrice {
         this.price = price;
     }
 
-    public List<StudentDiscount> getStudentDiscounts() {
-        return studentDiscounts;
-    }
-
-    public void setStudentDiscounts(List<StudentDiscount> studentDiscounts) {
-        this.studentDiscounts = studentDiscounts;
-    }
-
     @Override
     public String toString() {
         return "StudentPrice{" +
@@ -80,7 +65,6 @@ public class StudentPrice {
                 ", isActive=" + isActive +
                 ", student=" + student +
                 ", price=" + price +
-                ", studentDiscounts=" + studentDiscounts +
                 '}';
     }
 }

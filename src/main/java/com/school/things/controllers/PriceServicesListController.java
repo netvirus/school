@@ -1,9 +1,7 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.school.PriceServicesList;
-import com.school.things.entities.school.SchoolServicesList;
+import com.school.things.entities.school.PriceServiceList;
 import com.school.things.services.PriceServicesListService;
-import com.school.things.services.SchoolServicesListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,25 +17,25 @@ public class PriceServicesListController {
     private PriceServicesListService priceServicesListService;
 
     @GetMapping
-    public List<PriceServicesList> getAllServicesListItems() {
+    public List<PriceServiceList> getAllServicesListItems() {
         return priceServicesListService.getAllServicesLists();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PriceServicesList> getServiceListItemById(@PathVariable Long id) {
-        Optional<PriceServicesList> priceServiceList = priceServicesListService.getPriceServiceListById(id);
+    public ResponseEntity<PriceServiceList> getServiceListItemById(@PathVariable Long id) {
+        Optional<PriceServiceList> priceServiceList = priceServicesListService.getPriceServiceListById(id);
         return priceServiceList.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<PriceServicesList> createPriceServiceList(@RequestBody PriceServicesList priceServicesList) {
-        PriceServicesList createdSchoolServicesList = priceServicesListService.createPriceServiceList(priceServicesList);
+    public ResponseEntity<PriceServiceList> createPriceServiceList(@RequestBody PriceServiceList priceServiceList) {
+        PriceServiceList createdSchoolServicesList = priceServicesListService.createPriceServiceList(priceServiceList);
         return ResponseEntity.ok(createdSchoolServicesList);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PriceServicesList> updatePriceServiceList(@PathVariable Long id, @RequestBody PriceServicesList priceServicesList) {
-        PriceServicesList updatedSchoolServicesList = priceServicesListService.updatePriceServiceList(id, priceServicesList);
+    public ResponseEntity<PriceServiceList> updatePriceServiceList(@PathVariable Long id, @RequestBody PriceServiceList priceServiceList) {
+        PriceServiceList updatedSchoolServicesList = priceServicesListService.updatePriceServiceList(id, priceServiceList);
         return ResponseEntity.ok(updatedSchoolServicesList);
     }
 

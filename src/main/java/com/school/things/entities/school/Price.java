@@ -1,7 +1,9 @@
 package com.school.things.entities.school;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.entities.student.StudentPrice;
+import com.school.things.entities.student.StudentServiceList;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -28,22 +30,22 @@ public class Price {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "student_price_id", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    // BACK TO - StudentPrice
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<StudentPrice> studentPrices;
 
-    @OneToMany
-    @JoinColumn(name = "price_id")
+    // TO - PriceServicesList
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "price_service_list_id")
     @JsonManagedReference
-    private List<PriceServicesList> priceServicesList;
+    private List<PriceServiceList> priceServiceList;
 
-    public List<PriceServicesList> getPriceServicesList() {
-        return priceServicesList;
-    }
-
-    public void setPriceServicesList(List<PriceServicesList> priceServicesList) {
-        this.priceServicesList = priceServicesList;
-    }
+    // TO - PriceServicesList
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_service_list_id")
+    @JsonManagedReference
+    private List<StudentServiceList> studentServiceLists;
 
     public List<StudentPrice> getStudentPrices() {
         return studentPrices;
@@ -51,5 +53,21 @@ public class Price {
 
     public void setStudentPrices(List<StudentPrice> studentPrices) {
         this.studentPrices = studentPrices;
+    }
+
+    public List<PriceServiceList> getPriceServiceList() {
+        return priceServiceList;
+    }
+
+    public void setPriceServiceList(List<PriceServiceList> priceServiceList) {
+        this.priceServiceList = priceServiceList;
+    }
+
+    public List<StudentServiceList> getStudentServiceLists() {
+        return studentServiceLists;
+    }
+
+    public void setStudentServiceLists(List<StudentServiceList> studentServiceLists) {
+        this.studentServiceLists = studentServiceLists;
     }
 }

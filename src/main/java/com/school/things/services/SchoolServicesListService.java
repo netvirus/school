@@ -1,7 +1,7 @@
 package com.school.things.services;
 
-import com.school.things.repositories.SchoolServicesListRepository;
-import com.school.things.entities.school.SchoolServicesList;
+import com.school.things.repositories.SchoolServiceListRepository;
+import com.school.things.entities.school.SchoolServiceList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,30 +12,30 @@ import java.util.Optional;
 public class SchoolServicesListService {
 
     @Autowired
-    private SchoolServicesListRepository schoolServicesListRepository;
+    private SchoolServiceListRepository schoolServiceListRepository;
 
-    public List<SchoolServicesList> getAllServicesListItems() {
-        return schoolServicesListRepository.findAll();
+    public List<SchoolServiceList> getAllServicesListItems() {
+        return schoolServiceListRepository.findAll();
     }
 
-    public Optional<SchoolServicesList> getServiceListItemById(Long id) {
-        return schoolServicesListRepository.findById(id);
+    public Optional<SchoolServiceList> getServiceListItemById(Long id) {
+        return schoolServiceListRepository.findById(id);
     }
 
-    public SchoolServicesList createServiceListItem(SchoolServicesList schoolServicesList) {
-        return schoolServicesListRepository.save(schoolServicesList);
+    public SchoolServiceList createServiceListItem(SchoolServiceList schoolServiceList) {
+        return schoolServiceListRepository.save(schoolServiceList);
     }
 
-    public SchoolServicesList updateServiceListItem(Long id, SchoolServicesList updatedSchoolServicesList) {
-        return schoolServicesListRepository.findById(id).map(existingSchoolServicesList -> {
-            existingSchoolServicesList.setServiceName(updatedSchoolServicesList.getServiceName());
-            return schoolServicesListRepository.save(existingSchoolServicesList);
+    public SchoolServiceList updateServiceListItem(Long id, SchoolServiceList updatedSchoolServiceList) {
+        return schoolServiceListRepository.findById(id).map(existingSchoolServicesList -> {
+            existingSchoolServicesList.setServiceName(updatedSchoolServiceList.getServiceName());
+            return schoolServiceListRepository.save(existingSchoolServicesList);
         }).orElseThrow(() -> new RuntimeException("Services List Item isn't found by id " + id));
     }
 
     public boolean deleteServiceListItem(Long id) {
-        if (schoolServicesListRepository.existsById(id)) {
-            schoolServicesListRepository.deleteById(id);
+        if (schoolServiceListRepository.existsById(id)) {
+            schoolServiceListRepository.deleteById(id);
             return true;
         }
         return false;

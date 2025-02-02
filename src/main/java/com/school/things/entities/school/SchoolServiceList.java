@@ -4,14 +4,14 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "school_services_list")
-public class SchoolServicesList {
+public class SchoolServiceList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "service_name", nullable = false)
     private String serviceName;
 
-    public SchoolServicesList() {}
+    public SchoolServiceList() {}
 
     public Long getId() {
         return id;
@@ -28,7 +28,4 @@ public class SchoolServicesList {
 
 //    @OneToMany(mappedBy = "price_services_list_id")
 //    private List<PriceServicesList> priceServicesList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "student_extra_services_id")
-//    private List<StudentExtraServicesList> studentExtraServicesLists = new ArrayList<>();
 }

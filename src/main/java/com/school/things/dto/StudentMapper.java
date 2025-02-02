@@ -37,7 +37,6 @@ public class StudentMapper {
         StudentPriceDTO studentPriceDTO = new StudentPriceDTO();
         studentPriceDTO.setId(studentPrice.getId());
         studentPriceDTO.setPrice(studentPrice.getPrice());
-        studentPriceDTO.setStudentDiscounts(studentPrice.getStudentDiscounts());
         studentPriceDTO.setActive(studentPrice.getActive());
         return studentPriceDTO;
     }

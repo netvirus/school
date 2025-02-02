@@ -1,7 +1,7 @@
 package com.school.things.services;
 
-import com.school.things.entities.school.PriceServicesList;
-import com.school.things.repositories.PriceServicesListRepository;
+import com.school.things.entities.school.PriceServiceList;
+import com.school.things.repositories.PriceServiceListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,32 +12,32 @@ import java.util.Optional;
 public class PriceServicesListService {
 
     @Autowired
-    private PriceServicesListRepository priceServicesListRepository;
+    private PriceServiceListRepository priceServiceListRepository;
 
-    public List<PriceServicesList> getAllServicesLists() {
-        return priceServicesListRepository.findAll();
+    public List<PriceServiceList> getAllServicesLists() {
+        return priceServiceListRepository.findAll();
     }
 
-    public Optional<PriceServicesList> getPriceServiceListById(Long id) {
-        return priceServicesListRepository.findById(id);
+    public Optional<PriceServiceList> getPriceServiceListById(Long id) {
+        return priceServiceListRepository.findById(id);
     }
 
-    public PriceServicesList createPriceServiceList(PriceServicesList priceServicesList) {
-        return priceServicesListRepository.save(priceServicesList);
+    public PriceServiceList createPriceServiceList(PriceServiceList priceServiceList) {
+        return priceServiceListRepository.save(priceServiceList);
     }
 
-    public PriceServicesList updatePriceServiceList(Long id, PriceServicesList updatedPriceServicesList) {
-        return priceServicesListRepository.findById(id).map(existingPriceServicesList -> {
-            existingPriceServicesList.setPrice(updatedPriceServicesList.getPrice());
-            existingPriceServicesList.setSchoolServicesList(updatedPriceServicesList.getSchoolServicesList());
-            existingPriceServicesList.setServiceCost(updatedPriceServicesList.getServiceCost());
-            return priceServicesListRepository.save(existingPriceServicesList);
+    public PriceServiceList updatePriceServiceList(Long id, PriceServiceList updatedPriceServiceList) {
+        return priceServiceListRepository.findById(id).map(existingPriceServiceList -> {
+            existingPriceServiceList.setPrice(updatedPriceServiceList.getPrice());
+            existingPriceServiceList.setSchoolServiceList(updatedPriceServiceList.getSchoolServiceList());
+            existingPriceServiceList.setCost(updatedPriceServiceList.getCost());
+            return priceServiceListRepository.save(existingPriceServiceList);
         }).orElseThrow(() -> new RuntimeException("Price Services List isn't found by id " + id));
     }
 
     public boolean deletePriceServiceList(Long id) {
-        if (priceServicesListRepository.existsById(id)) {
-            priceServicesListRepository.deleteById(id);
+        if (priceServiceListRepository.existsById(id)) {
+            priceServiceListRepository.deleteById(id);
             return true;
         }
         return false;

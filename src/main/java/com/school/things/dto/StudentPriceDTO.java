@@ -1,14 +1,10 @@
 package com.school.things.dto;
 
 import com.school.things.entities.school.Price;
-import com.school.things.entities.student.StudentDiscount;
-
-import java.util.List;
 
 public class StudentPriceDTO {
     private Long id;
     private Price price;
-    private List<StudentDiscount> studentDiscounts;
     private Boolean isActive = false;
 
     public Long getId() {
@@ -25,14 +21,6 @@ public class StudentPriceDTO {
 
     public void setPrice(Price price) {
         this.price = price;
-    }
-
-    public List<StudentDiscount> getStudentDiscounts() {
-        return studentDiscounts;
-    }
-
-    public void setStudentDiscounts(List<StudentDiscount> studentDiscounts) {
-        this.studentDiscounts = studentDiscounts;
     }
 
     public Boolean getActive() {
