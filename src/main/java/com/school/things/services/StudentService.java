@@ -19,13 +19,13 @@ public class StudentService {
     public List<StudentDTO> getAllStudents() {
         return studentRepository.findAll()
                 .stream()
-                .map(StudentMapper::convertStudentToStudentDTO)
+                .map(StudentMapper::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     public StudentDTO getStudentById(Long id) {
         Student student = studentRepository.findById(id).get();
-        return StudentMapper.convertStudentToStudentDTO(student);
+        return StudentMapper.convertToDTO(student);
     }
 
     public Student saveStudent(Student student) {

@@ -1,40 +1,24 @@
 package com.school.things.dto;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@Builder
 public class StudentServiceListDTO {
     private Long id;
     private int discount;
     private String serviceName;
     private int serviceCost;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public StudentServiceListDTO(Long id, int discount, String serviceName, int serviceCost) {
         this.id = id;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
         this.discount = discount;
-    }
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
-    }
-
-    public int getServiceCost() {
-        return serviceCost;
-    }
-
-    public void setServiceCost(int serviceCost) {
         this.serviceCost = serviceCost;
     }
 }
