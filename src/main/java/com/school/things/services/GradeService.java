@@ -1,6 +1,6 @@
 package com.school.things.services;
 
-import com.school.things.entities.Grade;
+import com.school.things.entities.student.Grade;
 import com.school.things.repositories.GradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

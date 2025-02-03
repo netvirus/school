@@ -1,6 +1,6 @@
 package com.school.things.services;
 
-import com.school.things.entities.Teacher;
+import com.school.things.entities.teacher.Teacher;
 import com.school.things.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

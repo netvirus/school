@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.Book;
+import com.school.things.entities.items.Book;
 import com.school.things.services.BooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

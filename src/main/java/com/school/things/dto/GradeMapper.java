@@ -1,7 +1,7 @@
 package com.school.things.dto;
 
 import com.school.things.dto.grade.GradeDTO;
-import com.school.things.entities.Grade;
+import com.school.things.entities.student.Grade;
 
 public class GradeMapper {
     public static GradeDTO convertGradeToDTO(Grade grade) {

@@ -1,4 +1,4 @@
-package com.school.things.entities;
+package com.school.things.entities.teacher;
 
 import com.school.things.entities.abstracts.Person;
 import jakarta.persistence.*;

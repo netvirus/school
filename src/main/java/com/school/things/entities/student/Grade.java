@@ -1,7 +1,6 @@
-package com.school.things.entities;
+package com.school.things.entities.student;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.school.things.entities.student.StudentPrice;
 import jakarta.persistence.*;
 import lombok.*;
 

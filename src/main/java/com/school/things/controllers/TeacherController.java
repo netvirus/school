@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.Teacher;
+import com.school.things.entities.teacher.Teacher;
 import com.school.things.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

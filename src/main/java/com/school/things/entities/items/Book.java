@@ -1,4 +1,4 @@
-package com.school.things.entities;
+package com.school.things.entities.items;
 
 import com.school.things.entities.abstracts.Item;
 import jakarta.persistence.Entity;

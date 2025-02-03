@@ -1,10 +1,8 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.Book;
-import com.school.things.entities.Uniform;
+import com.school.things.entities.items.Uniform;
 import com.school.things.services.UniformService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.school.things.services;
 
-import com.school.things.entities.Uniform;
+import com.school.things.entities.items.Uniform;
 import com.school.things.repositories.UniformRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
