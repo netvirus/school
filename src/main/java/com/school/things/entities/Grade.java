@@ -1,7 +1,17 @@
 package com.school.things.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.school.things.entities.student.StudentPrice;
 import jakarta.persistence.*;
+import lombok.*;
 
+import java.util.List;
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "grade")
 public class Grade {
@@ -12,25 +22,9 @@ public class Grade {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonBackReference
+    List<StudentPrice> studentPrice;
+
     public Grade() {}
-
-    public Grade(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

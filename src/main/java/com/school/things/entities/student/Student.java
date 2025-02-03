@@ -1,7 +1,6 @@
 package com.school.things.entities.student;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.school.things.dto.StudentPriceDTO;
 import com.school.things.entities.abstracts.Person;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter

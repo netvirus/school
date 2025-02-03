@@ -1,5 +1,6 @@
-package com.school.things.dto;
+package com.school.things.dto.price;
 
+import com.school.things.dto.student.StudentServiceListDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

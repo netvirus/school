@@ -1,5 +1,8 @@
 package com.school.things.dto;
 
+import com.school.things.dto.price.PriceDTO;
+import com.school.things.dto.price.PriceServiceListDTO;
+import com.school.things.dto.student.StudentServiceListDTO;
 import com.school.things.entities.school.Price;
 import com.school.things.entities.school.PriceServiceList;
 import com.school.things.entities.school.SchoolServiceList;

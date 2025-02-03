@@ -1,4 +1,4 @@
-package com.school.things.dto;
+package com.school.things.dto.price;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.school.things.services;
 
-import com.school.things.dto.StudentDTO;
+import com.school.things.dto.student.StudentDTO;
 import com.school.things.entities.student.Student;
 import com.school.things.dto.StudentMapper;
 import com.school.things.repositories.StudentRepository;

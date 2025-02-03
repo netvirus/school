@@ -1,7 +1,10 @@
 package com.school.things.dto;
 
+import com.school.things.dto.student.StudentDTO;
+import com.school.things.dto.student.StudentPriceDTO;
 import com.school.things.entities.student.Student;
 import com.school.things.entities.student.StudentPrice;
+import jakarta.validation.constraints.Null;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +54,9 @@ public class StudentMapper {
                         .map(PriceMapper::convertPriceToDTO)
                         .orElse(null))
                 .active(studentPrice.getActive())
+                .grade(Optional.ofNullable(studentPrice.getGrade())
+                        .map(GradeMapper::convertGradeToDTO)
+                        .orElse(null))
                 .build();
     }
 }

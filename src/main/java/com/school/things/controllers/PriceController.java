@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.dto.PriceDTO;
+import com.school.things.dto.price.PriceDTO;
 import com.school.things.dto.PriceMapper;
 import com.school.things.entities.school.Price;
 import com.school.things.services.PriceService;

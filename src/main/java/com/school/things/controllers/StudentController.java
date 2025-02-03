@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.dto.StudentDTO;
+import com.school.things.dto.student.StudentDTO;
 import com.school.things.entities.student.Student;
 import com.school.things.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

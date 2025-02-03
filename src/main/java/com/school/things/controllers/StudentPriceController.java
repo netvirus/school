@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.dto.StudentPriceDTO;
+import com.school.things.dto.student.StudentPriceDTO;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.services.StudentPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/student/prices")

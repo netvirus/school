@@ -1,4 +1,4 @@
-package com.school.things.dto;
+package com.school.things.dto.student;
 
 import lombok.Builder;
 import lombok.Getter;

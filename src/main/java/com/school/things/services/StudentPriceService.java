@@ -1,14 +1,13 @@
 package com.school.things.services;
 
 import com.school.things.dto.StudentMapper;
-import com.school.things.dto.StudentPriceDTO;
+import com.school.things.dto.student.StudentPriceDTO;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.repositories.StudentPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentPriceService {
