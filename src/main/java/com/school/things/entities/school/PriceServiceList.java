@@ -15,7 +15,7 @@ public class PriceServiceList {
     private Long id;
 
     @Column(name = "cost", nullable = true)
-    private Long cost;
+    private int cost;
 
     // BACK TO - Price
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,11 +42,11 @@ public class PriceServiceList {
         this.id = id;
     }
 
-    public Long getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(Long cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 

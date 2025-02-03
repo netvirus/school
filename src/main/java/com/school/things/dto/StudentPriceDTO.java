@@ -1,10 +1,8 @@
 package com.school.things.dto;
 
-import com.school.things.entities.school.Price;
-
 public class StudentPriceDTO {
     private Long id;
-    private Price price;
+    private PriceDTO priceDto;
     private Boolean isActive = false;
 
     public Long getId() {
@@ -15,12 +13,12 @@ public class StudentPriceDTO {
         this.id = id;
     }
 
-    public Price getPrice() {
-        return price;
+    public PriceDTO getPriceDto() {
+        return priceDto;
     }
 
-    public void setPrice(Price price) {
-        this.price = price;
+    public void setPriceDto(PriceDTO priceDto) {
+        this.priceDto = priceDto;
     }
 
     public Boolean getActive() {
