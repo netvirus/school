@@ -11,14 +11,7 @@ import lombok.ToString;
 @Builder
 public class StudentServiceListDTO {
     private Long id;
-    private int discount;
+    private double discount;
     private String serviceName;
-    private int serviceCost;
-
-    public StudentServiceListDTO(Long id, int discount, String serviceName, int serviceCost) {
-        this.id = id;
-        this.discount = discount;
-        this.serviceName = serviceName;
-        this.serviceCost = serviceCost;
-    }
+    private double serviceCost;
 }

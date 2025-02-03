@@ -1,12 +1,17 @@
 package com.school.things.entities.school;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.entities.student.StudentServiceList;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "price_service_list")
 public class PriceServiceList {
@@ -15,15 +20,13 @@ public class PriceServiceList {
     private Long id;
 
     @Column(name = "cost", nullable = true)
-    private int cost;
+    private double cost;
 
-    // BACK TO - Price
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_id")
     @JsonBackReference
     private Price price;
 
-    // TO - SchoolServiceList
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_service_list_id")
     SchoolServiceList schoolServiceList;
@@ -31,46 +34,4 @@ public class PriceServiceList {
     @OneToMany(mappedBy = "priceServiceList", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<StudentServiceList> studentServiceList;
-
-    public PriceServiceList() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    public Price getPrice() {
-        return price;
-    }
-
-    public void setPrice(Price price) {
-        this.price = price;
-    }
-
-    public SchoolServiceList getSchoolServiceList() {
-        return schoolServiceList;
-    }
-
-    public void setSchoolServiceList(SchoolServiceList schoolServiceList) {
-        this.schoolServiceList = schoolServiceList;
-    }
-
-    public List<StudentServiceList> getStudentServiceList() {
-        return studentServiceList;
-    }
-
-    public void setStudentServiceList(List<StudentServiceList> studentServiceList) {
-        this.studentServiceList = studentServiceList;
-    }
 }

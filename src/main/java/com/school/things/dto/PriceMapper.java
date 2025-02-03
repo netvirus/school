@@ -42,9 +42,9 @@ public class PriceMapper {
                         .map(SchoolServiceList::getServiceName)
                         .orElse(null))
                 .serviceCost(Optional.ofNullable(entity.getPriceServiceList())
-                        .map(PriceServiceList::getCost)
-                        .orElse(null))
-                .build();
+                        .map(priceServiceList -> Discount(entity.getDiscount(), priceServiceList.getCost()))
+                        .orElseThrow(() -> new IllegalArgumentException("Cost or Discount can't be - null")))
+                        .build();
     }
 
     public static PriceServiceListDTO convertToDTO(PriceServiceList entity) {
@@ -60,5 +60,9 @@ public class PriceMapper {
                         .map(SchoolServiceList::getServiceName)
                         .orElse(null))
                 .build();
+    }
+
+    public static double Discount(double discount, double price) {
+        return (price - (price * discount / 100));
     }
 }
