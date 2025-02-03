@@ -4,6 +4,7 @@ import com.school.things.entities.school.Price;
 import com.school.things.entities.school.PriceServiceList;
 import com.school.things.entities.school.SchoolServiceList;
 import com.school.things.entities.student.StudentServiceList;
+import com.school.things.utils.Arithmetic;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +43,7 @@ public class PriceMapper {
                         .map(SchoolServiceList::getServiceName)
                         .orElse(null))
                 .serviceCost(Optional.ofNullable(entity.getPriceServiceList())
-                        .map(priceServiceList -> Discount(entity.getDiscount(), priceServiceList.getCost()))
+                        .map(priceServiceList -> Arithmetic.Discount(entity.getDiscount(), priceServiceList.getCost()))
                         .orElseThrow(() -> new IllegalArgumentException("Cost or Discount can't be - null")))
                         .build();
     }
@@ -62,7 +63,12 @@ public class PriceMapper {
                 .build();
     }
 
-    public static double Discount(double discount, double price) {
-        return (price - (price * discount / 100));
+    public static Price convertToPrice(PriceDTO priceDto) {
+        if (priceDto == null) return null;
+
+        return Price.builder()
+                .id(priceDto.getId())
+                .name(priceDto.getName())
+                .build();
     }
 }

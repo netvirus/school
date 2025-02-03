@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.entities.student.StudentServiceList;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 @Entity
 public class Price {
     @Id

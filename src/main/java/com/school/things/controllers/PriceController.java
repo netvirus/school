@@ -1,9 +1,9 @@
 package com.school.things.controllers;
 
+import com.school.things.dto.PriceDTO;
+import com.school.things.dto.PriceMapper;
 import com.school.things.entities.school.Price;
-import com.school.things.entities.student.Student;
 import com.school.things.services.PriceService;
-import com.school.things.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class PriceController {
     private PriceService priceService;
 
     @GetMapping
-    public ResponseEntity<List<Price>> getAllStudents() {
+    public ResponseEntity<List<Price>> getAllPrices() {
         List<Price> prices = priceService.getAllPrices();
         return ResponseEntity.ok(prices);
     }
@@ -31,9 +31,9 @@ public class PriceController {
     }
 
     @PostMapping
-    public ResponseEntity<Price> createStudent(@RequestBody Price price) {
-        Price createdPrice = priceService.savePrice(price);
-        return ResponseEntity.ok(createdPrice);
+    public ResponseEntity<Price> createPrice(@RequestBody PriceDTO priceDto) {
+        Price createdPrice = PriceMapper.convertToPrice(priceDto);
+        return ResponseEntity.ok(priceService.savePrice(createdPrice));
     }
 
     @PutMapping("/{id}")
