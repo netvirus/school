@@ -4,11 +4,19 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.dto.StudentPriceDTO;
 import com.school.things.entities.abstracts.Person;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
 @Entity
 @Table(name = "student")
 public class Student extends Person {
@@ -32,60 +40,4 @@ public class Student extends Person {
     private List<StudentPrice> studentPrices = new ArrayList<>();
 
     public Student() { }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
-    public String getMotherName() {
-        return motherName;
-    }
-
-    public void setMotherName(String motherName) {
-        this.motherName = motherName;
-    }
-
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
-    }
-
-    public String getMotherPhoneNumber() {
-        return motherPhoneNumber;
-    }
-
-    public void setMotherPhoneNumber(String motherPhoneNumber) {
-        this.motherPhoneNumber = motherPhoneNumber;
-    }
-
-    public String getFatherPhoneNumber() {
-        return fatherPhoneNumber;
-    }
-
-    public void setFatherPhoneNumber(String fatherPhoneNumber) {
-        this.fatherPhoneNumber = fatherPhoneNumber;
-    }
-
-    public List<StudentPrice> getStudentPrices() {
-        return studentPrices;
-    }
-
-    public void setStudentPrices(List<StudentPrice> studentPrices) {
-        this.studentPrices = studentPrices;
-    }
 }

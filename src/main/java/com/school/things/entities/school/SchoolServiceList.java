@@ -1,7 +1,15 @@
 package com.school.things.entities.school;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
 @Entity
 @Table(name = "school_services_list")
 public class SchoolServiceList {
@@ -12,20 +20,4 @@ public class SchoolServiceList {
     private String serviceName;
 
     public SchoolServiceList() {}
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getServiceName() {
-        return serviceName;
-    }
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-//    @OneToMany(mappedBy = "price_services_list_id")
-//    private List<PriceServicesList> priceServicesList = new ArrayList<>();
 }

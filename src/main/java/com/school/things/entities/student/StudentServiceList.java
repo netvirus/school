@@ -3,6 +3,7 @@ package com.school.things.entities.student;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.entities.school.PriceServiceList;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 @Entity
 @Table(name = "student_services_list")
 public class StudentServiceList {
@@ -19,9 +21,11 @@ public class StudentServiceList {
     @Column(name = "discount", nullable = false)
     private double discount = 0;
 
-    // BACK TO - PriceServiceList
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_service_list_id")
     @JsonManagedReference
     private PriceServiceList priceServiceList;
+
+    public StudentServiceList() {
+    }
 }
