@@ -26,6 +26,4 @@ public class StudentDTO {
     private String motherPhoneNumber;
     private String fatherPhoneNumber;
     private List<StudentPriceDTO> studentPricesDto;
-
-    public StudentDTO() { }
 }

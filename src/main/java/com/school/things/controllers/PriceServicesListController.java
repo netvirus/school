@@ -1,6 +1,6 @@
 package com.school.things.controllers;
 
-import com.school.things.entities.school.PriceServiceList;
+import com.school.things.entities.price.PriceServiceList;
 import com.school.things.services.PriceServicesListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

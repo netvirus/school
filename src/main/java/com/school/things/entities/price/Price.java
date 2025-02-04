@@ -1,4 +1,4 @@
-package com.school.things.entities.school;
+package com.school.things.entities.price;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

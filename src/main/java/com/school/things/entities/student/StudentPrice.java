@@ -2,17 +2,15 @@ package com.school.things.entities.student;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.school.things.entities.school.Price;
+import com.school.things.entities.price.Price;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "student_price")
 public class StudentPrice {

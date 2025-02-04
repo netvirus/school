@@ -1,5 +1,7 @@
 package com.school.things.services;
 
+import com.school.things.dto.GradeMapper;
+import com.school.things.dto.grade.GradeDTO;
 import com.school.things.entities.student.Grade;
 import com.school.things.repositories.GradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GradeService {
@@ -14,12 +17,16 @@ public class GradeService {
     @Autowired
     private GradeRepository gradeRepository;
 
-    public List<Grade> getAllGrades() {
-        return gradeRepository.findAll();
+    public List<GradeDTO> getAllGrades() {
+        return gradeRepository.findAll()
+                .stream()
+                .map(GradeMapper::convertGradeToDTO)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Grade> getGradeById(Long id) {
-        return gradeRepository.findById(id);
+    public Optional<GradeDTO> getGradeById(Long id) {
+        return gradeRepository.findById(id)
+                .map(GradeMapper::convertGradeToDTO);
     }
 
     public Grade createGrade(Grade grade) {

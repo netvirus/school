@@ -3,10 +3,8 @@ package com.school.things.entities.student;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.things.entities.abstracts.Person;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +13,7 @@ import java.util.List;
 @Setter
 @ToString
 @AllArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "student")
 public class Student extends Person {

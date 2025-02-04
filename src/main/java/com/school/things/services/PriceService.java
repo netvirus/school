@@ -1,7 +1,6 @@
 package com.school.things.services;
 
-import com.school.things.entities.school.Price;
-import com.school.things.entities.student.Student;
+import com.school.things.entities.price.Price;
 import com.school.things.repositories.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

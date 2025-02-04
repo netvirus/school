@@ -1,11 +1,16 @@
 package com.school.things.entities.abstracts;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Getter
+@Setter
+@SuperBuilder
 @MappedSuperclass
+@AllArgsConstructor
 public abstract class Person {
     @Column(name = "first_name", length = 45, nullable = false)
     private String firstName;
@@ -25,71 +30,8 @@ public abstract class Person {
     @Column(name = "created_at", updatable = false)
     private Date createdAt;
 
-    public Person(String firstName, String lastName, String email, int age, String gender, String nationality, String phoneNumber, String address, Date createdAt) {
-    }
-
     public Person() {
 
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
     }
 
     @PrePersist

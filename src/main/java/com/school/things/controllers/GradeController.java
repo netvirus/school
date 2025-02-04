@@ -1,5 +1,6 @@
 package com.school.things.controllers;
 
+import com.school.things.dto.grade.GradeDTO;
 import com.school.things.entities.student.Grade;
 import com.school.things.services.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class GradeController {
     private GradeService gradeService;
 
     @GetMapping
-    public List<Grade> getAllGrades() {
+    public List<GradeDTO> getAllGrades() {
         return gradeService.getAllGrades();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Grade> getGradeById(@PathVariable Long id) {
-        Optional<Grade> grade = gradeService.getGradeById(id);
+    public ResponseEntity<GradeDTO> getGradeById(@PathVariable Long id) {
+        Optional<GradeDTO> grade = gradeService.getGradeById(id);
         return grade.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

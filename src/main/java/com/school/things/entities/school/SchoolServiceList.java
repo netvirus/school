@@ -1,15 +1,13 @@
 package com.school.things.entities.school;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "school_services_list")
 public class SchoolServiceList {

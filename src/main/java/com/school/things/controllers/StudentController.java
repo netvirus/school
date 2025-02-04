@@ -1,5 +1,6 @@
 package com.school.things.controllers;
 
+import com.school.things.dto.StudentMapper;
 import com.school.things.dto.student.StudentDTO;
 import com.school.things.entities.student.Student;
 import com.school.things.services.StudentService;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/students")
@@ -24,13 +26,13 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
-        StudentDTO student = studentService.getStudentById(id);
-        return ResponseEntity.ok(student);
+        Optional<StudentDTO> student = studentService.getStudentById(id);
+        return student.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
-        Student createdStudent = studentService.saveStudent(student);
+    public ResponseEntity<Student> createStudent(@RequestBody StudentDTO studentDto) {
+        Student createdStudent = studentService.saveStudent(studentDto);
         return ResponseEntity.ok(createdStudent);
     }
 

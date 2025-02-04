@@ -3,8 +3,8 @@ package com.school.things.dto;
 import com.school.things.dto.price.PriceDTO;
 import com.school.things.dto.price.PriceServiceListDTO;
 import com.school.things.dto.student.StudentServiceListDTO;
-import com.school.things.entities.school.Price;
-import com.school.things.entities.school.PriceServiceList;
+import com.school.things.entities.price.Price;
+import com.school.things.entities.price.PriceServiceList;
 import com.school.things.entities.school.SchoolServiceList;
 import com.school.things.entities.student.StudentServiceList;
 import com.school.things.utils.Arithmetic;
@@ -66,7 +66,7 @@ public class PriceMapper {
                 .build();
     }
 
-    public static Price convertToPrice(PriceDTO priceDto) {
+    public static Price convertPriceFromDTO(PriceDTO priceDto) {
         if (priceDto == null) return null;
 
         return Price.builder()

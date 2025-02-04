@@ -2,7 +2,7 @@ package com.school.things.controllers;
 
 import com.school.things.dto.price.PriceDTO;
 import com.school.things.dto.PriceMapper;
-import com.school.things.entities.school.Price;
+import com.school.things.entities.price.Price;
 import com.school.things.services.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class PriceController {
 
     @PostMapping
     public ResponseEntity<Price> createPrice(@RequestBody PriceDTO priceDto) {
-        Price createdPrice = PriceMapper.convertToPrice(priceDto);
+        Price createdPrice = PriceMapper.convertPriceFromDTO(priceDto);
         return ResponseEntity.ok(priceService.savePrice(createdPrice));
     }
 

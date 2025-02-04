@@ -13,7 +13,7 @@ public class GradeMapper {
                 .build();
     }
 
-    public static Grade convertToGrade(GradeDTO gradeDTO) {
+    public static Grade convertGradeFromGTO(GradeDTO gradeDTO) {
         if (gradeDTO == null) return null;
 
         return Grade.builder()

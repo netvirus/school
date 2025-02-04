@@ -1,6 +1,7 @@
-package com.school.things.entities.school;
+package com.school.things.entities.price;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.school.things.entities.school.SchoolServiceList;
 import com.school.things.entities.student.StudentServiceList;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

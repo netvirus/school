@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,17 +20,17 @@ public class StudentService {
     public List<StudentDTO> getAllStudents() {
         return studentRepository.findAll()
                 .stream()
-                .map(StudentMapper::convertToDTO)
+                .map(StudentMapper::convertStudentToDTO)
                 .collect(Collectors.toList());
     }
 
-    public StudentDTO getStudentById(Long id) {
-        Student student = studentRepository.findById(id).get();
-        return StudentMapper.convertToDTO(student);
+    public Optional<StudentDTO> getStudentById(Long id) {
+       return studentRepository.findById(id)
+               .map(StudentMapper::convertStudentToDTO);
     }
 
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
+    public Student saveStudent(StudentDTO studentDto) {
+        return studentRepository.save(StudentMapper.convertStudentFromDTO(studentDto));
     }
 
     public Student updateStudent(Student student, Long id) {

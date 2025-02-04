@@ -1,15 +1,13 @@
 package com.school.things.dto.grade;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 @Builder
 public class GradeDTO {
-    private Long id;
-    private String name;
+    private Long id = 0L;
+    private String name = "There is no grade";
 }
