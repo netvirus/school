@@ -22,7 +22,7 @@ public class StudentPriceService {
     public StudentPriceDTO getStudentPriceById(Long priceId) {
         StudentPrice studentPrice = studentPriceRepository.findById(priceId).orElse(null);
         if (studentPrice != null) {
-            return StudentMapper.convertStudentToDTO(studentPrice);
+            return StudentMapper.convertStudentPriceToDTO(studentPrice);
         }
         return null;
     }

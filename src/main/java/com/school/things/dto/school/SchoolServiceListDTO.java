@@ -2,9 +2,7 @@ package com.school.things.dto.school;
 
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
 @AllArgsConstructor
 public class SchoolServiceListDTO {

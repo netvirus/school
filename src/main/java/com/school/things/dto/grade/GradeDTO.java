@@ -2,9 +2,7 @@ package com.school.things.dto.grade;
 
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @Builder
 public class GradeDTO {

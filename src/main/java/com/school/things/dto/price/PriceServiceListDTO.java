@@ -1,13 +1,8 @@
 package com.school.things.dto.price;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
 public class PriceServiceListDTO {
     private Long id;

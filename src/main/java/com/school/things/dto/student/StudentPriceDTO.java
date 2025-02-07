@@ -4,9 +4,7 @@ import com.school.things.dto.grade.GradeDTO;
 import com.school.things.dto.price.PriceDTO;
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
 @AllArgsConstructor
 public class StudentPriceDTO {
