@@ -3,9 +3,7 @@ package com.school.things.entities.school;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @Builder
 @Entity

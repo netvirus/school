@@ -4,16 +4,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.school.things.entities.school.SchoolServiceList;
 import com.school.things.entities.student.StudentServiceList;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @Entity
 @Table(name = "price_service_list")

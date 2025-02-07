@@ -6,9 +6,7 @@ import com.school.things.entities.price.Price;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @Builder
 @Entity

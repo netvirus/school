@@ -6,12 +6,10 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
 @AllArgsConstructor
 @Builder
 @Entity
+@Data
 @Table(name = "grade")
 public class Grade {
 
