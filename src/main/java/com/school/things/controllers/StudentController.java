@@ -2,6 +2,7 @@ package com.school.things.controllers;
 
 import com.school.things.dto.StudentMapper;
 import com.school.things.dto.student.StudentDTO;
+import com.school.things.dto.student.StudentListDTO;
 import com.school.things.entities.student.Student;
 import com.school.things.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
         List<StudentDTO> students = studentService.getAllStudents();
+        return ResponseEntity.ok(students);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<StudentListDTO>> getStudentList() {
+        List<StudentListDTO> students = studentService.getStudentList();
         return ResponseEntity.ok(students);
     }
 

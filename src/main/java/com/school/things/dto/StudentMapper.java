@@ -1,9 +1,11 @@
 package com.school.things.dto;
 
 import com.school.things.dto.student.StudentDTO;
+import com.school.things.dto.student.StudentListDTO;
 import com.school.things.dto.student.StudentPriceDTO;
 import com.school.things.entities.student.Student;
 import com.school.things.entities.student.StudentPrice;
+import com.school.things.entities.student.StudentServiceList;
 
 import java.util.List;
 import java.util.function.Function;
@@ -11,11 +13,11 @@ import java.util.stream.Collectors;
 
 public class StudentMapper {
 
-    private static <T, R> List<R> convertList(List<T> sourceList, Function<T, R> converter) {
+    public static <T, R> List<R> convertList(List<T> sourceList, Function<T, R> converter) {
         return sourceList == null ? null : sourceList.stream().map(converter).collect(Collectors.toList());
     }
 
-    private static StudentPriceDTO convertStudentPriceToDTO(StudentPrice studentPrice) {
+    public static StudentPriceDTO convertStudentPriceToDTO(StudentPrice studentPrice) {
         return StudentPriceDTO.builder()
                 .id(studentPrice.getId())
                 .priceDto(PriceMapper.convertPriceToDTO(studentPrice.getPrice()))
@@ -24,7 +26,7 @@ public class StudentMapper {
                 .build();
     }
 
-    private static StudentPrice convertStudentPriceFromDTO(StudentPriceDTO studentPriceDTO) {
+    public static StudentPrice convertStudentPriceFromDTO(StudentPriceDTO studentPriceDTO) {
         return StudentPrice.builder()
                 .id(studentPriceDTO.getId())
                 .price(PriceMapper.convertPriceFromDTO(studentPriceDTO.getPriceDto()))
@@ -74,6 +76,27 @@ public class StudentMapper {
                 .motherPhoneNumber(studentDTO.getMotherPhoneNumber())
                 .fatherPhoneNumber(studentDTO.getFatherPhoneNumber())
                 .studentPrices(convertList(studentDTO.getStudentPricesDto(), StudentMapper::convertStudentPriceFromDTO))
+                .build();
+    }
+
+    public static StudentListDTO convertStudentToListDTO(Student student) {
+        if (student == null) return null;
+
+        return StudentListDTO.builder()
+                .id(student.getId())
+                .fullName(student.getFullName())
+                .gender(student.getGender())
+                .nationality(student.getNationality())
+                .hasContacts(!student.getPhoneNumber().isEmpty() || !student.getAddress().isEmpty())
+                .hasParentsContacts(!student.getMotherPhoneNumber().isEmpty() || !student.getFatherPhoneNumber().isEmpty())
+                .grade(student.getGrade())
+                .hasStudentPrice(!student.getStudentPrices().isEmpty())
+                .hasDiscount(student.getStudentPrices()
+                        .stream()
+                        .flatMap(sp -> sp.getPrice().getStudentServiceLists().stream())
+                        .map(StudentServiceList::getDiscount)
+                        .anyMatch(discount -> discount > 0))
+                .paymentState(true)
                 .build();
     }
 }

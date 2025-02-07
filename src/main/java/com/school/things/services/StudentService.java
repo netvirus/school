@@ -1,6 +1,7 @@
 package com.school.things.services;
 
 import com.school.things.dto.student.StudentDTO;
+import com.school.things.dto.student.StudentListDTO;
 import com.school.things.entities.student.Student;
 import com.school.things.dto.StudentMapper;
 import com.school.things.repositories.StudentRepository;
@@ -21,6 +22,13 @@ public class StudentService {
         return studentRepository.findAll()
                 .stream()
                 .map(StudentMapper::convertStudentToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<StudentListDTO> getStudentList() {
+        return studentRepository.findAll()
+                .stream()
+                .map(StudentMapper::convertStudentToListDTO)
                 .collect(Collectors.toList());
     }
 
