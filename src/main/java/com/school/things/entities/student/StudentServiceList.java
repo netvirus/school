@@ -21,6 +21,9 @@ public class StudentServiceList {
     @JsonManagedReference
     private PriceServiceList priceServiceList;
 
+    @Enumerated(EnumType.STRING)
+    private StudentServiceType studentServiceType;
+
     public StudentServiceList() {
     }
 }

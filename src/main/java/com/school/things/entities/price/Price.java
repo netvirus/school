@@ -2,6 +2,7 @@ package com.school.things.entities.price;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.school.things.entities.payment.PaymentPeriod;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.entities.student.StudentServiceList;
 import jakarta.persistence.*;
@@ -33,6 +34,10 @@ public class Price {
     @JoinColumn(name = "student_service_list_id")
     @JsonManagedReference
     private List<StudentServiceList> studentServiceLists;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_period_id")
+    private PaymentPeriod paymentPeriod;
 
     public Price() {
     }

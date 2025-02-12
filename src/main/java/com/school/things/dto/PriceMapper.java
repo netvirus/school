@@ -22,8 +22,9 @@ public class PriceMapper {
         return PriceDTO.builder()
                 .id(price.getId())
                 .name(price.getName())
-                .priceServiceList(convertToListDTO(price.getPriceServiceList(), PriceMapper::convertToDTO))
+//                .priceServiceList(convertToListDTO(price.getPriceServiceList(), PriceMapper::convertToDTO))
                 .studentServiceLists(convertToListDTO(price.getStudentServiceLists(), PriceMapper::convertToDTO))
+                .paymentPeriod(PaymentMapper.convertPaymentPeriodToDTO(price.getPaymentPeriod()))
                 .build();
     }
 
@@ -72,6 +73,7 @@ public class PriceMapper {
         return Price.builder()
                 .id(priceDto.getId())
                 .name(priceDto.getName())
+                .paymentPeriod(PaymentMapper.convertPaymentPeriodFromDTO(priceDto.getPaymentPeriod()))
                 .build();
     }
 }
