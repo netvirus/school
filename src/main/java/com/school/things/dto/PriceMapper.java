@@ -2,12 +2,9 @@ package com.school.things.dto;
 
 import com.school.things.dto.price.PriceDTO;
 import com.school.things.dto.price.PriceServiceListDTO;
-import com.school.things.dto.student.StudentServiceListDTO;
 import com.school.things.entities.price.Price;
 import com.school.things.entities.price.PriceServiceList;
 import com.school.things.entities.school.SchoolServiceList;
-import com.school.things.entities.student.StudentServiceList;
-import com.school.things.utils.Arithmetic;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,9 +19,9 @@ public class PriceMapper {
         return PriceDTO.builder()
                 .id(price.getId())
                 .name(price.getName())
-//                .priceServiceList(convertToListDTO(price.getPriceServiceList(), PriceMapper::convertToDTO))
-                .studentServiceLists(convertToListDTO(price.getStudentServiceLists(), PriceMapper::convertToDTO))
-                .paymentPeriod(PaymentMapper.convertPaymentPeriodToDTO(price.getPaymentPeriod()))
+                .priceServiceList(convertToListDTO(price.getPriceServiceList(), PriceMapper::convertToDTO))
+//                .studentServiceLists(convertToListDTO(price.getStudentServiceDiscountLists(), StudentMapper::convertStudentServiceListToDTO))
+//                .paymentPeriod(PaymentMapper.convertPaymentPeriodToDTO(price.getPaymentPeriod()))
                 .build();
     }
 
@@ -34,22 +31,6 @@ public class PriceMapper {
                 .stream()
                 .map(converter)
                 .collect(Collectors.toList());
-    }
-
-    public static StudentServiceListDTO convertToDTO(StudentServiceList entity) {
-        if (entity == null) return null;
-
-        return StudentServiceListDTO.builder()
-                .id(entity.getId())
-                .discount(entity.getDiscount())
-                .serviceName(Optional.ofNullable(entity.getPriceServiceList())
-                        .map(PriceServiceList::getSchoolServiceList)
-                        .map(SchoolServiceList::getServiceName)
-                        .orElse(null))
-                .serviceCost(Optional.ofNullable(entity.getPriceServiceList())
-                        .map(priceServiceList -> Arithmetic.Discount(entity.getDiscount(), priceServiceList.getCost()))
-                        .orElseThrow(() -> new IllegalArgumentException("Cost or Discount can't be - null")))
-                        .build();
     }
 
     public static PriceServiceListDTO convertToDTO(PriceServiceList entity) {
@@ -73,7 +54,7 @@ public class PriceMapper {
         return Price.builder()
                 .id(priceDto.getId())
                 .name(priceDto.getName())
-                .paymentPeriod(PaymentMapper.convertPaymentPeriodFromDTO(priceDto.getPaymentPeriod()))
+//                .paymentPeriod(PaymentMapper.convertPaymentPeriodFromDTO(priceDto.getPaymentPeriod()))
                 .build();
     }
 }

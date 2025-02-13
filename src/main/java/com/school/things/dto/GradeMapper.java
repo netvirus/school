@@ -10,6 +10,7 @@ public class GradeMapper {
         return GradeDTO.builder()
                 .id(grade.getId())
                 .name(grade.getName())
+                .priceDto(PriceMapper.convertPriceToDTO(grade.getPrice()))
                 .build();
     }
 
@@ -19,6 +20,7 @@ public class GradeMapper {
         return Grade.builder()
                 .id(gradeDTO.getId())
                 .name(gradeDTO.getName())
+                .price(PriceMapper.convertPriceFromDTO(gradeDTO.getPriceDto()))
                 .build();
     }
 }

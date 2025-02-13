@@ -2,7 +2,7 @@ package com.school.things.entities.price;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.school.things.entities.school.SchoolServiceList;
-import com.school.things.entities.student.StudentServiceList;
+import com.school.things.entities.student.StudentServiceDiscountList;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,7 +31,7 @@ public class PriceServiceList {
 
     @OneToMany(mappedBy = "priceServiceList", fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<StudentServiceList> studentServiceList;
+    private List<StudentServiceDiscountList> studentServiceDiscountList;
 
     public PriceServiceList() {
     }

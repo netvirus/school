@@ -8,8 +8,8 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "student_services_list")
-public class StudentServiceList {
+@Table(name = "student_service_dicount_list")
+public class StudentServiceDiscountList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +24,6 @@ public class StudentServiceList {
     @Enumerated(EnumType.STRING)
     private StudentServiceType studentServiceType;
 
-    public StudentServiceList() {
+    public StudentServiceDiscountList() {
     }
 }

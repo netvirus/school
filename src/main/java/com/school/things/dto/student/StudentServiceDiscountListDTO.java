@@ -4,9 +4,10 @@ import lombok.*;
 
 @Data
 @Builder
-public class StudentServiceListDTO {
+public class StudentServiceDiscountListDTO {
     private Long id;
     private double discount;
     private String serviceName;
     private double serviceCost;
+    private String serviceType;
 }

@@ -33,8 +33,8 @@ public class StudentPriceService {
     public StudentPrice updateStudentPrice(Long priceId, StudentPrice updatedStudentPrice) {
         return studentPriceRepository.findById(priceId).map(existingPrice -> {
             existingPrice.setStudent(updatedStudentPrice.getStudent());
-            existingPrice.setPrice(updatedStudentPrice.getPrice());
             existingPrice.setActive(updatedStudentPrice.getActive());
+            existingPrice.setGrade(updatedStudentPrice.getGrade());
             return studentPriceRepository.save(existingPrice);
         }).orElseThrow(() -> new RuntimeException("Student Price isn't found by id " + priceId));
     }

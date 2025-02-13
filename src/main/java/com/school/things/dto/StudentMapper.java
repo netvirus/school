@@ -3,11 +3,16 @@ package com.school.things.dto;
 import com.school.things.dto.student.StudentDTO;
 import com.school.things.dto.student.StudentListDTO;
 import com.school.things.dto.student.StudentPriceDTO;
+import com.school.things.dto.student.StudentServiceDiscountListDTO;
+import com.school.things.entities.price.PriceServiceList;
+import com.school.things.entities.school.SchoolServiceList;
 import com.school.things.entities.student.Student;
 import com.school.things.entities.student.StudentPrice;
-import com.school.things.entities.student.StudentServiceList;
+import com.school.things.entities.student.StudentServiceDiscountList;
+import com.school.things.utils.Arithmetic;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -20,18 +25,19 @@ public class StudentMapper {
     public static StudentPriceDTO convertStudentPriceToDTO(StudentPrice studentPrice) {
         return StudentPriceDTO.builder()
                 .id(studentPrice.getId())
-                .priceDto(PriceMapper.convertPriceToDTO(studentPrice.getPrice()))
+//                .priceDto(PriceMapper.convertPriceToDTO(studentPrice.getPrice()))
                 .active(studentPrice.getActive())
-                .grade(GradeMapper.convertGradeToDTO(studentPrice.getGrade()))
+                .gradeDto(GradeMapper.convertGradeToDTO(studentPrice.getGrade()))
+                .studentServiceDiscountListDto(convertList(studentPrice.getStudentServiceDiscountList(), StudentMapper::convertStudentServiceListToDTO))
                 .build();
     }
 
     public static StudentPrice convertStudentPriceFromDTO(StudentPriceDTO studentPriceDTO) {
         return StudentPrice.builder()
                 .id(studentPriceDTO.getId())
-                .price(PriceMapper.convertPriceFromDTO(studentPriceDTO.getPriceDto()))
+//                .price(PriceMapper.convertPriceFromDTO(studentPriceDTO.getPriceDto()))
                 .active(studentPriceDTO.getActive())
-                .grade(GradeMapper.convertGradeFromDTO(studentPriceDTO.getGrade()))
+                .grade(GradeMapper.convertGradeFromDTO(studentPriceDTO.getGradeDto()))
                 .build();
     }
 
@@ -91,12 +97,29 @@ public class StudentMapper {
                 .hasParentsContacts(!student.getMotherPhoneNumber().isEmpty() || !student.getFatherPhoneNumber().isEmpty())
                 .grade(student.getGrade())
                 .hasStudentPrice(!student.getStudentPrices().isEmpty())
-                .hasDiscount(student.getStudentPrices()
-                        .stream()
-                        .flatMap(sp -> sp.getPrice().getStudentServiceLists().stream())
-                        .map(StudentServiceList::getDiscount)
-                        .anyMatch(discount -> discount > 0))
+//                .hasDiscount(student.getStudentPrices()
+//                        .stream()
+//                        .flatMap(sp -> sp.getGrade().getPrice().getStudentServiceDiscountLists().stream())
+//                        .map(StudentServiceDiscountList::getDiscount)
+//                        .anyMatch(discount -> discount > 0))
                 .paymentState(true)
+                .build();
+    }
+
+    public static StudentServiceDiscountListDTO convertStudentServiceListToDTO(StudentServiceDiscountList entity) {
+        if (entity == null) return null;
+
+        return StudentServiceDiscountListDTO.builder()
+                .id(entity.getId())
+                .discount(entity.getDiscount())
+                .serviceName(Optional.ofNullable(entity.getPriceServiceList())
+                        .map(PriceServiceList::getSchoolServiceList)
+                        .map(SchoolServiceList::getServiceName)
+                        .orElse(null))
+                .serviceCost(Optional.ofNullable(entity.getPriceServiceList())
+                        .map(priceServiceList -> Arithmetic.Discount(entity.getDiscount(), priceServiceList.getCost()))
+                        .orElseThrow(() -> new IllegalArgumentException("Cost or Discount can't be - null")))
+                .serviceType(entity.getStudentServiceType().name())
                 .build();
     }
 }
