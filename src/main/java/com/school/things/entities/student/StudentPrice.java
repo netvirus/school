@@ -2,6 +2,7 @@ package com.school.things.entities.student;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.school.things.entities.payment.PaymentCurrency;
 import com.school.things.entities.price.Price;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,6 +18,8 @@ public class StudentPrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "payment_period", nullable = false)
+    private int paymentPeriod;
     @Column(name = "is_active", nullable = false)
     private Boolean active = false;
 
@@ -35,14 +38,6 @@ public class StudentPrice {
     @JoinColumn(name = "grade_id")
     private Grade grade;
 
-//    /**
-//     *  Connect to Price
-//     */
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "price_id")
-//    @JsonManagedReference
-//    private Price price;
-
     /**
      *  Connect to StudentServiceDiscountList
      */
@@ -50,6 +45,14 @@ public class StudentPrice {
     @JoinColumn(name = "student_service_discount_list_id")
     @JsonManagedReference
     private List<StudentServiceDiscountList> studentServiceDiscountList;
+
+    /**
+     *  Connect to PaymentCurrency
+     */
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_currency_id")
+    @JsonManagedReference
+    private PaymentCurrency paymentCurrency;
 
     public StudentPrice() {}
 }

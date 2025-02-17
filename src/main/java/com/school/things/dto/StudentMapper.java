@@ -9,7 +9,6 @@ import com.school.things.entities.school.SchoolServiceList;
 import com.school.things.entities.student.Student;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.entities.student.StudentServiceDiscountList;
-import com.school.things.utils.Arithmetic;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,19 +24,21 @@ public class StudentMapper {
     public static StudentPriceDTO convertStudentPriceToDTO(StudentPrice studentPrice) {
         return StudentPriceDTO.builder()
                 .id(studentPrice.getId())
-//                .priceDto(PriceMapper.convertPriceToDTO(studentPrice.getPrice()))
                 .active(studentPrice.getActive())
+                .paymentPeriod(studentPrice.getPaymentPeriod())
                 .gradeDto(GradeMapper.convertGradeToDTO(studentPrice.getGrade()))
                 .studentServiceDiscountListDto(convertList(studentPrice.getStudentServiceDiscountList(), StudentMapper::convertStudentServiceListToDTO))
+                .paymentCurrencyDTO(PaymentMapper.convertPaymentCurrencyToDTO(studentPrice.getPaymentCurrency()))
                 .build();
     }
 
     public static StudentPrice convertStudentPriceFromDTO(StudentPriceDTO studentPriceDTO) {
         return StudentPrice.builder()
                 .id(studentPriceDTO.getId())
-//                .price(PriceMapper.convertPriceFromDTO(studentPriceDTO.getPriceDto()))
                 .active(studentPriceDTO.getActive())
+                .paymentPeriod(studentPriceDTO.getPaymentPeriod())
                 .grade(GradeMapper.convertGradeFromDTO(studentPriceDTO.getGradeDto()))
+                .studentServiceDiscountList(convertList(studentPriceDTO.getStudentServiceDiscountListDto(), StudentMapper::convertStudentServiceDiscountListFromDTO))
                 .build();
     }
 
@@ -97,11 +98,6 @@ public class StudentMapper {
                 .hasParentsContacts(!student.getMotherPhoneNumber().isEmpty() || !student.getFatherPhoneNumber().isEmpty())
                 .grade(student.getGrade())
                 .hasStudentPrice(!student.getStudentPrices().isEmpty())
-//                .hasDiscount(student.getStudentPrices()
-//                        .stream()
-//                        .flatMap(sp -> sp.getGrade().getPrice().getStudentServiceDiscountLists().stream())
-//                        .map(StudentServiceDiscountList::getDiscount)
-//                        .anyMatch(discount -> discount > 0))
                 .paymentState(true)
                 .build();
     }
@@ -116,10 +112,20 @@ public class StudentMapper {
                         .map(PriceServiceList::getSchoolServiceList)
                         .map(SchoolServiceList::getServiceName)
                         .orElse(null))
-                .serviceCost(Optional.ofNullable(entity.getPriceServiceList())
-                        .map(priceServiceList -> Arithmetic.Discount(entity.getDiscount(), priceServiceList.getCost()))
-                        .orElseThrow(() -> new IllegalArgumentException("Cost or Discount can't be - null")))
-                .serviceType(entity.getStudentServiceType().name())
+                .costWithDiscount(Discount(entity.getPriceServiceList().getCost(), entity.getDiscount()))
                 .build();
+    }
+
+    public static StudentServiceDiscountList convertStudentServiceDiscountListFromDTO(StudentServiceDiscountListDTO entity) {
+        if (entity == null) return null;
+
+        return StudentServiceDiscountList.builder()
+                .id(entity.getId())
+                .discount(entity.getDiscount())
+                .build();
+    }
+
+    public static double Discount(double amount, double discountPercent) {
+        return amount - (amount * discountPercent / 100);
     }
 }

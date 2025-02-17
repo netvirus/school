@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
+@Builder
 @AllArgsConstructor
 @Entity
 @Table(name = "student_service_dicount_list")
@@ -20,9 +21,6 @@ public class StudentServiceDiscountList {
     @JoinColumn(name = "price_service_list_id")
     @JsonManagedReference
     private PriceServiceList priceServiceList;
-
-    @Enumerated(EnumType.STRING)
-    private StudentServiceType studentServiceType;
 
     public StudentServiceDiscountList() {
     }

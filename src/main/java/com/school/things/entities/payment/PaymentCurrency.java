@@ -1,6 +1,7 @@
 package com.school.things.entities.payment;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.school.things.entities.student.StudentPrice;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,5 +23,5 @@ public class PaymentCurrency {
 
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY)
-    private List<PaymentPeriod> paymentPeriod;
+    private List<StudentPrice> studentPrice;
 }
