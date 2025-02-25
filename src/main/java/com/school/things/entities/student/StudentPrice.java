@@ -7,6 +7,7 @@ import com.school.things.entities.price.Price;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -53,6 +54,12 @@ public class StudentPrice {
     @JoinColumn(name = "payment_currency_id")
     @JsonManagedReference
     private PaymentCurrency paymentCurrency;
+
+    /**
+     *  Connect to StudentPayment
+     */
+    @OneToMany(mappedBy = "studentPrice", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentPayment> payments = new ArrayList<>();
 
     public StudentPrice() {}
 }

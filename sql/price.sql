@@ -1,0 +1,14 @@
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (1, 'Price 2025 - G1', 1, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (2, 'Price 2025 - G2', 2, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (3, 'Price 2025 - G3', 3, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (4, 'Price 2025 - G4', 4, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (5, 'Price 2025 - G5', 5, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (6, 'Price 2025 - G6', 6, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (7, 'Price 2025 - G7', 7, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (8, 'Price 2025 - G8', 8, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (9, 'Price 2025 - G9', 9, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (10, 'Price 2025 - G10', 10, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (11, 'Price 2025 - G11', 11, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (12, 'Price 2025 - G12', 12, 1);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (13, 'Price 2025 - K1', 13, 2);
+INSERT INTO public.price (id, name, grade_id, payment_period_id) VALUES (14, 'Price 2025 - K2', 14, 2);
