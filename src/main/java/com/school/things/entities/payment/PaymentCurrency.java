@@ -24,4 +24,7 @@ public class PaymentCurrency {
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY)
     private List<StudentPrice> studentPrice;
+
+    public PaymentCurrency(Long id, String name) {
+    }
 }

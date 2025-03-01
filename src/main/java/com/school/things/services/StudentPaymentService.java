@@ -1,13 +1,16 @@
 package com.school.things.services;
 
 import com.school.things.dto.StudentPaymentMapper;
+import com.school.things.dto.payment.PaymentDTO;
 import com.school.things.dto.student.StudentPaymentDTO;
+import com.school.things.entities.payment.Payment;
 import com.school.things.entities.school.LearningCycle;
 import com.school.things.entities.school.LearningCycleMonth;
 import com.school.things.entities.student.StudentPayment;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.entities.student.StudentServiceDiscountList;
 import com.school.things.repositories.LearningCycleRepository;
+import com.school.things.repositories.PaymentRepository;
 import com.school.things.repositories.StudentPaymentRepository;
 import com.school.things.repositories.StudentPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +28,17 @@ public class StudentPaymentService {
     private final LearningCycleRepository learningCycleRepository;
     private final StudentPaymentMapper studentPaymentMapper;
     private final StudentPriceRepository studentPriceRepository;
+    private final PaymentRepository paymentRepository;
 
     @Autowired
     public StudentPaymentService(StudentPaymentRepository studentPaymentRepository,
                                  LearningCycleRepository learningCycleRepository,
-                                 StudentPaymentMapper studentPaymentMapper, StudentPriceRepository studentPriceRepository) {
+                                 StudentPaymentMapper studentPaymentMapper, StudentPriceRepository studentPriceRepository, PaymentRepository paymentRepository) {
         this.studentPaymentRepository = studentPaymentRepository;
         this.learningCycleRepository = learningCycleRepository;
         this.studentPaymentMapper = studentPaymentMapper;
         this.studentPriceRepository = studentPriceRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     public List<StudentPaymentDTO> getPaymentStatusByStudentPriceId(Long studentPriceId) {
@@ -42,6 +47,7 @@ public class StudentPaymentService {
 
         List<LearningCycleMonth> months = learningCycle.getMonths();
         List<StudentPayment> studentPayments = studentPaymentRepository.findByStudentPriceId(studentPriceId);
+        List<Payment> allPayments = paymentRepository.findByStudentPriceId(studentPriceId);
 
         StudentPrice studentPrice = studentPriceRepository.findById(studentPriceId)
                 .orElseThrow(() -> new RuntimeException("Student Price not found"));
@@ -50,28 +56,40 @@ public class StudentPaymentService {
                 .mapToDouble(StudentServiceDiscountList::getCostWithDiscount)
                 .sum();
 
-        double monthlyAmount = totalAmount / months.size();
+        double monthlyAmount = BigDecimal.valueOf(totalAmount / months.size())
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
 
         return months.stream()
                 .map(month -> {
-                    Optional<StudentPayment> payment = studentPayments.stream()
+                    Optional<StudentPayment> studentPaymentOpt = studentPayments.stream()
                             .filter(p -> p.getMonth() == month.getMonth() && p.getYear() == month.getYear())
                             .findFirst();
 
-                    boolean isPaid = payment.map(StudentPayment::isPaid).orElse(false);
+                    boolean isPaid = studentPaymentOpt.map(StudentPayment::isPaid).orElse(false);
 
-                    return new StudentPaymentDTO(month.getId(), month.getMonth(), month.getYear(), isPaid, BigDecimal.valueOf(monthlyAmount) // ✅ Округляем до 2 знаков
+                    List<PaymentDTO> paymentDTOs = allPayments.stream()
+                            .filter(payment -> payment.getMonth() == month.getMonth() && payment.getYear() == month.getYear())
+                            .map(payment -> new PaymentDTO(payment.getId(), payment.getMonth(), payment.getYear(), payment.getAmount()))
+                            .collect(Collectors.toList());
+
+                    double totalPaidForMonth = paymentDTOs.stream()
+                            .mapToDouble(PaymentDTO::amount)
+                            .sum();
+
+                    double remainingAmount = BigDecimal.valueOf(monthlyAmount - totalPaidForMonth)
                             .setScale(2, RoundingMode.HALF_UP)
-                            .doubleValue());
+                            .doubleValue();
+
+                    return new StudentPaymentDTO(
+                            month.getId(),
+                            month.getMonth(),
+                            month.getYear(),
+                            isPaid,
+                            remainingAmount,
+                            paymentDTOs
+                    );
                 })
                 .collect(Collectors.toList());
-    }
-
-    private double calculateMonthlyAmount(StudentPrice studentPrice, int totalMonths) {
-        double totalPrice = studentPrice.getStudentServiceDiscountList().stream()
-                .mapToDouble(StudentServiceDiscountList::getDiscount)
-                .sum();
-
-        return totalPrice / totalMonths;
     }
 }

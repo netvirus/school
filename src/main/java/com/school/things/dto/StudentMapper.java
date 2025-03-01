@@ -1,5 +1,6 @@
 package com.school.things.dto;
 
+import com.school.things.dto.payment.PaymentDTO;
 import com.school.things.dto.student.*;
 import com.school.things.entities.price.PriceServiceList;
 import com.school.things.entities.school.SchoolServiceList;
@@ -70,56 +71,63 @@ public class StudentMapper {
     public StudentPaymentDTO convertStudentPaymentToDTO(StudentPayment studentPayment) {
         if (studentPayment == null) return null;
 
+        List<PaymentDTO> paymentDTOs = Optional.ofNullable(studentPayment.getPayments())
+                .map(payments -> payments.stream()
+                        .map(paymentMapper::convertPaymentToDTO)
+                        .collect(Collectors.toList()))
+                .orElse(List.of());
+
         return new StudentPaymentDTO(
                 studentPayment.getId(),
                 studentPayment.getMonth(),
                 studentPayment.getYear(),
                 studentPayment.isPaid(),
-                studentPayment.getAmountPaid()
+                studentPayment.getAmountPaid(),
+                paymentDTOs
         );
     }
 
     public StudentDTO convertStudentToDTO(Student student) {
         if (student == null) return null;
 
-        return StudentDTO.builder()
-                .id(student.getId())
-                .firstName(student.getFirstName())
-                .lastName(student.getLastName())
-                .age(student.getAge())
-                .gender(student.getGender())
-                .nationality(student.getNationality())
-                .phoneNumber(Optional.ofNullable(student.getPhoneNumber()).orElse(""))
-                .address(Optional.ofNullable(student.getAddress()).orElse(""))
-                .createdAt(student.getCreatedAt())
-                .grade(student.getGrade())
-                .motherName(student.getMotherName())
-                .fatherName(student.getFatherName())
-                .motherPhoneNumber(Optional.ofNullable(student.getMotherPhoneNumber()).orElse(""))
-                .fatherPhoneNumber(Optional.ofNullable(student.getFatherPhoneNumber()).orElse(""))
-                .studentPricesDto(convertStudentPrices(student.getStudentPrices()))
-                .build();
+        return new StudentDTO(
+                student.getId(),
+                student.getFirstName(),
+                student.getLastName(),
+                student.getAge(),
+                student.getGender(),
+                student.getNationality(),
+                Optional.ofNullable(student.getPhoneNumber()).orElse(""),
+                Optional.ofNullable(student.getAddress()).orElse(""),
+                student.getCreatedAt(),
+                student.getGrade(),
+                student.getMotherName(),
+                student.getFatherName(),
+                Optional.ofNullable(student.getMotherPhoneNumber()).orElse(""),
+                Optional.ofNullable(student.getFatherPhoneNumber()).orElse(""),
+                convertStudentPrices(student.getStudentPrices())
+        );
     }
 
     public Student convertStudentFromDTO(StudentDTO studentDTO) {
         if (studentDTO == null) return null;
 
         return Student.builder()
-                .id(studentDTO.getId())
-                .firstName(studentDTO.getFirstName())
-                .lastName(studentDTO.getLastName())
-                .age(studentDTO.getAge())
-                .gender(studentDTO.getGender())
-                .nationality(studentDTO.getNationality())
-                .phoneNumber(Optional.ofNullable(studentDTO.getPhoneNumber()).orElse(""))
-                .address(Optional.ofNullable(studentDTO.getAddress()).orElse(""))
-                .createdAt(studentDTO.getCreatedAt())
-                .grade(studentDTO.getGrade())
-                .motherName(studentDTO.getMotherName())
-                .fatherName(studentDTO.getFatherName())
-                .motherPhoneNumber(Optional.ofNullable(studentDTO.getMotherPhoneNumber()).orElse(""))
-                .fatherPhoneNumber(Optional.ofNullable(studentDTO.getFatherPhoneNumber()).orElse(""))
-                .studentPrices(convertList(studentDTO.getStudentPricesDto(), this::convertStudentPriceFromDTO))
+                .id(studentDTO.id())
+                .firstName(studentDTO.firstName())
+                .lastName(studentDTO.lastName())
+                .age(studentDTO.age())
+                .gender(studentDTO.gender())
+                .nationality(studentDTO.nationality())
+                .phoneNumber(Optional.ofNullable(studentDTO.phoneNumber()).orElse(""))
+                .address(Optional.ofNullable(studentDTO.address()).orElse(""))
+                .createdAt(studentDTO.createdAt())
+                .grade(studentDTO.grade())
+                .motherName(studentDTO.motherName())
+                .fatherName(studentDTO.fatherName())
+                .motherPhoneNumber(Optional.ofNullable(studentDTO.motherPhoneNumber()).orElse(""))
+                .fatherPhoneNumber(Optional.ofNullable(studentDTO.fatherPhoneNumber()).orElse(""))
+                .studentPrices(convertList(studentDTO.studentPricesDto(), this::convertStudentPriceFromDTO))
                 .build();
     }
 

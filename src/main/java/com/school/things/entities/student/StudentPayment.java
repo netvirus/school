@@ -1,7 +1,10 @@
 package com.school.things.entities.student;
 
+import com.school.things.entities.payment.Payment;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -26,4 +29,7 @@ public class StudentPayment {
 
     @Column(name = "amount_paid", nullable = false)
     private double amountPaid;
+
+    @OneToMany(mappedBy = "studentPayment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Payment> payments;
 }
