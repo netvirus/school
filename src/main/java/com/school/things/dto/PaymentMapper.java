@@ -2,9 +2,11 @@ package com.school.things.dto;
 
 import com.school.things.dto.payment.PaymentCurrencyDTO;
 import com.school.things.entities.payment.PaymentCurrency;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PaymentMapper {
-    public static PaymentCurrencyDTO convertPaymentCurrencyToDTO(PaymentCurrency paymentCurrency) {
+    public PaymentCurrencyDTO convertPaymentCurrencyToDTO(PaymentCurrency paymentCurrency) {
         if (paymentCurrency == null) return null;
 
         return PaymentCurrencyDTO.builder()
@@ -13,7 +15,7 @@ public class PaymentMapper {
                 .build();
     }
 
-    public static PaymentCurrency convertPaymentCurrencyDTOFromDTO(PaymentCurrencyDTO paymentCurrencyDTO) {
+    public PaymentCurrency convertPaymentCurrencyDTOFromDTO(PaymentCurrencyDTO paymentCurrencyDTO) {
         if (paymentCurrencyDTO == null) return null;
 
         return PaymentCurrency.builder()

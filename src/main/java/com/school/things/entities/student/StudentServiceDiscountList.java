@@ -24,4 +24,9 @@ public class StudentServiceDiscountList {
 
     public StudentServiceDiscountList() {
     }
+
+    public double getCostWithDiscount() {
+        double cost = priceServiceList.getCost();
+        return cost - (cost * discount / 100);
+    }
 }

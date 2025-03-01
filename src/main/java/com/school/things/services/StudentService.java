@@ -18,27 +18,30 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    StudentMapper studentMapper;
+
     public List<StudentDTO> getAllStudents() {
         return studentRepository.findAll()
                 .stream()
-                .map(StudentMapper::convertStudentToDTO)
+                .map(studentMapper::convertStudentToDTO)
                 .collect(Collectors.toList());
     }
 
     public List<StudentListDTO> getStudentList() {
         return studentRepository.findAll()
                 .stream()
-                .map(StudentMapper::convertStudentToListDTO)
+                .map(studentMapper::convertStudentToListDTO)
                 .collect(Collectors.toList());
     }
 
     public Optional<StudentDTO> getStudentById(Long id) {
        return studentRepository.findById(id)
-               .map(StudentMapper::convertStudentToDTO);
+               .map(studentMapper::convertStudentToDTO);
     }
 
     public Student saveStudent(StudentDTO studentDto) {
-        return studentRepository.save(StudentMapper.convertStudentFromDTO(studentDto));
+        return studentRepository.save(studentMapper.convertStudentFromDTO(studentDto));
     }
 
     public Student updateStudent(Student student, Long id) {

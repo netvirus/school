@@ -19,10 +19,6 @@ public class StudentPrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "payment_period", nullable = false)
-    private int paymentPeriod;
-    @Column(name = "is_active", nullable = false)
-    private Boolean active = false;
 
     /**
      *  Back to PriceServiceList

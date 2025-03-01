@@ -1,6 +1,7 @@
 package com.school.things.controllers;
 
 import com.school.things.dto.student.StudentPriceDTO;
+import com.school.things.dto.student.requests.StudentPriceRequest;
 import com.school.things.entities.student.StudentPrice;
 import com.school.things.services.StudentPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,12 @@ public class StudentPriceController {
     }
 
     @PostMapping
-    public StudentPrice createStudentPrice(@RequestBody StudentPrice studentPrice) {
-        return studentPriceService.createStudentPrice(studentPrice);
+    public ResponseEntity<StudentPrice> createStudentPrice(@RequestBody StudentPriceRequest request) {
+        StudentPrice studentPrice = studentPriceService.createStudentPrice(
+                request.getStudentId(),
+                request.getGradeId()
+        );
+        return ResponseEntity.ok(studentPrice);
     }
 
     @PutMapping("/{id}")

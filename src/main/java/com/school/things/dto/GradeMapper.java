@@ -2,9 +2,11 @@ package com.school.things.dto;
 
 import com.school.things.dto.grade.GradeDTO;
 import com.school.things.entities.student.Grade;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GradeMapper {
-    public static GradeDTO convertGradeToDTO(Grade grade) {
+    public GradeDTO convertGradeToDTO(Grade grade) {
         if (grade == null) return null;
 
         return GradeDTO.builder()
@@ -14,7 +16,7 @@ public class GradeMapper {
                 .build();
     }
 
-    public static Grade convertGradeFromDTO(GradeDTO gradeDTO) {
+    public Grade convertGradeFromDTO(GradeDTO gradeDTO) {
         if (gradeDTO == null) return null;
 
         return Grade.builder()

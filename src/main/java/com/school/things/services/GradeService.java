@@ -17,16 +17,19 @@ public class GradeService {
     @Autowired
     private GradeRepository gradeRepository;
 
+    @Autowired
+    GradeMapper gradeMapper;
+
     public List<GradeDTO> getAllGrades() {
         return gradeRepository.findAll()
                 .stream()
-                .map(GradeMapper::convertGradeToDTO)
+                .map(gradeMapper::convertGradeToDTO)
                 .collect(Collectors.toList());
     }
 
     public Optional<GradeDTO> getGradeById(Long id) {
         return gradeRepository.findById(id)
-                .map(GradeMapper::convertGradeToDTO);
+                .map(gradeMapper::convertGradeToDTO);
     }
 
     public Grade createGrade(Grade grade) {
