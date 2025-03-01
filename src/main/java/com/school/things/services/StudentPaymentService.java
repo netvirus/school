@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -60,6 +61,16 @@ public class StudentPaymentService {
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
 
+        // Группируем платежи по месяцам
+        Map<String, List<PaymentDTO>> paymentsByMonth = allPayments.stream()
+                .collect(Collectors.groupingBy(
+                        p -> p.getMonth() + "-" + p.getYear(),
+                        Collectors.mapping(
+                                p -> new PaymentDTO(p.getId(), p.getMonth(), p.getYear(), p.getAmount()),
+                                Collectors.toList()
+                        )
+                ));
+
         return months.stream()
                 .map(month -> {
                     Optional<StudentPayment> studentPaymentOpt = studentPayments.stream()
@@ -68,10 +79,8 @@ public class StudentPaymentService {
 
                     boolean isPaid = studentPaymentOpt.map(StudentPayment::isPaid).orElse(false);
 
-                    List<PaymentDTO> paymentDTOs = allPayments.stream()
-                            .filter(payment -> payment.getMonth() == month.getMonth() && payment.getYear() == month.getYear())
-                            .map(payment -> new PaymentDTO(payment.getId(), payment.getMonth(), payment.getYear(), payment.getAmount()))
-                            .collect(Collectors.toList());
+                    // Получаем платежи для конкретного месяца
+                    List<PaymentDTO> paymentDTOs = paymentsByMonth.getOrDefault(month.getMonth() + "-" + month.getYear(), List.of());
 
                     double totalPaidForMonth = paymentDTOs.stream()
                             .mapToDouble(PaymentDTO::amount)
